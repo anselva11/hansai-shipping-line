@@ -437,6 +437,14 @@
       strengthText.textContent = score > 0 ? labels[score - 1] + ' password' : 'Enter a password';
     });
 
+    // Social signup buttons
+    document.querySelectorAll('.social-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const provider = btn.textContent.trim();
+        showToast(`Connecting to ${provider} authentication...`, 'info');
+      });
+    });
+
     // Toast notification
     function showToast(message, type = 'info') {
       const container = document.getElementById('toast-container');
@@ -521,3 +529,4 @@
 
 </body>
 </html>
+
