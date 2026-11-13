@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Executive Leadership & Governance — HANSAI SHIPPING LINE</title>
+  <meta name="description"
+    content="Meet the executive leadership team, board of directors, and maritime commanders guiding HANSAI SHIPPING LINE across global trade corridors.">
+
+  <!-- Favicon / Brand Icon -->
+  <link rel="icon" type="image/png" href="Assets/logo-transparent.png">
+
+  <!-- Google Fonts (Plus Jakarta Sans & JetBrains Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#06345B',
+              dark: '#032746',
+              white: '#FFFFFF',
+              light: '#F4F5F6',
+              gray: '#8A929B',
+              canvas: '#ECEEF2',
+              card: '#FFFFFF',
+              border: '#E2E5EA',
+              accent: '#0084FF',
+              accentHover: '#0070D8'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          },
+          boxShadow: {
+            'editorial': '0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.02)',
+            'editorial-card': '0 4px 24px -2px rgba(6, 52, 91, 0.06)',
+            'editorial-hover': '0 16px 36px -4px rgba(6, 52, 91, 0.12)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .leader-card {
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .leader-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 35px -8px rgba(6, 52, 91, 0.12);
+    }
+    .avatar-wrapper {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+    }
+    .avatar-wrapper::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(3, 39, 70, 0.7) 100%);
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body class="bg-white text-gray-900 antialiased selection:bg-[#06345B] selection:text-white">
+
+  <!-- ====================================================================
+       SECTION 1 — NAVIGATION BAR
+       ==================================================================== -->
+  <header id="main-navbar"
+    class="sticky top-0 z-40 bg-white/95 backdrop-blur-md transition-all duration-300 py-4 px-6 sm:px-10 lg:px-16 border-b border-gray-100">
+    <div class="max-w-[1400px] mx-auto flex items-center justify-between">
+
+      <!-- Brand Logo -->
+      <a href="index.html" class="flex items-center group focus:outline-none" aria-label="HANSAI SHIPPING LINE Home">
+        <img src="Assets/logo-white.png" alt="HANSAI SHIPPING LINE"
+          class="h-9 sm:h-11 w-auto object-contain [filter:brightness(0)] hover:[filter:brightness(0)_saturate(100%)_invert(14%)_sepia(85%)_saturate(1915%)_hue-rotate(186deg)] transition-all duration-200 group-hover:scale-[1.02]">
+      </a>
+
+      <!-- Center Navigation Links -->
+      <nav class="hidden lg:flex items-center space-x-9 text-[14px] font-medium text-gray-700">
+        <a href="index.html#about" class="hover:text-black transition-colors py-1">About us</a>
+        <a href="index.html#services" class="hover:text-black transition-colors py-1">Services</a>
+        <a href="leadership.html" class="text-[#06345B] font-bold border-b-2 border-[#06345B] py-1">Leadership</a>
+        <a href="index.html#fleet" class="hover:text-black transition-colors py-1">Fleet</a>
+        <a href="index.html#technology" class="hover:text-black transition-colors py-1">Technology</a>
+      </nav>
+
+      <!-- Right CTAs -->
+      <div class="hidden sm:flex items-center space-x-3">
+        <a href="index.html#contact"
+          class="px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold text-white bg-[#111827] hover:bg-[#06345B] transition-all duration-200 shadow-sm">
+          Contact Us
+        </a>
+        <a href="signin.html"
+          class="px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold text-gray-800 bg-white border border-gray-300 hover:border-gray-500 transition-all duration-200 shadow-sm">
+          Sign In
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobile-menu-btn" type="button"
+        class="lg:hidden p-2 rounded-xl text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#06345B]"
+        aria-label="Open Mobile Menu">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- Mobile Menu Drawer Overlay -->
+  <div id="mobile-menu"
+    class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
+    <div
+      class="mobile-menu-drawer fixed top-0 right-0 w-full max-w-sm h-full bg-white shadow-2xl p-6 flex flex-col justify-between transform translate-x-full transition-transform duration-300 ease-out">
+      <div>
+        <!-- Drawer Header -->
+        <div class="flex items-center justify-between pb-6 border-b border-gray-100">
+          <img src="Assets/logo-white.png" alt="HANSAI" class="h-8 w-auto object-contain [filter:brightness(0)]">
+          <button id="mobile-menu-close" class="p-2 rounded-full hover:bg-gray-100 text-gray-500 hover:text-gray-900"
+            aria-label="Close menu">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <!-- Drawer Links -->
+        <nav class="flex flex-col space-y-4 py-6 text-lg font-medium text-gray-800">
+          <a href="index.html" class="hover:text-[#06345B] py-2 border-b border-gray-50">Home</a>
+          <a href="index.html#about" class="hover:text-[#06345B] py-2 border-b border-gray-50">About us</a>
+          <a href="leadership.html" class="text-[#06345B] font-bold py-2 border-b border-gray-50">Leadership</a>
+          <a href="index.html#services" class="hover:text-[#06345B] py-2 border-b border-gray-50">Services</a>
+          <a href="index.html#fleet" class="hover:text-[#06345B] py-2 border-b border-gray-50">Our Fleet</a>
+          <a href="index.html#contact" class="hover:text-[#06345B] py-2 border-b border-gray-50">Contact Us</a>
+        </nav>
+      </div>
+
+      <!-- Drawer Actions -->
+      <div class="space-y-3 pt-6 border-t border-gray-100">
+        <div class="grid grid-cols-2 gap-2">
+          <a href="signin.html"
+            class="py-3 rounded-full text-center font-semibold text-gray-800 bg-white border border-gray-300 hover:border-gray-500 transition-colors shadow-sm block text-sm">
+            Sign In
+          </a>
+          <a href="signup.html"
+            class="py-3 rounded-full text-center font-semibold text-white bg-[#06345B] hover:bg-[#032746] transition-colors shadow-md block text-sm">
+            Register
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ====================================================================
+       SECTION 2 — HERO HEADER (Editorial Style)
+       ==================================================================== -->
+  <section class="bg-[#F4F5F6] border-b border-gray-200/80 pt-10 pb-16 px-6 sm:px-10 lg:px-16">
+    <div class="max-w-[1400px] mx-auto">
+
+      <!-- Breadcrumbs -->
+      <div class="flex items-center space-x-2 text-xs font-mono text-gray-500 uppercase tracking-wider mb-6">
+        <a href="index.html" class="hover:text-[#06345B] transition-colors">Home</a>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+        <a href="index.html#about" class="hover:text-[#06345B] transition-colors">About Us</a>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+        <span class="text-[#06345B] font-bold">Leadership</span>
+      </div>
+
+      <!-- Header Content -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+        <div class="lg:col-span-8">
+          <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white border border-gray-200 text-[#06345B] text-xs font-mono font-bold uppercase tracking-wider mb-4 shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-[#0084FF]"></span>
+            <span>Executive Stewardship & Governance</span>
+          </div>
+          <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#032746] tracking-tight leading-[1.1]">
+            Guiding Global Trade With Vision, Precision, and Integrity
+          </h1>
+        </div>
+
+        <div class="lg:col-span-4">
+          <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
+            Meet the seasoned maritime commanders, logistics strategists, and supply chain pioneers navigating HANSAI SHIPPING LINE into the future of resilient international trade.
+          </p>
+        </div>
+      </div>
+
+      <!-- Executive Metric Highlights -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-12 pt-8 border-t border-gray-200">
+        <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+          <div class="text-2xl sm:text-3xl font-extrabold text-[#032746] font-mono">120+</div>
+          <div class="text-xs text-gray-500 font-medium mt-1">Years Combined Maritime Leadership</div>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+          <div class="text-2xl sm:text-3xl font-extrabold text-[#032746] font-mono">195+</div>
+          <div class="text-xs text-gray-500 font-medium mt-1">Countries Connected Worldwide</div>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+          <div class="text-2xl sm:text-3xl font-extrabold text-[#032746] font-mono">1.8M+</div>
+          <div class="text-xs text-gray-500 font-medium mt-1">TEU Annual Fleet Capacity</div>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+          <div class="text-2xl sm:text-3xl font-extrabold text-[#032746] font-mono">100%</div>
+          <div class="text-xs text-gray-500 font-medium mt-1">IMO & BIMCO Safety Compliance</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ====================================================================
+       SECTION 3 — EXECUTIVE COMMITTEE & DIRECTORS
+       ==================================================================== -->
+  <section class="py-16 sm:py-24 px-6 sm:px-10 lg:px-16">
+    <div class="max-w-[1400px] mx-auto space-y-16">
+
+      <!-- Section Title -->
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between border-b border-gray-200 pb-6">
+        <div>
+          <span class="text-xs font-mono font-bold text-[#06345B] uppercase tracking-wider">EXECUTIVE BOARD</span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-[#032746] mt-1">Executive Leadership Team</h2>
+        </div>
+        <p class="text-sm text-gray-500 max-w-md mt-2 sm:mt-0">
+          Decades of hands-on bridge command, commercial freight acumen, and technology transformation.
+        </p>
+      </div>
+
+      <!-- Leaders Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- Leader 1: CEO -->
+        <div class="leader-card bg-white rounded-3xl border border-gray-200 p-6 sm:p-7 flex flex-col justify-between shadow-editorial-card">
+          <div>
+            <div class="avatar-wrapper h-64 bg-gradient-to-tr from-[#032746] via-[#06345B] to-[#0a528f] mb-6 flex items-center justify-center relative group">
+              <!-- Decorative Captain Badge / Graphic -->
+              <div class="w-28 h-28 rounded-full border-2 border-white/20 bg-white/10 flex items-center justify-center text-white backdrop-blur-sm">
+                <i data-lucide="anchor" class="w-14 h-14 text-white/90"></i>
+              </div>
+              <div class="absolute bottom-4 left-4 z-10 text-white">
+                <span class="text-[11px] font-mono uppercase bg-white/20 backdrop-blur-md px-2.5 py-1 rounded-full">Executive Committee</span>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-xl font-extrabold text-[#032746]">Capt. Hendrik van der Meer</h3>
+              <a href="#" class="text-gray-400 hover:text-[#06345B] transition-colors p-1" aria-label="LinkedIn">
+                <i data-lucide="linkedin" class="w-4 h-4"></i>
+              </a>
+            </div>
+            <div class="text-xs font-mono font-bold text-[#0084FF] uppercase tracking-wider mb-3">
+              Chief Executive Officer & Managing Director
+            </div>
+            <p class="text-gray-600 text-sm leading-relaxed mb-5">
+              Former Master Mariner with 28+ years of ocean liner command and global logistics management. Led fleet expansion programs and transpacific network restructuring across major maritime hubs in Europe and Asia.
+            </p>
+          </div>
+
+          <div class="pt-4 border-t border-gray-100">
+            <div class="text-xs font-mono text-gray-400 uppercase mb-2">Key Competencies</div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="text-[11px] font-medium bg-[#F4F5F6] text-gray-700 px-2.5 py-1 rounded-md">Liner Strategy</span>
+              <span class="text-[11px] font-medium bg-[#F4F5F6] text-gray-700 px-2.5 py-1 rounded-md">Fleet Expansion</span>
+              <span class="text-[11px] font-medium bg-[#F4F5F6] text-gray-700 px-2.5 py-1 rounded-md">IMO Compliance</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Leader 2: COO -->
+        <div class="leader-card bg-white rounded-3xl border border-gray-200 p-6 sm:p-7 flex flex-col justify-between shadow-editorial-card">
+          <div>
+            <div class="avatar-wrapper h-64 bg-gradient-to-tr from-[#032746] via-[#09416f] to-[#0084FF] mb-6 flex items-center justify-center relative group">
+              <div class="w-28 h-28 rounded-full border-2 border-white/20 bg-white/10 flex items-center justify-center text-white backdrop-blur-sm">
+                <i data-lucide="cpu" class="w-14 h-14 text-white/90"></i>
+              </div>
+              <div class="absolute bottom-4 left-4 z-10 text-white">
+                <span class="text-[11px] font-mono uppercase bg-white/20 backdrop-blur-md px-2.5 py-1 rounded-full">Executive Committee</span>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-xl font-extrabold text-[#032746]">Maya Sastrowardoyo, M.Sc.</h3>
+              <a href="#" class="text-gray-400 hover:text-[#06345B] transition-colors p-1" aria-label="LinkedIn">
+                <i data-lucide="linkedin" class="w-4 h-4"></i>
+              </a>
+            </div>
+            <div class="text-xs font-mono font-bold text-[#0084FF] uppercase tracking-wider mb-3">
+              Chief Operating Officer (COO)
+            </div>
+            <p class="text-gray-600 text-sm leading-relaxed mb-5">
+              22+ years driving port terminal automation, berthing optimization, and container yard efficiency across Southeast Asia and Oceania. Spearheaded HANSAI’s automated terminal turnaround initiative.
+            </p>
+          </div>
+
+          <div class="pt-4 border-t border-gray-100">
+            <div class="text-xs font-mono text-gray-400 uppercase mb-2">Key Competencies</div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="text-[11px] font-medium bg-[#F4F5F6] text-gray-700 px-2.5 py-1 rounded-md">Terminal Automation</span>
+              <span class="text-[11px] font-medium bg-[#F4F5F6] text-gray-700 px-2.5 py-1 rounded-md">Port Concessions</span>
+              <span class="text-[11px] font-medium bg-[#F4F5F6] text-gray-700 px-2.5 py-1 rounded-md">Supply Chain Flow</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Leader 3: CFO -->
+        <div class="leader-card bg-white rounded-3xl border border-gray-200 p-6 sm:p-7 flex flex-col justify-between shadow-editorial-card">
+          <div>
+            <div class="avatar-wrapper h-64 bg-gradient-to-tr from-[#021f37] via-[#06345B] to-[#10629b] mb-6 flex items-center justify-center relative group">
+              <div class="w-28 h-28 rounded-full border-2 border-white/20 bg-white/10 flex items-center justify-center text-white backdrop-blur-sm">
+                <i data-lucide="trending-up" class="w-14 h-14 text-white/90"></i>
+              </div>
+              <div class="absolute bottom-4 left-4 z-10 text-white">
+                <span class="text-[11px] font-mono uppercase bg-white/20 backdrop-blur-md px-2.5 py-1 rounded-full">Executive Committee</span>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-xl font-extrabold text-[#032746]">David Chen, CFA</h3>
+              <a href="#" class="text-gray-400 hover:text-[#06345B] transition-colors p-1" aria-label="LinkedIn">
+                <i data-lucide="linkedin" class="w-4 h-4"></i>
+              </a>
+            </div>
+            <div class="text-xs font-mono font-bold text-[#0084FF] uppercase tracking-wider mb-3">
+              Chief Financial Officer (CFO)
+            </div>
+            <p class="text-gray-600 text-sm leading-relaxed mb-5">
+              Maritime finance veteran with deep expertise in vessel acquisition syndication, bunker fuel hedging, and green maritime transition bonds. Previously held senior investment roles in Singapore and London.
+            </p>
+          </div>
+
+          <div class="pt-4 border-t border-gray-100">
+            <div class="text-xs font-mono text-gray-400 uppercase mb-2">Key Competencies</div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="text-[11px] font-medium bg-[#F4F5F6] text-gray-700 px-2.5 py-1 rounded-md">Maritime Finance</span>
+              <span class="text-[11px] font-medium bg-[#F4F5F6] text-gray-700 px-2.5 py-1 rounded-md">Fuel Hedging</span>
+              <span class="text-[11px] font-medium bg-[#F4F5F6] text-gray-700 px-2.5 py-1 rounded-md">Green Bonds</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Leader 4: CTO -->
+        <div class="leader-card bg-white rounded-3xl border border-gray-200 p-6 sm:p-7 flex flex-col justify-between shadow-editorial-card">
+          <div>
+            <div class="avatar-wrapper h-64 bg-gradient-to-tr from-[#032746] via-[#005a9e] to-[#00a8ff] mb-6 flex items-center justify-center relative group">
+              <div class="w-28 h-28 rounded-full border-2 border-white/20 bg-white/10 flex items-center justify-center text-white backdrop-blur-sm">
+                <i data-lucide="satellite" class="w-14 h-14 text-white/90"></i>
+              </div>
+              <div class="absolute bottom-4 left-4 z-10 text-white">
+                <span class="text-[11px] font-mono uppercase bg-white/20 backdrop-blur-md px-2.5 py-1 rounded-full">Technology & ESG</span>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-xl font-extrabold text-[#032746]">Dr. Marcus Sterling</h3>
+              <a href="#" class="text-gray-400 hover:text-[#06345B] transition-colors p-1" aria-label="LinkedIn">
+                <i data-lucide="linkedin" class="w-4 h-4"></i>
+              </a>
+            </div>
+            <div class="text-xs font-mono font-bold text-[#0084FF] uppercase tracking-wider mb-3">
+              Chief Technology & Sustainability Officer
+            </div>
+            <p class="text-gray-600 text-sm leading-relaxed mb-5">
+              Architect behind HANSAI’s real-time IoT satellite container telemetry and AI voyage routing. Holds PhD in Naval Architecture & Marine Engineering, focusing on dual-fuel green methanol retrofits.
+            </p>
+          </div>
+
+          <div class="pt-4 border-t border-gray-100">
+            <div class="text-xs font-mono text-gray-400 uppercase mb-2">Key Competencies</div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="text-[11px] font-medium bg-[#F4F5F6] text-gray-700 px-2.5 py-1 rounded-md">Satellite Telemetry</span>
+              <span class="text-[11px] font-medium bg-[#F4F5F6] text-gray-700 px-2.5 py-1 rounded-md">Decarbonization</span>
+              <span class="text-[11px] font-medium bg-[#F4F5F6] text-gray-700 px-2.5 py-1 rounded-md">Voyage AI</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Leader 5: EVP Commercial -->
+        <div class="leader-card bg-white rounded-3xl border border-gray-200 p-6 sm:p-7 flex flex-col justify-between shadow-editorial-card">
+          <div>
+            <div class="avatar-wrapper h-64 bg-gradient-to-tr from-[#021f37] via-[#0b477b] to-[#0084FF] mb-6 flex items-center justify-center relative group">
+              <div class="w-28 h-28 rounded-full border-2 border-white/20 bg-white/10 flex items-center justify-center text-white backdrop-blur-sm">
+                <i data-lucide="globe-2" class="w-14 h-14 text-white/90"></i>
+              </div>
+              <div class="absolute bottom-4 left-4 z-10 text-white">
+                <span class="text-[11px] font-mono uppercase bg-white/20 backdrop-blur-md px-2.5 py-1 rounded-full">Commercial & Accounts</span>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-xl font-extrabold text-[#032746]">Elena Rostova</h3>
+              <a href="#" class="text-gray-400 hover:text-[#06345B] transition-colors p-1" aria-label="LinkedIn">
+                <i data-lucide="linkedin" class="w-4 h-4"></i>
+              </a>
+            </div>
+            <div class="text-xs font-mono font-bold text-[#0084FF] uppercase tracking-wider mb-3">
+              EVP Global Commercial & Liner Services
+            </div>
+            <p class="text-gray-600 text-sm leading-relaxed mb-5">
+              Oversees worldwide sales, enterprise freight contracts, spot rate algorithms, and customer success across our 5 global operating regions. Architect of HANSAI's Instant Rate Estimator framework.
+            </p>
+          </div>
+
+          <div class="pt-4 border-t border-gray-100">
+            <div class="text-xs font-mono text-gray-400 uppercase mb-2">Key Competencies</div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="text-[11px] font-medium bg-[#F4F5F6] text-gray-700 px-2.5 py-1 rounded-md">Freight Contracting</span>
+              <span class="text-[11px] font-medium bg-[#F4F5F6] text-gray-700 px-2.5 py-1 rounded-md">Key Accounts</span>
+              <span class="text-[11px] font-medium bg-[#F4F5F6] text-gray-700 px-2.5 py-1 rounded-md">Liner Alliances</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Leader 6: VP Marine Ops & Safety -->
+        <div class="leader-card bg-white rounded-3xl border border-gray-200 p-6 sm:p-7 flex flex-col justify-between shadow-editorial-card">
+          <div>
+            <div class="avatar-wrapper h-64 bg-gradient-to-tr from-[#032746] via-[#06345B] to-[#2563eb] mb-6 flex items-center justify-center relative group">
+              <div class="w-28 h-28 rounded-full border-2 border-white/20 bg-white/10 flex items-center justify-center text-white backdrop-blur-sm">
+                <i data-lucide="shield" class="w-14 h-14 text-white/90"></i>
+              </div>
+              <div class="absolute bottom-4 left-4 z-10 text-white">
+                <span class="text-[11px] font-mono uppercase bg-white/20 backdrop-blur-md px-2.5 py-1 rounded-full">Safety & Seamanship</span>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-xl font-extrabold text-[#032746]">Capt. Bambang Suryono</h3>
+              <a href="#" class="text-gray-400 hover:text-[#06345B] transition-colors p-1" aria-label="LinkedIn">
+                <i data-lucide="linkedin" class="w-4 h-4"></i>
+              </a>
+            </div>
+            <div class="text-xs font-mono font-bold text-[#0084FF] uppercase tracking-wider mb-3">
+              VP Marine Operations & Port Captaincy
+            </div>
+            <p class="text-gray-600 text-sm leading-relaxed mb-5">
+              30+ years in maritime safety management, crew welfare, and port captaincy across Malacca Strait, Suez, and Rotterdam. Maintains HANSAI’s spotless record of zero marine casualties.
+            </p>
+          </div>
+
+          <div class="pt-4 border-t border-gray-100">
+            <div class="text-xs font-mono text-gray-400 uppercase mb-2">Key Competencies</div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="text-[11px] font-medium bg-[#F4F5F6] text-gray-700 px-2.5 py-1 rounded-md">ISM / ISPS Code</span>
+              <span class="text-[11px] font-medium bg-[#F4F5F6] text-gray-700 px-2.5 py-1 rounded-md">Crew Operations</span>
+              <span class="text-[11px] font-medium bg-[#F4F5F6] text-gray-700 px-2.5 py-1 rounded-md">Vessel Safety</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ====================================================================
+       SECTION 4 — LEADERSHIP PHILOSOPHY & GOVERNANCE PRINCIPLES
+       ==================================================================== -->
+  <section class="bg-[#032746] text-white py-16 sm:py-24 px-6 sm:px-10 lg:px-16 relative overflow-hidden">
+    <div class="max-w-[1400px] mx-auto relative z-10">
+
+      <div class="max-w-2xl mb-14">
+        <span class="text-xs font-mono font-bold text-blue-400 uppercase tracking-wider">FOUNDATIONAL PRINCIPLES</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">
+          How Our Leadership Drives Maritime Excellence
+        </h2>
+        <p class="text-white/70 text-sm sm:text-base mt-3 leading-relaxed">
+          At HANSAI SHIPPING LINE, corporate governance isn't a checklist — it is the compass that guides every departure, berth, and commercial agreement.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+          <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center mb-4">
+            <i data-lucide="life-buoy" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-bold text-base text-white mb-2">Uncompromising Safety</h3>
+          <p class="text-xs text-white/70 leading-relaxed">
+            Zero harm to seafarers, zero environmental discharge, and strict conformance to international maritime regulations (IMO, BIMCO, SOLAS).
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+          <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center mb-4">
+            <i data-lucide="leaf" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-bold text-base text-white mb-2">Net-Zero Horizon</h3>
+          <p class="text-xs text-white/70 leading-relaxed">
+            Committed to reducing fleet carbon intensity by 40% before 2030 through bio-fuels, route optimization, and shore-power berths.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+          <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center mb-4">
+            <i data-lucide="layers" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-bold text-base text-white mb-2">Radical Transparency</h3>
+          <p class="text-xs text-white/70 leading-relaxed">
+            Live container telemetry, open liner schedules, and zero-hidden-surcharge freight quotation standards for all shippers.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+          <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center mb-4">
+            <i data-lucide="users" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-bold text-base text-white mb-2">Customer Stewardship</h3>
+          <p class="text-xs text-white/70 leading-relaxed">
+            Dedicated regional port desks, 24/7 incident response, and direct access to senior commercial decision-makers.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ====================================================================
+       SECTION 5 — CALL TO ACTION
+       ==================================================================== -->
+  <section class="py-16 sm:py-20 px-6 sm:px-10 lg:px-16 bg-[#F4F5F6]">
+    <div class="max-w-[1400px] mx-auto text-center space-y-6">
+      <span class="text-xs font-mono font-bold text-[#06345B] uppercase tracking-wider">COLLABORATION & PARTNERSHIPS</span>
+      <h2 class="text-2xl sm:text-4xl font-extrabold text-[#032746] tracking-tight">
+        Connect With Our Executive Office
+      </h2>
+      <p class="text-gray-600 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+        Whether you are seeking long-term liner freight contracts, strategic port logistics alliances, or vessel chartering opportunities, our leadership team welcomes your inquiry.
+      </p>
+
+      <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="index.html#contact"
+          class="w-full sm:w-auto px-8 py-3.5 rounded-full font-semibold text-white bg-[#032746] hover:bg-[#06345B] transition-colors shadow-md flex items-center justify-center space-x-2 text-sm">
+          <i data-lucide="mail" class="w-4 h-4"></i>
+          <span>Contact Executive Office</span>
+        </a>
+        <a href="index.html"
+          class="w-full sm:w-auto px-8 py-3.5 rounded-full font-semibold text-gray-800 bg-white border border-gray-300 hover:border-gray-500 transition-colors shadow-sm flex items-center justify-center space-x-2 text-sm">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          <span>Return to Homepage</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ====================================================================
+       SECTION 6 — FOOTER (Matching Corporate Style)
+       ==================================================================== -->
+  <footer class="bg-[#032746] text-white border-t border-white/10 pt-16 pb-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto space-y-12">
+
+      <!-- Top Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12 pb-12 border-b border-white/10">
+
+        <!-- Col 1 & 2: Brand Information -->
+        <div class="lg:col-span-2 space-y-4">
+          <a href="index.html" class="inline-block">
+            <img src="Assets/logo-white.png" alt="HANSAI SHIPPING LINE White Logo" class="h-10 w-auto object-contain">
+          </a>
+
+          <p class="text-white/70 text-sm leading-relaxed max-w-sm">
+            HANSAI SHIPPING LINE is an international container carrier and integrated logistics corporation delivering
+            global ocean freight, smart warehousing, and resilient supply chain management.
+          </p>
+
+          <div class="text-xs text-white/50 font-mono space-y-1 pt-2">
+            <div>IMO CERTIFIED CARRIER • REGISTRATION 9821422</div>
+            <div>BIMCO MEMBER • ISO 9001:2015 & ISO 14001 CERTIFIED</div>
+          </div>
+
+          <!-- Social Icons -->
+          <div class="flex items-center space-x-3 pt-3">
+            <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors" aria-label="LinkedIn">
+              <i data-lucide="linkedin" class="w-4 h-4"></i>
+            </a>
+            <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors" aria-label="Twitter">
+              <i data-lucide="twitter" class="w-4 h-4"></i>
+            </a>
+            <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors" aria-label="Facebook">
+              <i data-lucide="facebook" class="w-4 h-4"></i>
+            </a>
+            <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors" aria-label="YouTube">
+              <i data-lucide="youtube" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Col 3: Quick Links -->
+        <div class="space-y-3">
+          <h4 class="text-xs font-mono font-bold uppercase tracking-wider text-white">Quick Links</h4>
+          <ul class="space-y-2 text-sm text-white/70">
+            <li><a href="index.html#about" class="hover:text-white transition-colors">About Us</a></li>
+            <li><a href="leadership.html" class="text-blue-400 font-semibold hover:text-white transition-colors">Leadership Team</a></li>
+            <li><a href="index.html#fleet" class="hover:text-white transition-colors">Our Fleet & Vessels</a></li>
+            <li><a href="index.html#industries" class="hover:text-white transition-colors">Industries We Serve</a></li>
+            <li><a href="index.html#technology" class="hover:text-white transition-colors">Technology & IoT</a></li>
+            <li><a href="signin.html" class="hover:text-white transition-colors flex items-center space-x-1.5"><i data-lucide="log-in" class="w-3.5 h-3.5 text-blue-400"></i><span>Client Portal / Sign In</span></a></li>
+            <li><a href="signup.html" class="hover:text-white transition-colors flex items-center space-x-1.5"><i data-lucide="user-plus" class="w-3.5 h-3.5 text-blue-400"></i><span>Create Account</span></a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Services -->
+        <div class="space-y-3">
+          <h4 class="text-xs font-mono font-bold uppercase tracking-wider text-white">Our Services</h4>
+          <ul class="space-y-2 text-sm text-white/70">
+            <li><a href="index.html#services" class="hover:text-white transition-colors">International Ocean Shipping</a></li>
+            <li><a href="index.html#services" class="hover:text-white transition-colors">Warehousing & Distribution</a></li>
+            <li><a href="index.html#services" class="hover:text-white transition-colors">Freight Forwarding</a></li>
+            <li><a href="index.html#services" class="hover:text-white transition-colors">Supply Chain Management</a></li>
+            <li><a href="index.html#services" class="hover:text-white transition-colors">Customs Clearance</a></li>
+            <li><a href="index.html#services" class="hover:text-white transition-colors">Reefer Cold Chain Logistics</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 5: Contact Desk -->
+        <div class="space-y-3">
+          <h4 class="text-xs font-mono font-bold uppercase tracking-wider text-white">Contact & Support</h4>
+          <div class="space-y-2 text-sm text-white/70">
+            <p><strong class="text-white">Commercial & Operations:</strong><br> <a href="mailto:hansaiocean@gmail.com" class="hover:text-white transition-colors">hansaiocean@gmail.com</a></p>
+            <p><strong class="text-white">Rate Quotes:</strong><br> <a href="mailto:booking@hansailine.com" class="hover:text-white transition-colors">booking@hansailine.com</a></p>
+            <p><strong class="text-white">24/7 Maritime Hotline:</strong><br> <a href="tel:+6281805886644" class="hover:text-white transition-colors">+62 818 0588 6644</a></p>
+            <p><strong class="text-white">Global Headquarters:</strong><br> Jakarta, Indonesia</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="flex flex-col sm:flex-row items-center justify-between text-xs text-white/50 space-y-4 sm:space-y-0">
+        <div>
+          © 2026 HANSAI SHIPPING LINE. All rights reserved. "Global Reach. Reliable Shipping. Intelligent Logistics."
+        </div>
+        <div class="flex items-center space-x-6 font-mono text-[11px]">
+          <a href="#" class="hover:text-white transition-colors">Terms of Carriage</a>
+          <a href="#" class="hover:text-white transition-colors">Bill of Lading Terms</a>
+          <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenuClose = document.getElementById('mobile-menu-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileDrawer = document.querySelector('.mobile-menu-drawer');
+
+    function openMobileMenu() {
+      mobileMenu.classList.remove('hidden');
+      setTimeout(() => {
+        mobileMenu.classList.remove('opacity-0');
+        mobileDrawer.classList.remove('translate-x-full');
+      }, 10);
+    }
+
+    function closeMobileMenu() {
+      mobileMenu.classList.add('opacity-0');
+      mobileDrawer.classList.add('translate-x-full');
+      setTimeout(() => {
+        mobileMenu.classList.add('hidden');
+      }, 300);
+    }
+
+    if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openMobileMenu);
+    if (mobileMenuClose) mobileMenuClose.addEventListener('click', closeMobileMenu);
+    if (mobileMenu) {
+      mobileMenu.addEventListener('click', (e) => {
+        if (e.target === mobileMenu) closeMobileMenu();
+      });
+    }
+  </script>
+
+</body>
+
+</html>
