@@ -441,57 +441,169 @@ function calculateNauticalDistance(p1, p2) {
   return Math.round(greatCircleNM * detourFactor);
 }
 
-function setupLiveSelectFilter(selectId, searchInputId, clearBtnId, defaultCode) {
-  const select = document.getElementById(selectId);
+function setupSearchablePortDropdown({
+  btnId,
+  textId,
+  popoverId,
+  searchInputId,
+  clearBtnId,
+  listId,
+  countId,
+  hiddenSelectId,
+  pillClass,
+  defaultCode,
+  onChange
+}) {
+  const btn = document.getElementById(btnId);
+  const textEl = document.getElementById(textId);
+  const popover = document.getElementById(popoverId);
   const searchInput = document.getElementById(searchInputId);
   const clearBtn = document.getElementById(clearBtnId);
-  if (!select) return;
+  const listEl = document.getElementById(listId);
+  const countEl = document.getElementById(countId);
+  const hiddenSelect = document.getElementById(hiddenSelectId);
+
+  if (!btn || !popover || !listEl) return;
 
   const ports = (window.HANSAI_WORLD_PORTS && window.HANSAI_WORLD_PORTS.length)
     ? window.HANSAI_WORLD_PORTS
     : [];
 
-  function renderOptions(list, selectedCode) {
-    select.innerHTML = list.map(p => {
-      const isSel = p.code === selectedCode ? ' selected' : '';
-      return `<option value="${p.code}" data-country="${p.country}" data-port="${p.port}" data-region="${p.region}"${isSel}>${p.flag} ${p.country} — ${p.port} (${p.code})</option>`;
-    }).join('');
+  // Populate hidden select for form consistency
+  if (hiddenSelect && ports.length) {
+    hiddenSelect.innerHTML = ports.map(p =>
+      `<option value="${p.code}" ${p.code === defaultCode ? 'selected' : ''}>${p.country} — ${p.port} (${p.code})</option>`
+    ).join('');
+    hiddenSelect.value = defaultCode;
   }
 
-  // Ensure default option is selected if not already
-  if (defaultCode && select.value !== defaultCode) {
-    select.value = defaultCode;
-  }
+  let currentSearch = '';
+  let currentRegion = 'ALL';
+  let activeCode = defaultCode;
 
-  if (searchInput) {
-    searchInput.addEventListener('input', (e) => {
-      const q = e.target.value.toLowerCase().trim();
-      if (clearBtn) {
-        if (q) clearBtn.classList.remove('hidden');
-        else clearBtn.classList.add('hidden');
-      }
+  // Set default display text
+  const defPort = getPortByCode(activeCode);
+  if (textEl) textEl.textContent = `${defPort.flag} ${defPort.country} — ${defPort.port} (${defPort.code})`;
 
-      if (!q) {
-        const currentVal = select.value || defaultCode;
-        renderOptions(ports, currentVal);
-        select.value = currentVal;
-        select.dispatchEvent(new Event('change', { bubbles: true }));
-        return;
-      }
-
-      const filtered = ports.filter(p =>
+  function renderList() {
+    const q = currentSearch.toLowerCase().trim();
+    const filtered = ports.filter(p => {
+      const matchRegion = currentRegion === 'ALL' || p.region === currentRegion;
+      if (!matchRegion) return false;
+      if (!q) return true;
+      return (
         p.country.toLowerCase().includes(q) ||
         p.port.toLowerCase().includes(q) ||
         p.code.toLowerCase().includes(q) ||
         p.region.toLowerCase().includes(q)
       );
+    });
 
-      if (filtered.length > 0) {
-        renderOptions(filtered, filtered[0].code);
-        select.value = filtered[0].code;
-        select.dispatchEvent(new Event('change', { bubbles: true }));
-      } else {
-        select.innerHTML = `<option value="" disabled selected>⚠️ Tidak ditemukan negara/pelabuhan "${escapeHtml(q)}"</option>`;
+    if (countEl) {
+      countEl.textContent = `Menampilkan ${filtered.length} negara & pelabuhan`;
+    }
+
+    if (filtered.length === 0) {
+      listEl.innerHTML = `
+        <div class="p-6 text-center text-xs text-gray-400">
+          <div>Tidak ada negara atau pelabuhan yang cocok dengan "<strong>${escapeHtml(currentSearch)}</strong>".</div>
+          <div class="mt-1 text-[11px] text-gray-400">Coba kata kunci lain atau pilih tab region.</div>
+        </div>
+      `;
+      return;
+    }
+
+    listEl.innerHTML = filtered.map(p => {
+      const isSelected = p.code === activeCode;
+      return `
+        <div class="port-option flex items-center justify-between px-3 py-2 rounded-xl cursor-pointer hover:bg-blue-50/90 transition-colors ${isSelected ? 'selected font-semibold text-[#06345B] bg-blue-50/50' : 'text-gray-800'}" data-code="${p.code}">
+          <div class="flex items-center space-x-2.5 min-w-0">
+            <span class="text-base flex-shrink-0 select-none">${p.flag}</span>
+            <div class="min-w-0">
+              <div class="text-xs truncate font-medium text-gray-900">${highlightMatch(p.country, currentSearch)}</div>
+              <div class="text-[11px] text-gray-500 truncate">${highlightMatch(p.port, currentSearch)} • <span class="font-mono text-[10px] text-gray-400">${p.code}</span></div>
+            </div>
+          </div>
+          <div class="flex items-center space-x-1.5 flex-shrink-0 ml-2">
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-600">${p.region}</span>
+            ${isSelected ? '<span class="text-emerald-600 font-bold text-xs">✓</span>' : ''}
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    listEl.querySelectorAll('.port-option').forEach(item => {
+      item.addEventListener('click', () => {
+        selectItem(item.getAttribute('data-code'));
+      });
+    });
+  }
+
+  function selectItem(code) {
+    activeCode = code;
+    const p = getPortByCode(code);
+    if (textEl) textEl.textContent = `${p.flag} ${p.country} — ${p.port} (${p.code})`;
+    if (hiddenSelect) {
+      hiddenSelect.value = code;
+      hiddenSelect.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+    close();
+    btn.focus();
+    if (typeof onChange === 'function') onChange(code);
+  }
+
+  function open() {
+    // Close other popovers
+    document.querySelectorAll('.hansai-combo-box .searchable-popover').forEach(p => {
+      if (p !== popover) p.classList.add('hidden');
+    });
+    document.querySelectorAll('.hansai-combo-box button[aria-expanded="true"]').forEach(b => {
+      if (b !== btn) b.setAttribute('aria-expanded', 'false');
+    });
+
+    popover.classList.remove('hidden');
+    btn.setAttribute('aria-expanded', 'true');
+    renderList();
+    if (searchInput) {
+      setTimeout(() => searchInput.focus(), 60);
+    }
+  }
+
+  function close() {
+    popover.classList.add('hidden');
+    btn.setAttribute('aria-expanded', 'false');
+  }
+
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (popover.classList.contains('hidden')) {
+      open();
+    } else {
+      close();
+    }
+  });
+
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      currentSearch = e.target.value;
+      if (clearBtn) {
+        if (currentSearch) clearBtn.classList.remove('hidden');
+        else clearBtn.classList.add('hidden');
+      }
+      renderList();
+    });
+
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        close();
+        btn.focus();
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        const firstOpt = listEl.querySelector('.port-option');
+        if (firstOpt) {
+          selectItem(firstOpt.getAttribute('data-code'));
+        }
       }
     });
   }
@@ -499,15 +611,45 @@ function setupLiveSelectFilter(selectId, searchInputId, clearBtnId, defaultCode)
   if (clearBtn) {
     clearBtn.addEventListener('click', (e) => {
       e.preventDefault();
+      e.stopPropagation();
       searchInput.value = '';
+      currentSearch = '';
       clearBtn.classList.add('hidden');
-      const currentVal = select.value || defaultCode;
-      renderOptions(ports, currentVal);
-      select.value = currentVal;
-      select.dispatchEvent(new Event('change', { bubbles: true }));
+      renderList();
       searchInput.focus();
     });
   }
+
+  // Region tabs
+  const pills = popover.querySelectorAll(`.${pillClass}`);
+  pills.forEach(pill => {
+    pill.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      pills.forEach(p => {
+        p.classList.remove('bg-[#06345B]', 'text-white');
+        p.classList.add('bg-gray-100', 'text-gray-600');
+      });
+      pill.classList.remove('bg-gray-100', 'text-gray-600');
+      pill.classList.add('bg-[#06345B]', 'text-white');
+      currentRegion = pill.getAttribute('data-region') || 'ALL';
+      renderList();
+    });
+  });
+
+  // Global click outside
+  document.addEventListener('click', (e) => {
+    if (!popover.contains(e.target) && !btn.contains(e.target)) {
+      close();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !popover.classList.contains('hidden')) {
+      close();
+      btn.focus();
+    }
+  });
 }
 
 function initRateEstimator() {
@@ -602,9 +744,34 @@ function initRateEstimator() {
     if (resultCo2) resultCo2.textContent = `${co2Tonnes} MT CO2e`;
   }
 
-  // Setup Live Search Filters on Origin and Destination Selects
-  setupLiveSelectFilter('calc-origin', 'calc-origin-search', 'calc-origin-clear', 'CNSHG');
-  setupLiveSelectFilter('calc-dest', 'calc-dest-search', 'calc-dest-clear', 'NLRTM');
+  // Setup Clean Searchable Dropdowns
+  setupSearchablePortDropdown({
+    btnId: 'combo-origin-btn',
+    textId: 'combo-origin-text',
+    popoverId: 'combo-origin-popover',
+    searchInputId: 'combo-origin-search',
+    clearBtnId: 'combo-origin-clear',
+    listId: 'combo-origin-list',
+    countId: 'combo-origin-count',
+    hiddenSelectId: 'calc-origin',
+    pillClass: 'origin-pill',
+    defaultCode: 'CNSHG',
+    onChange: () => updateEstimate()
+  });
+
+  setupSearchablePortDropdown({
+    btnId: 'combo-dest-btn',
+    textId: 'combo-dest-text',
+    popoverId: 'combo-dest-popover',
+    searchInputId: 'combo-dest-search',
+    clearBtnId: 'combo-dest-clear',
+    listId: 'combo-dest-list',
+    countId: 'combo-dest-count',
+    hiddenSelectId: 'calc-dest',
+    pillClass: 'dest-pill',
+    defaultCode: 'NLRTM',
+    onChange: () => updateEstimate()
+  });
 
   [originSelect, destSelect, containerSelect, commoditySelect].forEach(sel => {
     if (sel) sel.addEventListener('change', updateEstimate);

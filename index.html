@@ -1008,608 +1008,84 @@
             <form id="rate-calculator-form" class="space-y-4">
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 <!-- Origin Port -->
-                <div>
-                  <div class="flex items-center justify-between mb-1">
-                    <label class="block text-xs font-semibold text-gray-700">Origin Port</label>
-                    <span class="text-[10px] text-gray-400 font-mono">195+ Negara / 285 Pelabuhan</span>
+                <div class="relative hansai-combo-box" id="combo-origin-container">
+                  <label class="block text-xs font-semibold text-gray-700 mb-1.5">Origin Port</label>
+                  
+                  <!-- Clean Single Trigger Button -->
+                  <button type="button" id="combo-origin-btn" aria-haspopup="listbox" aria-expanded="false"
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm bg-white text-gray-800 flex items-center justify-between text-left hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-[#06345B] transition-all shadow-sm group">
+                    <span id="combo-origin-text" class="truncate font-medium text-gray-900">🇨🇳 China — Shanghai (CNSHG)</span>
+                    <i data-lucide="chevron-down" class="w-4 h-4 text-gray-400 group-hover:text-gray-600 flex-shrink-0 ml-1.5 transition-transform duration-200"></i>
+                  </button>
+
+                  <!-- Floating Search & Selection Dropdown -->
+                  <div id="combo-origin-popover" class="searchable-popover hidden absolute top-full left-0 w-full sm:w-[380px] z-50 mt-1.5 bg-white rounded-2xl border border-gray-200 shadow-2xl overflow-hidden flex flex-col">
+                    <div class="p-2.5 bg-gray-50/90 border-b border-gray-100">
+                      <div class="relative">
+                        <i data-lucide="search" class="w-3.5 h-3.5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+                        <input type="text" id="combo-origin-search" placeholder="Cari negara atau pelabuhan..."
+                          class="w-full pl-8 pr-7 py-1.5 text-xs rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#06345B] text-gray-800 placeholder-gray-400">
+                        <button type="button" id="combo-origin-clear" class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 text-xs">✕</button>
+                      </div>
+                      <div class="flex items-center gap-1 overflow-x-auto text-[11px] no-scrollbar pt-2">
+                        <button type="button" data-region="ALL" class="origin-pill px-2.5 py-0.5 rounded-lg font-medium whitespace-nowrap bg-[#06345B] text-white">Semua</button>
+                        <button type="button" data-region="Asia" class="origin-pill px-2.5 py-0.5 rounded-lg whitespace-nowrap bg-gray-100 text-gray-600 hover:bg-gray-200">Asia</button>
+                        <button type="button" data-region="Europe" class="origin-pill px-2.5 py-0.5 rounded-lg whitespace-nowrap bg-gray-100 text-gray-600 hover:bg-gray-200">Eropa</button>
+                        <button type="button" data-region="Americas" class="origin-pill px-2.5 py-0.5 rounded-lg whitespace-nowrap bg-gray-100 text-gray-600 hover:bg-gray-200">Amerika</button>
+                        <button type="button" data-region="Middle East" class="origin-pill px-2.5 py-0.5 rounded-lg whitespace-nowrap bg-gray-100 text-gray-600 hover:bg-gray-200">Timur Tengah</button>
+                        <button type="button" data-region="Africa" class="origin-pill px-2.5 py-0.5 rounded-lg whitespace-nowrap bg-gray-100 text-gray-600 hover:bg-gray-200">Afrika</button>
+                        <button type="button" data-region="Oceania" class="origin-pill px-2.5 py-0.5 rounded-lg whitespace-nowrap bg-gray-100 text-gray-600 hover:bg-gray-200">Oseania</button>
+                      </div>
+                    </div>
+                    <div id="combo-origin-list" class="max-h-60 overflow-y-auto divide-y divide-gray-50 p-1"></div>
+                    <div class="px-3 py-1.5 bg-gray-50 border-t border-gray-100 flex items-center justify-between text-[10px] text-gray-400">
+                      <span id="combo-origin-count">195+ Negara / 285 Pelabuhan</span>
+                      <span>ESC untuk menutup</span>
+                    </div>
                   </div>
-                  <!-- Quick Search Filter Box -->
-                  <div class="relative mb-1.5">
-                    <i data-lucide="search" class="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
-                    <input type="text" id="calc-origin-search" placeholder="🔍 Ketik cari negara (cth: Indonesia, China, US)..."
-                      class="w-full pl-8 pr-7 py-1.5 text-xs rounded-lg border border-gray-200 bg-gray-50/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#06345B] text-gray-800 placeholder-gray-400 transition-all">
-                    <button type="button" id="calc-origin-clear" class="hidden absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 text-xs px-1">✕</button>
-                  </div>
-                  <select id="calc-origin"
-                    class="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#06345B] bg-white text-gray-800 font-medium cursor-pointer shadow-sm">
-                      <option value="AFKBL" data-country="Afghanistan" data-port="Kabul (Karachi Gateway)" data-region="Asia">🇦🇫 Afghanistan — Kabul (Karachi Gateway) (AFKBL)</option>
-                      <option value="ALDRZ" data-country="Albania" data-port="Durrës" data-region="Europe">🇦🇱 Albania — Durrës (ALDRZ)</option>
-                      <option value="DZALG" data-country="Algeria" data-port="Algiers / Skikda" data-region="Africa">🇩🇿 Algeria — Algiers / Skikda (DZALG)</option>
-                      <option value="ADAND" data-country="Andorra" data-port="Andorra la Vella (Barcelona GW)" data-region="Europe">🇦🇩 Andorra — Andorra la Vella (Barcelona GW) (ADAND)</option>
-                      <option value="AOLAD" data-country="Angola" data-port="Luanda" data-region="Africa">🇦🇴 Angola — Luanda (AOLAD)</option>
-                      <option value="AGSTJ" data-country="Antigua and Barbuda" data-port="St. John's" data-region="Americas">🇦🇬 Antigua and Barbuda — St. John's (AGSTJ)</option>
-                      <option value="ARBAA" data-country="Argentina" data-port="Buenos Aires (TRP / BACTSSA)" data-region="Americas">🇦🇷 Argentina — Buenos Aires (TRP / BACTSSA) (ARBAA)</option>
-                      <option value="AMEVN" data-country="Armenia" data-port="Yerevan (Poti Gateway)" data-region="Europe">🇦🇲 Armenia — Yerevan (Poti Gateway) (AMEVN)</option>
-                      <option value="AUBNE" data-country="Australia" data-port="Brisbane" data-region="Oceania">🇦🇺 Australia — Brisbane (AUBNE)</option>
-                      <option value="AUFRE" data-country="Australia" data-port="Fremantle (Perth)" data-region="Oceania">🇦🇺 Australia — Fremantle (Perth) (AUFRE)</option>
-                      <option value="AUMEL" data-country="Australia" data-port="Melbourne (Victoria Port)" data-region="Oceania">🇦🇺 Australia — Melbourne (Victoria Port) (AUMEL)</option>
-                      <option value="AUSYD" data-country="Australia" data-port="Sydney (Port Botany)" data-region="Oceania">🇦🇺 Australia — Sydney (Port Botany) (AUSYD)</option>
-                      <option value="ATVIE" data-country="Austria" data-port="Vienna (Hamburg / Koper GW)" data-region="Europe">🇦🇹 Austria — Vienna (Hamburg / Koper GW) (ATVIE)</option>
-                      <option value="AZBAK" data-country="Azerbaijan" data-port="Baku (Caspian Port)" data-region="Europe">🇦🇿 Azerbaijan — Baku (Caspian Port) (AZBAK)</option>
-                      <option value="BSFPO" data-country="Bahamas" data-port="Freeport (FCP)" data-region="Americas">🇧🇸 Bahamas — Freeport (FCP) (BSFPO)</option>
-                      <option value="BHKBS" data-country="Bahrain" data-port="Khalifa Bin Salman (KBSP)" data-region="Middle East">🇧🇭 Bahrain — Khalifa Bin Salman (KBSP) (BHKBS)</option>
-                      <option value="BDCGP" data-country="Bangladesh" data-port="Chittagong (Chattogram)" data-region="Asia">🇧🇩 Bangladesh — Chittagong (Chattogram) (BDCGP)</option>
-                      <option value="BBBGI" data-country="Barbados" data-port="Bridgetown" data-region="Americas">🇧🇧 Barbados — Bridgetown (BBBGI)</option>
-                      <option value="BYMSQ" data-country="Belarus" data-port="Minsk (Klaipeda Gateway)" data-region="Europe">🇧🇾 Belarus — Minsk (Klaipeda Gateway) (BYMSQ)</option>
-                      <option value="BEANR" data-country="Belgium" data-port="Antwerp (Port of Antwerp-Bruges)" data-region="Europe">🇧🇪 Belgium — Antwerp (Port of Antwerp-Bruges) (BEANR)</option>
-                      <option value="BEZEE" data-country="Belgium" data-port="Zeebrugge" data-region="Europe">🇧🇪 Belgium — Zeebrugge (BEZEE)</option>
-                      <option value="BZBZE" data-country="Belize" data-port="Belize City Port" data-region="Americas">🇧🇿 Belize — Belize City Port (BZBZE)</option>
-                      <option value="BJCOO" data-country="Benin" data-port="Cotonou" data-region="Africa">🇧🇯 Benin — Cotonou (BJCOO)</option>
-                      <option value="BMHAM" data-country="Bermuda" data-port="Hamilton" data-region="Americas">🇧🇲 Bermuda — Hamilton (BMHAM)</option>
-                      <option value="BTTHI" data-country="Bhutan" data-port="Phuentsholing (Kolkata Gateway)" data-region="Asia">🇧🇹 Bhutan — Phuentsholing (Kolkata Gateway) (BTTHI)</option>
-                      <option value="BOLPZ" data-country="Bolivia" data-port="La Paz (Arica / Iquique GW)" data-region="Americas">🇧🇴 Bolivia — La Paz (Arica / Iquique GW) (BOLPZ)</option>
-                      <option value="BAPLC" data-country="Bosnia and Herzegovina" data-port="Neum / Ploče Gateway" data-region="Europe">🇧🇦 Bosnia and Herzegovina — Neum / Ploče Gateway (BAPLC)</option>
-                      <option value="BWGBE" data-country="Botswana" data-port="Gaborone (Durban Gateway)" data-region="Africa">🇧🇼 Botswana — Gaborone (Durban Gateway) (BWGBE)</option>
-                      <option value="BRNVG" data-country="Brazil" data-port="Navegantes / Itajaí" data-region="Americas">🇧🇷 Brazil — Navegantes / Itajaí (BRNVG)</option>
-                      <option value="BRPNG" data-country="Brazil" data-port="Paranaguá" data-region="Americas">🇧🇷 Brazil — Paranaguá (BRPNG)</option>
-                      <option value="BRRIO" data-country="Brazil" data-port="Rio de Janeiro" data-region="Americas">🇧🇷 Brazil — Rio de Janeiro (BRRIO)</option>
-                      <option value="BRSSZ" data-country="Brazil" data-port="Santos (São Paulo)" data-region="Americas">🇧🇷 Brazil — Santos (São Paulo) (BRSSZ)</option>
-                      <option value="BNMUA" data-country="Brunei" data-port="Muara Port" data-region="Asia">🇧🇳 Brunei — Muara Port (BNMUA)</option>
-                      <option value="BGVAR" data-country="Bulgaria" data-port="Varna / Burgas" data-region="Europe">🇧🇬 Bulgaria — Varna / Burgas (BGVAR)</option>
-                      <option value="BFOUA" data-country="Burkina Faso" data-port="Ouagadougou (Tema Gateway)" data-region="Africa">🇧🇫 Burkina Faso — Ouagadougou (Tema Gateway) (BFOUA)</option>
-                      <option value="BJBJM" data-country="Burundi" data-port="Bujumbura (Dar es Salaam GW)" data-region="Africa">🇧🇮 Burundi — Bujumbura (Dar es Salaam GW) (BJBJM)</option>
-                      <option value="KHKOS" data-country="Cambodia" data-port="Sihanoukville (PAS)" data-region="Asia">🇰🇭 Cambodia — Sihanoukville (PAS) (KHKOS)</option>
-                      <option value="CMDLA" data-country="Cameroon" data-port="Douala / Kribi Deep Sea" data-region="Africa">🇨🇲 Cameroon — Douala / Kribi Deep Sea (CMDLA)</option>
-                      <option value="CAHAL" data-country="Canada" data-port="Halifax, NS" data-region="Americas">🇨🇦 Canada — Halifax, NS (CAHAL)</option>
-                      <option value="CAMTR" data-country="Canada" data-port="Montreal, QC" data-region="Americas">🇨🇦 Canada — Montreal, QC (CAMTR)</option>
-                      <option value="CAPRR" data-country="Canada" data-port="Prince Rupert, BC" data-region="Americas">🇨🇦 Canada — Prince Rupert, BC (CAPRR)</option>
-                      <option value="CAVAN" data-country="Canada" data-port="Vancouver, BC" data-region="Americas">🇨🇦 Canada — Vancouver, BC (CAVAN)</option>
-                      <option value="CVRAI" data-country="Cape Verde" data-port="Praia / Mindelo" data-region="Africa">🇨🇻 Cape Verde — Praia / Mindelo (CVRAI)</option>
-                      <option value="KYGEC" data-country="Cayman Islands" data-port="George Town" data-region="Americas">🇰🇾 Cayman Islands — George Town (KYGEC)</option>
-                      <option value="CFBGF" data-country="Central African Republic" data-port="Bangui (Douala Gateway)" data-region="Africa">🇨🇫 Central African Republic — Bangui (Douala Gateway) (CFBGF)</option>
-                      <option value="TDNDJ" data-country="Chad" data-port="N'Djamena (Douala Gateway)" data-region="Africa">🇹🇩 Chad — N'Djamena (Douala Gateway) (TDNDJ)</option>
-                      <option value="CLSAI" data-country="Chile" data-port="San Antonio" data-region="Americas">🇨🇱 Chile — San Antonio (CLSAI)</option>
-                      <option value="CLVAP" data-country="Chile" data-port="Valparaíso" data-region="Americas">🇨🇱 Chile — Valparaíso (CLVAP)</option>
-                      <option value="CNDLC" data-country="China" data-port="Dalian" data-region="Asia">🇨🇳 China — Dalian (CNDLC)</option>
-                      <option value="CNCAN" data-country="China" data-port="Guangzhou (Nansha)" data-region="Asia">🇨🇳 China — Guangzhou (Nansha) (CNCAN)</option>
-                      <option value="CNNGB" data-country="China" data-port="Ningbo-Zhoushan" data-region="Asia">🇨🇳 China — Ningbo-Zhoushan (CNNGB)</option>
-                      <option value="CNTAO" data-country="China" data-port="Qingdao (QCT)" data-region="Asia">🇨🇳 China — Qingdao (QCT) (CNTAO)</option>
-                      <option value="CNSHG" data-country="China" data-port="Shanghai (Yangshan / Waigaoqiao)" data-region="Asia" selected>🇨🇳 China — Shanghai (Yangshan / Waigaoqiao) (CNSHG)</option>
-                      <option value="CNSZX" data-country="China" data-port="Shenzhen (Yantian / Shekou)" data-region="Asia">🇨🇳 China — Shenzhen (Yantian / Shekou) (CNSZX)</option>
-                      <option value="CNTXG" data-country="China" data-port="Tianjin / Xingang" data-region="Asia">🇨🇳 China — Tianjin / Xingang (CNTXG)</option>
-                      <option value="CNXMN" data-country="China" data-port="Xiamen" data-region="Asia">🇨🇳 China — Xiamen (CNXMN)</option>
-                      <option value="COBUN" data-country="Colombia" data-port="Buenaventura (Pacific)" data-region="Americas">🇨🇴 Colombia — Buenaventura (Pacific) (COBUN)</option>
-                      <option value="COCTG" data-country="Colombia" data-port="Cartagena (SPRC / Contecar)" data-region="Americas">🇨🇴 Colombia — Cartagena (SPRC / Contecar) (COCTG)</option>
-                      <option value="KMYVA" data-country="Comoros" data-port="Moroni" data-region="Africa">🇰🇲 Comoros — Moroni (KMYVA)</option>
-                      <option value="CDMAT" data-country="Congo, Dem. Rep." data-port="Matadi / Boma" data-region="Africa">🇨🇩 Congo, Dem. Rep. — Matadi / Boma (CDMAT)</option>
-                      <option value="CGPNR" data-country="Congo, Rep." data-port="Pointe-Noire" data-region="Africa">🇨🇬 Congo, Rep. — Pointe-Noire (CGPNR)</option>
-                      <option value="CRCAL" data-country="Costa Rica" data-port="Caldera (Pacific)" data-region="Americas">🇨🇷 Costa Rica — Caldera (Pacific) (CRCAL)</option>
-                      <option value="CRLIO" data-country="Costa Rica" data-port="Puerto Limón / Moin" data-region="Americas">🇨🇷 Costa Rica — Puerto Limón / Moin (CRLIO)</option>
-                      <option value="HRRJK" data-country="Croatia" data-port="Rijeka" data-region="Europe">🇭🇷 Croatia — Rijeka (HRRJK)</option>
-                      <option value="CUHAV" data-country="Cuba" data-port="Havana / Mariel" data-region="Americas">🇨🇺 Cuba — Havana / Mariel (CUHAV)</option>
-                      <option value="CWWIL" data-country="Curaçao" data-port="Willemstad" data-region="Americas">🇨🇼 Curaçao — Willemstad (CWWIL)</option>
-                      <option value="CYLMS" data-country="Cyprus" data-port="Limassol" data-region="Europe">🇨🇾 Cyprus — Limassol (CYLMS)</option>
-                      <option value="CZPRG" data-country="Czech Republic" data-port="Prague (Hamburg Gateway)" data-region="Europe">🇨🇿 Czech Republic — Prague (Hamburg Gateway) (CZPRG)</option>
-                      <option value="DKAAR" data-country="Denmark" data-port="Aarhus / Copenhagen" data-region="Europe">🇩🇰 Denmark — Aarhus / Copenhagen (DKAAR)</option>
-                      <option value="DJJIB" data-country="Djibouti" data-port="Djibouti (Doraleh Container Terminal)" data-region="Africa">🇩🇯 Djibouti — Djibouti (Doraleh Container Terminal) (DJJIB)</option>
-                      <option value="DMRSU" data-country="Dominica" data-port="Roseau" data-region="Americas">🇩🇲 Dominica — Roseau (DMRSU)</option>
-                      <option value="DOCAU" data-country="Dominican Republic" data-port="Caucedo (DP World)" data-region="Americas">🇩🇴 Dominican Republic — Caucedo (DP World) (DOCAU)</option>
-                      <option value="ECGYE" data-country="Ecuador" data-port="Guayaquil (Contecon)" data-region="Americas">🇪🇨 Ecuador — Guayaquil (Contecon) (ECGYE)</option>
-                      <option value="EGALY" data-country="Egypt" data-port="Alexandria / Dekheila" data-region="Africa">🇪🇬 Egypt — Alexandria / Dekheila (EGALY)</option>
-                      <option value="EGDAM" data-country="Egypt" data-port="Damietta" data-region="Africa">🇪🇬 Egypt — Damietta (EGDAM)</option>
-                      <option value="EGPSD" data-country="Egypt" data-port="Port Said (SCCT / Suez Canal)" data-region="Africa">🇪🇬 Egypt — Port Said (SCCT / Suez Canal) (EGPSD)</option>
-                      <option value="SVAQJ" data-country="El Salvador" data-port="Acajutla" data-region="Americas">🇸🇻 El Salvador — Acajutla (SVAQJ)</option>
-                      <option value="GQSSG" data-country="Equatorial Guinea" data-port="Malabo / Bata" data-region="Africa">🇬🇶 Equatorial Guinea — Malabo / Bata (GQSSG)</option>
-                      <option value="ERMSW" data-country="Eritrea" data-port="Massawa / Assab" data-region="Africa">🇪🇷 Eritrea — Massawa / Assab (ERMSW)</option>
-                      <option value="EETLL" data-country="Estonia" data-port="Tallinn (Muuga)" data-region="Europe">🇪🇪 Estonia — Tallinn (Muuga) (EETLL)</option>
-                      <option value="SZQUT" data-country="Eswatini" data-port="Mbabane (Maputo Gateway)" data-region="Africa">🇸🇿 Eswatini — Mbabane (Maputo Gateway) (SZQUT)</option>
-                      <option value="ETADD" data-country="Ethiopia" data-port="Addis Ababa (Djibouti Gateway)" data-region="Africa">🇪🇹 Ethiopia — Addis Ababa (Djibouti Gateway) (ETADD)</option>
-                      <option value="FJSUV" data-country="Fiji" data-port="Suva / Lautoka" data-region="Oceania">🇫🇯 Fiji — Suva / Lautoka (FJSUV)</option>
-                      <option value="FIHEL" data-country="Finland" data-port="Helsinki / Kotka" data-region="Europe">🇫🇮 Finland — Helsinki / Kotka (FIHEL)</option>
-                      <option value="FRLEH" data-country="France" data-port="Le Havre (HAROPA)" data-region="Europe">🇫🇷 France — Le Havre (HAROPA) (FRLEH)</option>
-                      <option value="FRMRS" data-country="France" data-port="Marseille-Fos" data-region="Europe">🇫🇷 France — Marseille-Fos (FRMRS)</option>
-                      <option value="GALBV" data-country="Gabon" data-port="Libreville (Owendo)" data-region="Africa">🇬🇦 Gabon — Libreville (Owendo) (GALBV)</option>
-                      <option value="GMBJL" data-country="Gambia" data-port="Banjul" data-region="Africa">🇬🇲 Gambia — Banjul (GMBJL)</option>
-                      <option value="GEPTI" data-country="Georgia" data-port="Poti / Batumi" data-region="Europe">🇬🇪 Georgia — Poti / Batumi (GEPTI)</option>
-                      <option value="DEBRE" data-country="Germany" data-port="Bremerhaven" data-region="Europe">🇩🇪 Germany — Bremerhaven (DEBRE)</option>
-                      <option value="DEHAM" data-country="Germany" data-port="Hamburg (HHLA / Eurogate)" data-region="Europe">🇩🇪 Germany — Hamburg (HHLA / Eurogate) (DEHAM)</option>
-                      <option value="GHTKD" data-country="Ghana" data-port="Takoradi" data-region="Africa">🇬🇭 Ghana — Takoradi (GHTKD)</option>
-                      <option value="GHTEM" data-country="Ghana" data-port="Tema (MPS Terminal 3)" data-region="Africa">🇬🇭 Ghana — Tema (MPS Terminal 3) (GHTEM)</option>
-                      <option value="GRPIR" data-country="Greece" data-port="Piraeus (Athens)" data-region="Europe">🇬🇷 Greece — Piraeus (Athens) (GRPIR)</option>
-                      <option value="GRSKG" data-country="Greece" data-port="Thessaloniki" data-region="Europe">🇬🇷 Greece — Thessaloniki (GRSKG)</option>
-                      <option value="GDSTG" data-country="Grenada" data-port="St. George's" data-region="Americas">🇬🇩 Grenada — St. George's (GDSTG)</option>
-                      <option value="GTPRQ" data-country="Guatemala" data-port="Puerto Quetzal" data-region="Americas">🇬🇹 Guatemala — Puerto Quetzal (GTPRQ)</option>
-                      <option value="GTSTC" data-country="Guatemala" data-port="Santo Tomás de Castilla" data-region="Americas">🇬🇹 Guatemala — Santo Tomás de Castilla (GTSTC)</option>
-                      <option value="GNCKY" data-country="Guinea" data-port="Conakry" data-region="Africa">🇬🇳 Guinea — Conakry (GNCKY)</option>
-                      <option value="GWOXB" data-country="Guinea-Bissau" data-port="Bissau" data-region="Africa">🇬🇼 Guinea-Bissau — Bissau (GWOXB)</option>
-                      <option value="GYGEO" data-country="Guyana" data-port="Georgetown" data-region="Americas">🇬🇾 Guyana — Georgetown (GYGEO)</option>
-                      <option value="HTPAP" data-country="Haiti" data-port="Port-au-Prince" data-region="Americas">🇭🇹 Haiti — Port-au-Prince (HTPAP)</option>
-                      <option value="HNPCR" data-country="Honduras" data-port="Puerto Cortés" data-region="Americas">🇭🇳 Honduras — Puerto Cortés (HNPCR)</option>
-                      <option value="HKHKG" data-country="Hong Kong" data-port="Hong Kong (Kwai Tsing)" data-region="Asia">🇭🇰 Hong Kong — Hong Kong (Kwai Tsing) (HKHKG)</option>
-                      <option value="HUBUD" data-country="Hungary" data-port="Budapest (Koper Gateway)" data-region="Europe">🇭🇺 Hungary — Budapest (Koper Gateway) (HUBUD)</option>
-                      <option value="ISREY" data-country="Iceland" data-port="Reykjavik" data-region="Europe">🇮🇸 Iceland — Reykjavik (ISREY)</option>
-                      <option value="INMAA" data-country="India" data-port="Chennai" data-region="Asia">🇮🇳 India — Chennai (INMAA)</option>
-                      <option value="INCOK" data-country="India" data-port="Cochin (Vallarpadam)" data-region="Asia">🇮🇳 India — Cochin (Vallarpadam) (INCOK)</option>
-                      <option value="INCCU" data-country="India" data-port="Kolkata / Haldia" data-region="Asia">🇮🇳 India — Kolkata / Haldia (INCCU)</option>
-                      <option value="INMUN" data-country="India" data-port="Mundra" data-region="Asia">🇮🇳 India — Mundra (INMUN)</option>
-                      <option value="INNSA" data-country="India" data-port="Nhava Sheva / Mumbai (JNPT)" data-region="Asia">🇮🇳 India — Nhava Sheva / Mumbai (JNPT) (INNSA)</option>
-                      <option value="IDBTH" data-country="Indonesia" data-port="Batam (Batu Ampar)" data-region="Asia">🇮🇩 Indonesia — Batam (Batu Ampar) (IDBTH)</option>
-                      <option value="IDJKT" data-country="Indonesia" data-port="Jakarta (Tanjung Priok)" data-region="Asia">🇮🇩 Indonesia — Jakarta (Tanjung Priok) (IDJKT)</option>
-                      <option value="IDMAK" data-country="Indonesia" data-port="Makassar (Soekarno-Hatta)" data-region="Asia">🇮🇩 Indonesia — Makassar (Soekarno-Hatta) (IDMAK)</option>
-                      <option value="IDBLW" data-country="Indonesia" data-port="Medan (Belawan)" data-region="Asia">🇮🇩 Indonesia — Medan (Belawan) (IDBLW)</option>
-                      <option value="IDSRG" data-country="Indonesia" data-port="Semarang (Tanjung Emas)" data-region="Asia">🇮🇩 Indonesia — Semarang (Tanjung Emas) (IDSRG)</option>
-                      <option value="IDSUB" data-country="Indonesia" data-port="Surabaya (Tanjung Perak)" data-region="Asia">🇮🇩 Indonesia — Surabaya (Tanjung Perak) (IDSUB)</option>
-                      <option value="IRBND" data-country="Iran" data-port="Bandar Abbas (Shahid Rajaee)" data-region="Middle East">🇮🇷 Iran — Bandar Abbas (Shahid Rajaee) (IRBND)</option>
-                      <option value="IQUQR" data-country="Iraq" data-port="Umm Qasr / Basra" data-region="Middle East">🇮🇶 Iraq — Umm Qasr / Basra (IQUQR)</option>
-                      <option value="IEDUB" data-country="Ireland" data-port="Dublin" data-region="Europe">🇮🇪 Ireland — Dublin (IEDUB)</option>
-                      <option value="ILHFA" data-country="Israel" data-port="Haifa / Ashdod" data-region="Middle East">🇮🇱 Israel — Haifa / Ashdod (ILHFA)</option>
-                      <option value="ITGOA" data-country="Italy" data-port="Genoa" data-region="Europe">🇮🇹 Italy — Genoa (ITGOA)</option>
-                      <option value="ITGIT" data-country="Italy" data-port="Gioia Tauro" data-region="Europe">🇮🇹 Italy — Gioia Tauro (ITGIT)</option>
-                      <option value="ITSPE" data-country="Italy" data-port="La Spezia" data-region="Europe">🇮🇹 Italy — La Spezia (ITSPE)</option>
-                      <option value="ITTRS" data-country="Italy" data-port="Trieste" data-region="Europe">🇮🇹 Italy — Trieste (ITTRS)</option>
-                      <option value="CIABJ" data-country="Ivory Coast" data-port="Abidjan (Abidjan Terminal)" data-region="Africa">🇨🇮 Ivory Coast — Abidjan (Abidjan Terminal) (CIABJ)</option>
-                      <option value="JMKIN" data-country="Jamaica" data-port="Kingston (KFTL)" data-region="Americas">🇯🇲 Jamaica — Kingston (KFTL) (JMKIN)</option>
-                      <option value="JPNGO" data-country="Japan" data-port="Nagoya" data-region="Asia">🇯🇵 Japan — Nagoya (JPNGO)</option>
-                      <option value="JPOSA" data-country="Japan" data-port="Osaka / Kobe (Hanshin Port)" data-region="Asia">🇯🇵 Japan — Osaka / Kobe (Hanshin Port) (JPOSA)</option>
-                      <option value="JPYOK" data-country="Japan" data-port="Tokyo / Yokohama" data-region="Asia">🇯🇵 Japan — Tokyo / Yokohama (JPYOK)</option>
-                      <option value="JOAQB" data-country="Jordan" data-port="Aqaba" data-region="Middle East">🇯🇴 Jordan — Aqaba (JOAQB)</option>
-                      <option value="KZAKU" data-country="Kazakhstan" data-port="Aktau / Almaty Gateway" data-region="Asia">🇰🇿 Kazakhstan — Aktau / Almaty Gateway (KZAKU)</option>
-                      <option value="KEMBA" data-country="Kenya" data-port="Mombasa (Kilindini Harbour)" data-region="Africa">🇰🇪 Kenya — Mombasa (Kilindini Harbour) (KEMBA)</option>
-                      <option value="KIBTO" data-country="Kiribati" data-port="Betio / Tarawa" data-region="Oceania">🇰🇮 Kiribati — Betio / Tarawa (KIBTO)</option>
-                      <option value="KWSWK" data-country="Kuwait" data-port="Shuwaikh / Shuaiba" data-region="Middle East">🇰🇼 Kuwait — Shuwaikh / Shuaiba (KWSWK)</option>
-                      <option value="KGFRU" data-country="Kyrgyzstan" data-port="Bishkek (Qingdao Gateway)" data-region="Asia">🇰🇬 Kyrgyzstan — Bishkek (Qingdao Gateway) (KGFRU)</option>
-                      <option value="LAXAY" data-country="Laos" data-port="Vientiane (Laem Chabang Gateway)" data-region="Asia">🇱🇦 Laos — Vientiane (Laem Chabang Gateway) (LAXAY)</option>
-                      <option value="LVRIG" data-country="Latvia" data-port="Riga" data-region="Europe">🇱🇻 Latvia — Riga (LVRIG)</option>
-                      <option value="LBBEY" data-country="Lebanon" data-port="Beirut" data-region="Middle East">🇱🇧 Lebanon — Beirut (LBBEY)</option>
-                      <option value="LSMSU" data-country="Lesotho" data-port="Maseru (Durban Gateway)" data-region="Africa">🇱🇸 Lesotho — Maseru (Durban Gateway) (LSMSU)</option>
-                      <option value="LRMLW" data-country="Liberia" data-port="Monrovia (Freeport of Monrovia)" data-region="Africa">🇱🇷 Liberia — Monrovia (Freeport of Monrovia) (LRMLW)</option>
-                      <option value="LYTIP" data-country="Libya" data-port="Tripoli / Misrata" data-region="Africa">🇱🇾 Libya — Tripoli / Misrata (LYTIP)</option>
-                      <option value="LIVAZ" data-country="Liechtenstein" data-port="Vaduz (Basel Gateway)" data-region="Europe">🇱🇮 Liechtenstein — Vaduz (Basel Gateway) (LIVAZ)</option>
-                      <option value="LTKLJ" data-country="Lithuania" data-port="Klaipeda" data-region="Europe">🇱🇹 Lithuania — Klaipeda (LTKLJ)</option>
-                      <option value="LUXLU" data-country="Luxembourg" data-port="Luxembourg / Mertert Port" data-region="Europe">🇱🇺 Luxembourg — Luxembourg / Mertert Port (LUXLU)</option>
-                      <option value="MGTMM" data-country="Madagascar" data-port="Toamasina (Tamatave)" data-region="Africa">🇲🇬 Madagascar — Toamasina (Tamatave) (MGTMM)</option>
-                      <option value="MWLLW" data-country="Malawi" data-port="Lilongwe (Nacala Gateway)" data-region="Africa">🇲🇼 Malawi — Lilongwe (Nacala Gateway) (MWLLW)</option>
-                      <option value="MYPEN" data-country="Malaysia" data-port="Penang" data-region="Asia">🇲🇾 Malaysia — Penang (MYPEN)</option>
-                      <option value="MYPKG" data-country="Malaysia" data-port="Port Klang" data-region="Asia">🇲🇾 Malaysia — Port Klang (MYPKG)</option>
-                      <option value="MYTPP" data-country="Malaysia" data-port="Tanjung Pelepas (PTP)" data-region="Asia">🇲🇾 Malaysia — Tanjung Pelepas (PTP) (MYTPP)</option>
-                      <option value="MVMLE" data-country="Maldives" data-port="Malé Port" data-region="Asia">🇲🇻 Maldives — Malé Port (MVMLE)</option>
-                      <option value="MLBKO" data-country="Mali" data-port="Bamako (Dakar Gateway)" data-region="Africa">🇲🇱 Mali — Bamako (Dakar Gateway) (MLBKO)</option>
-                      <option value="MTMAR" data-country="Malta" data-port="Marsaxlokk (Malta Freeport)" data-region="Europe">🇲🇹 Malta — Marsaxlokk (Malta Freeport) (MTMAR)</option>
-                      <option value="MHMAJ" data-country="Marshall Islands" data-port="Majuro" data-region="Oceania">🇲🇭 Marshall Islands — Majuro (MHMAJ)</option>
-                      <option value="MRNKC" data-country="Mauritania" data-port="Nouakchott / Nouadhibou" data-region="Africa">🇲🇷 Mauritania — Nouakchott / Nouadhibou (MRNKC)</option>
-                      <option value="MUPLU" data-country="Mauritius" data-port="Port Louis" data-region="Africa">🇲🇺 Mauritius — Port Louis (MUPLU)</option>
-                      <option value="MXATM" data-country="Mexico" data-port="Altamira" data-region="Americas">🇲🇽 Mexico — Altamira (MXATM)</option>
-                      <option value="MXLZC" data-country="Mexico" data-port="Lázaro Cárdenas" data-region="Americas">🇲🇽 Mexico — Lázaro Cárdenas (MXLZC)</option>
-                      <option value="MXZLO" data-country="Mexico" data-port="Manzanillo (Colima)" data-region="Americas">🇲🇽 Mexico — Manzanillo (Colima) (MXZLO)</option>
-                      <option value="MXVER" data-country="Mexico" data-port="Veracruz" data-region="Americas">🇲🇽 Mexico — Veracruz (MXVER)</option>
-                      <option value="FMPNI" data-country="Micronesia" data-port="Pohnpei" data-region="Oceania">🇫🇲 Micronesia — Pohnpei (FMPNI)</option>
-                      <option value="MDGIU" data-country="Moldova" data-port="Giurgiulești (Danube Port)" data-region="Europe">🇲🇩 Moldova — Giurgiulești (Danube Port) (MDGIU)</option>
-                      <option value="MCMON" data-country="Monaco" data-port="Port Hercules / Marseille GW" data-region="Europe">🇲🇨 Monaco — Port Hercules / Marseille GW (MCMON)</option>
-                      <option value="MNUBN" data-country="Mongolia" data-port="Ulaanbaatar (Tianjin Gateway)" data-region="Asia">🇲🇳 Mongolia — Ulaanbaatar (Tianjin Gateway) (MNUBN)</option>
-                      <option value="MEMBR" data-country="Montenegro" data-port="Bar Port" data-region="Europe">🇲🇪 Montenegro — Bar Port (MEMBR)</option>
-                      <option value="MACAS" data-country="Morocco" data-port="Casablanca" data-region="Africa">🇲🇦 Morocco — Casablanca (MACAS)</option>
-                      <option value="MATNG" data-country="Morocco" data-port="Tanger Med" data-region="Africa">🇲🇦 Morocco — Tanger Med (MATNG)</option>
-                      <option value="MZMPM" data-country="Mozambique" data-port="Maputo / Beira" data-region="Africa">🇲🇿 Mozambique — Maputo / Beira (MZMPM)</option>
-                      <option value="MMRGN" data-country="Myanmar" data-port="Yangon (Thilawa)" data-region="Asia">🇲🇲 Myanmar — Yangon (Thilawa) (MMRGN)</option>
-                      <option value="NAWVB" data-country="Namibia" data-port="Walvis Bay" data-region="Africa">🇳🇦 Namibia — Walvis Bay (NAWVB)</option>
-                      <option value="NRINU" data-country="Nauru" data-port="Aiwo Port" data-region="Oceania">🇳🇷 Nauru — Aiwo Port (NRINU)</option>
-                      <option value="NPRTH" data-country="Nepal" data-port="Birgunj (Kolkata Gateway)" data-region="Asia">🇳🇵 Nepal — Birgunj (Kolkata Gateway) (NPRTH)</option>
-                      <option value="NLAMS" data-country="Netherlands" data-port="Amsterdam" data-region="Europe">🇳🇱 Netherlands — Amsterdam (NLAMS)</option>
-                      <option value="NLRTM" data-country="Netherlands" data-port="Rotterdam (Maasvlakte)" data-region="Europe">🇳🇱 Netherlands — Rotterdam (Maasvlakte) (NLRTM)</option>
-                      <option value="NZAKL" data-country="New Zealand" data-port="Auckland" data-region="Oceania">🇳🇿 New Zealand — Auckland (NZAKL)</option>
-                      <option value="NZLYT" data-country="New Zealand" data-port="Lyttelton / Christchurch" data-region="Oceania">🇳🇿 New Zealand — Lyttelton / Christchurch (NZLYT)</option>
-                      <option value="NZTRG" data-country="New Zealand" data-port="Tauranga" data-region="Oceania">🇳🇿 New Zealand — Tauranga (NZTRG)</option>
-                      <option value="NICIO" data-country="Nicaragua" data-port="Corinto" data-region="Americas">🇳🇮 Nicaragua — Corinto (NICIO)</option>
-                      <option value="NENIM" data-country="Niger" data-port="Niamey (Cotonou Gateway)" data-region="Africa">🇳🇪 Niger — Niamey (Cotonou Gateway) (NENIM)</option>
-                      <option value="NGLOS" data-country="Nigeria" data-port="Lagos (Apapa / Tin Can Island)" data-region="Africa">🇳🇬 Nigeria — Lagos (Apapa / Tin Can Island) (NGLOS)</option>
-                      <option value="NGLEK" data-country="Nigeria" data-port="Lekki Deep Sea Port" data-region="Africa">🇳🇬 Nigeria — Lekki Deep Sea Port (NGLEK)</option>
-                      <option value="NGONN" data-country="Nigeria" data-port="Onne Port (Port Harcourt)" data-region="Africa">🇳🇬 Nigeria — Onne Port (Port Harcourt) (NGONN)</option>
-                      <option value="KPKAN" data-country="North Korea" data-port="Nampo" data-region="Asia">🇰🇵 North Korea — Nampo (KPKAN)</option>
-                      <option value="MKSKP" data-country="North Macedonia" data-port="Skopje (Thessaloniki Gateway)" data-region="Europe">🇲🇰 North Macedonia — Skopje (Thessaloniki Gateway) (MKSKP)</option>
-                      <option value="NOOSL" data-country="Norway" data-port="Oslo" data-region="Europe">🇳🇴 Norway — Oslo (NOOSL)</option>
-                      <option value="OMSLL" data-country="Oman" data-port="Salalah" data-region="Middle East">🇴🇲 Oman — Salalah (OMSLL)</option>
-                      <option value="OMSOH" data-country="Oman" data-port="Sohar" data-region="Middle East">🇴🇲 Oman — Sohar (OMSOH)</option>
-                      <option value="PKKHI" data-country="Pakistan" data-port="Karachi (QICT / KICT)" data-region="Asia">🇵🇰 Pakistan — Karachi (QICT / KICT) (PKKHI)</option>
-                      <option value="PKBQM" data-country="Pakistan" data-port="Port Qasim" data-region="Asia">🇵🇰 Pakistan — Port Qasim (PKBQM)</option>
-                      <option value="PWKOR" data-country="Palau" data-port="Koror" data-region="Oceania">🇵🇼 Palau — Koror (PWKOR)</option>
-                      <option value="PABLB" data-country="Panama" data-port="Balboa (Pacific)" data-region="Americas">🇵🇦 Panama — Balboa (Pacific) (PABLB)</option>
-                      <option value="PAONX" data-country="Panama" data-port="Colon / Manzanillo (Atlantic)" data-region="Americas">🇵🇦 Panama — Colon / Manzanillo (Atlantic) (PAONX)</option>
-                      <option value="PGPOM" data-country="Papua New Guinea" data-port="Port Moresby / Lae" data-region="Oceania">🇵🇬 Papua New Guinea — Port Moresby / Lae (PGPOM)</option>
-                      <option value="PYASU" data-country="Paraguay" data-port="Asunción / Villeta Port" data-region="Americas">🇵🇾 Paraguay — Asunción / Villeta Port (PYASU)</option>
-                      <option value="PECLO" data-country="Peru" data-port="Callao (Lima / DP World)" data-region="Americas">🇵🇪 Peru — Callao (Lima / DP World) (PECLO)</option>
-                      <option value="PHCEB" data-country="Philippines" data-port="Cebu" data-region="Asia">🇵🇭 Philippines — Cebu (PHCEB)</option>
-                      <option value="PHMNL" data-country="Philippines" data-port="Manila (MICT)" data-region="Asia">🇵🇭 Philippines — Manila (MICT) (PHMNL)</option>
-                      <option value="PLGDN" data-country="Poland" data-port="Gdansk (Baltic Hub)" data-region="Europe">🇵🇱 Poland — Gdansk (Baltic Hub) (PLGDN)</option>
-                      <option value="PLGDY" data-country="Poland" data-port="Gdynia" data-region="Europe">🇵🇱 Poland — Gdynia (PLGDY)</option>
-                      <option value="PTLIS" data-country="Portugal" data-port="Lisbon / Leixões" data-region="Europe">🇵🇹 Portugal — Lisbon / Leixões (PTLIS)</option>
-                      <option value="PTSIE" data-country="Portugal" data-port="Sines" data-region="Europe">🇵🇹 Portugal — Sines (PTSIE)</option>
-                      <option value="PRSJU" data-country="Puerto Rico" data-port="San Juan" data-region="Americas">🇵🇷 Puerto Rico — San Juan (PRSJU)</option>
-                      <option value="QAHMD" data-country="Qatar" data-port="Hamad Port / Doha" data-region="Middle East">🇶🇦 Qatar — Hamad Port / Doha (QAHMD)</option>
-                      <option value="ROKOS" data-country="Romania" data-port="Constanta" data-region="Europe">🇷🇴 Romania — Constanta (ROKOS)</option>
-                      <option value="RUNVS" data-country="Russia" data-port="Novorossiysk (Black Sea)" data-region="Europe">🇷🇺 Russia — Novorossiysk (Black Sea) (RUNVS)</option>
-                      <option value="RUSPT" data-country="Russia" data-port="St. Petersburg (Baltic)" data-region="Europe">🇷🇺 Russia — St. Petersburg (Baltic) (RUSPT)</option>
-                      <option value="RUVVO" data-country="Russia" data-port="Vladivostok (Pacific)" data-region="Europe">🇷🇺 Russia — Vladivostok (Pacific) (RUVVO)</option>
-                      <option value="RWKGL" data-country="Rwanda" data-port="Kigali (Dar es Salaam Gateway)" data-region="Africa">🇷🇼 Rwanda — Kigali (Dar es Salaam Gateway) (RWKGL)</option>
-                      <option value="KNBAS" data-country="Saint Kitts and Nevis" data-port="Basseterre" data-region="Americas">🇰🇳 Saint Kitts and Nevis — Basseterre (KNBAS)</option>
-                      <option value="LCCAS" data-country="Saint Lucia" data-port="Castries" data-region="Americas">🇱🇨 Saint Lucia — Castries (LCCAS)</option>
-                      <option value="VCKTN" data-country="Saint Vincent & Grenadines" data-port="Kingstown" data-region="Americas">🇻🇨 Saint Vincent & Grenadines — Kingstown (VCKTN)</option>
-                      <option value="WSAPW" data-country="Samoa" data-port="Apia" data-region="Oceania">🇼🇸 Samoa — Apia (WSAPW)</option>
-                      <option value="SMSMR" data-country="San Marino" data-port="San Marino (Ravenna Gateway)" data-region="Europe">🇸🇲 San Marino — San Marino (Ravenna Gateway) (SMSMR)</option>
-                      <option value="STTMS" data-country="Sao Tome and Principe" data-port="São Tomé" data-region="Africa">🇸🇹 Sao Tome and Principe — São Tomé (STTMS)</option>
-                      <option value="SADMM" data-country="Saudi Arabia" data-port="Dammam (King Abdulaziz)" data-region="Middle East">🇸🇦 Saudi Arabia — Dammam (King Abdulaziz) (SADMM)</option>
-                      <option value="SAJED" data-country="Saudi Arabia" data-port="Jeddah Islamic Port" data-region="Middle East">🇸🇦 Saudi Arabia — Jeddah Islamic Port (SAJED)</option>
-                      <option value="SNDKR" data-country="Senegal" data-port="Dakar (DP World)" data-region="Africa">🇸🇳 Senegal — Dakar (DP World) (SNDKR)</option>
-                      <option value="RSBEG" data-country="Serbia" data-port="Belgrade (Constanta / Bar GW)" data-region="Europe">🇷🇸 Serbia — Belgrade (Constanta / Bar GW) (RSBEG)</option>
-                      <option value="SCPOV" data-country="Seychelles" data-port="Victoria / Mahé" data-region="Africa">🇸🇨 Seychelles — Victoria / Mahé (SCPOV)</option>
-                      <option value="SLFNA" data-country="Sierra Leone" data-port="Freetown (Queen Elizabeth II Quay)" data-region="Africa">🇸🇱 Sierra Leone — Freetown (Queen Elizabeth II Quay) (SLFNA)</option>
-                      <option value="SGSIN" data-country="Singapore" data-port="Singapore Port / PSA" data-region="Asia">🇸🇬 Singapore — Singapore Port / PSA (SGSIN)</option>
-                      <option value="SKBTS" data-country="Slovakia" data-port="Bratislava (Koper Gateway)" data-region="Europe">🇸🇰 Slovakia — Bratislava (Koper Gateway) (SKBTS)</option>
-                      <option value="SIKOP" data-country="Slovenia" data-port="Koper" data-region="Europe">🇸🇮 Slovenia — Koper (SIKOP)</option>
-                      <option value="SBHIR" data-country="Solomon Islands" data-port="Honiara" data-region="Oceania">🇸🇧 Solomon Islands — Honiara (SBHIR)</option>
-                      <option value="SOMOG" data-country="Somalia" data-port="Mogadishu / Berbera" data-region="Africa">🇸🇴 Somalia — Mogadishu / Berbera (SOMOG)</option>
-                      <option value="ZACPT" data-country="South Africa" data-port="Cape Town" data-region="Africa">🇿🇦 South Africa — Cape Town (ZACPT)</option>
-                      <option value="ZADUR" data-country="South Africa" data-port="Durban (DCT)" data-region="Africa">🇿🇦 South Africa — Durban (DCT) (ZADUR)</option>
-                      <option value="ZAPLZ" data-country="South Africa" data-port="Port Elizabeth / Ngqura" data-region="Africa">🇿🇦 South Africa — Port Elizabeth / Ngqura (ZAPLZ)</option>
-                      <option value="KRPUS" data-country="South Korea" data-port="Busan (PNC)" data-region="Asia">🇰🇷 South Korea — Busan (PNC) (KRPUS)</option>
-                      <option value="KRINC" data-country="South Korea" data-port="Incheon" data-region="Asia">🇰🇷 South Korea — Incheon (KRINC)</option>
-                      <option value="SSJUB" data-country="South Sudan" data-port="Juba (Mombasa Gateway)" data-region="Africa">🇸🇸 South Sudan — Juba (Mombasa Gateway) (SSJUB)</option>
-                      <option value="ESALG" data-country="Spain" data-port="Algeciras" data-region="Europe">🇪🇸 Spain — Algeciras (ESALG)</option>
-                      <option value="ESBCN" data-country="Spain" data-port="Barcelona" data-region="Europe">🇪🇸 Spain — Barcelona (ESBCN)</option>
-                      <option value="ESVLC" data-country="Spain" data-port="Valencia" data-region="Europe">🇪🇸 Spain — Valencia (ESVLC)</option>
-                      <option value="LKCMB" data-country="Sri Lanka" data-port="Colombo (CICT)" data-region="Asia">🇱🇰 Sri Lanka — Colombo (CICT) (LKCMB)</option>
-                      <option value="SDPZU" data-country="Sudan" data-port="Port Sudan" data-region="Africa">🇸🇩 Sudan — Port Sudan (SDPZU)</option>
-                      <option value="SRPBM" data-country="Suriname" data-port="Paramaribo" data-region="Americas">🇸🇷 Suriname — Paramaribo (SRPBM)</option>
-                      <option value="SEGOT" data-country="Sweden" data-port="Gothenburg (Göteborg)" data-region="Europe">🇸🇪 Sweden — Gothenburg (Göteborg) (SEGOT)</option>
-                      <option value="CHBSL" data-country="Switzerland" data-port="Basel (Rotterdam / Genoa GW)" data-region="Europe">🇨🇭 Switzerland — Basel (Rotterdam / Genoa GW) (CHBSL)</option>
-                      <option value="SYLTK" data-country="Syria" data-port="Latakia" data-region="Middle East">🇸🇾 Syria — Latakia (SYLTK)</option>
-                      <option value="TWKHH" data-country="Taiwan" data-port="Kaohsiung" data-region="Asia">🇹🇼 Taiwan — Kaohsiung (TWKHH)</option>
-                      <option value="TWKEL" data-country="Taiwan" data-port="Keelung / Taipei" data-region="Asia">🇹🇼 Taiwan — Keelung / Taipei (TWKEL)</option>
-                      <option value="TJDYU" data-country="Tajikistan" data-port="Dushanbe Gateway" data-region="Asia">🇹🇯 Tajikistan — Dushanbe Gateway (TJDYU)</option>
-                      <option value="TZDAR" data-country="Tanzania" data-port="Dar es Salaam (TICTS)" data-region="Africa">🇹🇿 Tanzania — Dar es Salaam (TICTS) (TZDAR)</option>
-                      <option value="TZZNZ" data-country="Tanzania" data-port="Zanzibar (Malindi Port)" data-region="Africa">🇹🇿 Tanzania — Zanzibar (Malindi Port) (TZZNZ)</option>
-                      <option value="THBKK" data-country="Thailand" data-port="Bangkok (Klong Toey)" data-region="Asia">🇹🇭 Thailand — Bangkok (Klong Toey) (THBKK)</option>
-                      <option value="THLCH" data-country="Thailand" data-port="Laem Chabang" data-region="Asia">🇹🇭 Thailand — Laem Chabang (THLCH)</option>
-                      <option value="TLDIL" data-country="Timor-Leste" data-port="Dili (Tibai Port)" data-region="Asia">🇹🇱 Timor-Leste — Dili (Tibai Port) (TLDIL)</option>
-                      <option value="TGLFW" data-country="Togo" data-port="Lomé (LCT)" data-region="Africa">🇹🇬 Togo — Lomé (LCT) (TGLFW)</option>
-                      <option value="TONUK" data-country="Tonga" data-port="Nuku'alofa" data-region="Oceania">🇹🇴 Tonga — Nuku'alofa (TONUK)</option>
-                      <option value="TTPOS" data-country="Trinidad and Tobago" data-port="Port of Spain / Point Lisas" data-region="Americas">🇹🇹 Trinidad and Tobago — Port of Spain / Point Lisas (TTPOS)</option>
-                      <option value="TNRAD" data-country="Tunisia" data-port="Tunis / Rades" data-region="Africa">🇹🇳 Tunisia — Tunis / Rades (TNRAD)</option>
-                      <option value="TRIST" data-country="Turkey" data-port="Istanbul (Ambarli)" data-region="Middle East">🇹🇷 Turkey — Istanbul (Ambarli) (TRIST)</option>
-                      <option value="TRIZM" data-country="Turkey" data-port="Izmir (Aliaga)" data-region="Middle East">🇹🇷 Turkey — Izmir (Aliaga) (TRIZM)</option>
-                      <option value="TRMER" data-country="Turkey" data-port="Mersin" data-region="Middle East">🇹🇷 Turkey — Mersin (TRMER)</option>
-                      <option value="TMKRW" data-country="Turkmenistan" data-port="Turkmenbashi" data-region="Asia">🇹🇲 Turkmenistan — Turkmenbashi (TMKRW)</option>
-                      <option value="TVFUN" data-country="Tuvalu" data-port="Funafuti" data-region="Oceania">🇹🇻 Tuvalu — Funafuti (TVFUN)</option>
-                      <option value="UGKLA" data-country="Uganda" data-port="Kampala (Mombasa Gateway)" data-region="Africa">🇺🇬 Uganda — Kampala (Mombasa Gateway) (UGKLA)</option>
-                      <option value="UAODS" data-country="Ukraine" data-port="Odesa / Chornomorsk" data-region="Europe">🇺🇦 Ukraine — Odesa / Chornomorsk (UAODS)</option>
-                      <option value="AEAUH" data-country="United Arab Emirates" data-port="Abu Dhabi (Khalifa Port)" data-region="Middle East">🇦🇪 United Arab Emirates — Abu Dhabi (Khalifa Port) (AEAUH)</option>
-                      <option value="AEJEA" data-country="United Arab Emirates" data-port="Jebel Ali / Dubai" data-region="Middle East">🇦🇪 United Arab Emirates — Jebel Ali / Dubai (AEJEA)</option>
-                      <option value="GBFXT" data-country="United Kingdom" data-port="Felixstowe" data-region="Europe">🇬🇧 United Kingdom — Felixstowe (GBFXT)</option>
-                      <option value="GBLON" data-country="United Kingdom" data-port="London Gateway" data-region="Europe">🇬🇧 United Kingdom — London Gateway (GBLON)</option>
-                      <option value="GBSOU" data-country="United Kingdom" data-port="Southampton" data-region="Europe">🇬🇧 United Kingdom — Southampton (GBSOU)</option>
-                      <option value="USCHS" data-country="United States" data-port="Charleston, SC" data-region="Americas">🇺🇸 United States — Charleston, SC (USCHS)</option>
-                      <option value="USHOU" data-country="United States" data-port="Houston, TX" data-region="Americas">🇺🇸 United States — Houston, TX (USHOU)</option>
-                      <option value="USLGB" data-country="United States" data-port="Long Beach, CA" data-region="Americas">🇺🇸 United States — Long Beach, CA (USLGB)</option>
-                      <option value="USLAX" data-country="United States" data-port="Los Angeles, CA" data-region="Americas">🇺🇸 United States — Los Angeles, CA (USLAX)</option>
-                      <option value="USMIA" data-country="United States" data-port="Miami, FL" data-region="Americas">🇺🇸 United States — Miami, FL (USMIA)</option>
-                      <option value="USNYC" data-country="United States" data-port="New York / New Jersey" data-region="Americas">🇺🇸 United States — New York / New Jersey (USNYC)</option>
-                      <option value="USORF" data-country="United States" data-port="Norfolk / Virginia" data-region="Americas">🇺🇸 United States — Norfolk / Virginia (USORF)</option>
-                      <option value="USOAK" data-country="United States" data-port="Oakland, CA" data-region="Americas">🇺🇸 United States — Oakland, CA (USOAK)</option>
-                      <option value="USSAV" data-country="United States" data-port="Savannah, GA" data-region="Americas">🇺🇸 United States — Savannah, GA (USSAV)</option>
-                      <option value="USSEA" data-country="United States" data-port="Seattle / Tacoma, WA" data-region="Americas">🇺🇸 United States — Seattle / Tacoma, WA (USSEA)</option>
-                      <option value="UYMVD" data-country="Uruguay" data-port="Montevideo (TCP)" data-region="Americas">🇺🇾 Uruguay — Montevideo (TCP) (UYMVD)</option>
-                      <option value="UZTAS" data-country="Uzbekistan" data-port="Tashkent (Bandar Abbas Gateway)" data-region="Asia">🇺🇿 Uzbekistan — Tashkent (Bandar Abbas Gateway) (UZTAS)</option>
-                      <option value="VUVLI" data-country="Vanuatu" data-port="Port Vila" data-region="Oceania">🇻🇺 Vanuatu — Port Vila (VUVLI)</option>
-                      <option value="VAVAT" data-country="Vatican City" data-port="Vatican City (Civitavecchia GW)" data-region="Europe">🇻🇦 Vatican City — Vatican City (Civitavecchia GW) (VAVAT)</option>
-                      <option value="VEPBL" data-country="Venezuela" data-port="Puerto Cabello / La Guaira" data-region="Americas">🇻🇪 Venezuela — Puerto Cabello / La Guaira (VEPBL)</option>
-                      <option value="VNDAD" data-country="Vietnam" data-port="Da Nang" data-region="Asia">🇻🇳 Vietnam — Da Nang (VNDAD)</option>
-                      <option value="VNHPH" data-country="Vietnam" data-port="Haiphong" data-region="Asia">🇻🇳 Vietnam — Haiphong (VNHPH)</option>
-                      <option value="VNSGN" data-country="Vietnam" data-port="Ho Chi Minh City (Cat Lai / Cai Mep)" data-region="Asia">🇻🇳 Vietnam — Ho Chi Minh City (Cat Lai / Cai Mep) (VNSGN)</option>
-                      <option value="YEADE" data-country="Yemen" data-port="Aden / Hodeidah" data-region="Middle East">🇾🇪 Yemen — Aden / Hodeidah (YEADE)</option>
-                      <option value="ZMLUN" data-country="Zambia" data-port="Lusaka (Dar es Salaam GW)" data-region="Africa">🇿🇲 Zambia — Lusaka (Dar es Salaam GW) (ZMLUN)</option>
-                      <option value="ZWHRE" data-country="Zimbabwe" data-port="Harare (Beira Gateway)" data-region="Africa">🇿🇼 Zimbabwe — Harare (Beira Gateway) (ZWHRE)</option>
+                  <select id="calc-origin" class="hidden">
+                    <option value="CNSHG" selected>Shanghai (CNSHG), China</option>
                   </select>
                 </div>
 
                 <!-- Destination Port -->
-                <div>
-                  <div class="flex items-center justify-between mb-1">
-                    <label class="block text-xs font-semibold text-gray-700">Destination Port</label>
-                    <span class="text-[10px] text-gray-400 font-mono">195+ Negara / 285 Pelabuhan</span>
+                <div class="relative hansai-combo-box" id="combo-dest-container">
+                  <label class="block text-xs font-semibold text-gray-700 mb-1.5">Destination Port</label>
+                  
+                  <!-- Clean Single Trigger Button -->
+                  <button type="button" id="combo-dest-btn" aria-haspopup="listbox" aria-expanded="false"
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm bg-white text-gray-800 flex items-center justify-between text-left hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-[#06345B] transition-all shadow-sm group">
+                    <span id="combo-dest-text" class="truncate font-medium text-gray-900">🇳🇱 Netherlands — Rotterdam (NLRTM)</span>
+                    <i data-lucide="chevron-down" class="w-4 h-4 text-gray-400 group-hover:text-gray-600 flex-shrink-0 ml-1.5 transition-transform duration-200"></i>
+                  </button>
+
+                  <!-- Floating Search & Selection Dropdown -->
+                  <div id="combo-dest-popover" class="searchable-popover hidden absolute top-full left-0 sm:left-auto sm:right-0 w-full sm:w-[380px] z-50 mt-1.5 bg-white rounded-2xl border border-gray-200 shadow-2xl overflow-hidden flex flex-col">
+                    <div class="p-2.5 bg-gray-50/90 border-b border-gray-100">
+                      <div class="relative">
+                        <i data-lucide="search" class="w-3.5 h-3.5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+                        <input type="text" id="combo-dest-search" placeholder="Cari negara atau pelabuhan..."
+                          class="w-full pl-8 pr-7 py-1.5 text-xs rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#06345B] text-gray-800 placeholder-gray-400">
+                        <button type="button" id="combo-dest-clear" class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 text-xs">✕</button>
+                      </div>
+                      <div class="flex items-center gap-1 overflow-x-auto text-[11px] no-scrollbar pt-2">
+                        <button type="button" data-region="ALL" class="dest-pill px-2.5 py-0.5 rounded-lg font-medium whitespace-nowrap bg-[#06345B] text-white">Semua</button>
+                        <button type="button" data-region="Asia" class="dest-pill px-2.5 py-0.5 rounded-lg whitespace-nowrap bg-gray-100 text-gray-600 hover:bg-gray-200">Asia</button>
+                        <button type="button" data-region="Europe" class="dest-pill px-2.5 py-0.5 rounded-lg whitespace-nowrap bg-gray-100 text-gray-600 hover:bg-gray-200">Eropa</button>
+                        <button type="button" data-region="Americas" class="dest-pill px-2.5 py-0.5 rounded-lg whitespace-nowrap bg-gray-100 text-gray-600 hover:bg-gray-200">Amerika</button>
+                        <button type="button" data-region="Middle East" class="dest-pill px-2.5 py-0.5 rounded-lg whitespace-nowrap bg-gray-100 text-gray-600 hover:bg-gray-200">Timur Tengah</button>
+                        <button type="button" data-region="Africa" class="dest-pill px-2.5 py-0.5 rounded-lg whitespace-nowrap bg-gray-100 text-gray-600 hover:bg-gray-200">Afrika</button>
+                        <button type="button" data-region="Oceania" class="dest-pill px-2.5 py-0.5 rounded-lg whitespace-nowrap bg-gray-100 text-gray-600 hover:bg-gray-200">Oseania</button>
+                      </div>
+                    </div>
+                    <div id="combo-dest-list" class="max-h-60 overflow-y-auto divide-y divide-gray-50 p-1"></div>
+                    <div class="px-3 py-1.5 bg-gray-50 border-t border-gray-100 flex items-center justify-between text-[10px] text-gray-400">
+                      <span id="combo-dest-count">195+ Negara / 285 Pelabuhan</span>
+                      <span>ESC untuk menutup</span>
+                    </div>
                   </div>
-                  <!-- Quick Search Filter Box -->
-                  <div class="relative mb-1.5">
-                    <i data-lucide="search" class="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
-                    <input type="text" id="calc-dest-search" placeholder="🔍 Ketik cari negara (cth: Netherlands, Japan, Jerman)..."
-                      class="w-full pl-8 pr-7 py-1.5 text-xs rounded-lg border border-gray-200 bg-gray-50/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#06345B] text-gray-800 placeholder-gray-400 transition-all">
-                    <button type="button" id="calc-dest-clear" class="hidden absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 text-xs px-1">✕</button>
-                  </div>
-                  <select id="calc-dest"
-                    class="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#06345B] bg-white text-gray-800 font-medium cursor-pointer shadow-sm">
-                      <option value="AFKBL" data-country="Afghanistan" data-port="Kabul (Karachi Gateway)" data-region="Asia">🇦🇫 Afghanistan — Kabul (Karachi Gateway) (AFKBL)</option>
-                      <option value="ALDRZ" data-country="Albania" data-port="Durrës" data-region="Europe">🇦🇱 Albania — Durrës (ALDRZ)</option>
-                      <option value="DZALG" data-country="Algeria" data-port="Algiers / Skikda" data-region="Africa">🇩🇿 Algeria — Algiers / Skikda (DZALG)</option>
-                      <option value="ADAND" data-country="Andorra" data-port="Andorra la Vella (Barcelona GW)" data-region="Europe">🇦🇩 Andorra — Andorra la Vella (Barcelona GW) (ADAND)</option>
-                      <option value="AOLAD" data-country="Angola" data-port="Luanda" data-region="Africa">🇦🇴 Angola — Luanda (AOLAD)</option>
-                      <option value="AGSTJ" data-country="Antigua and Barbuda" data-port="St. John's" data-region="Americas">🇦🇬 Antigua and Barbuda — St. John's (AGSTJ)</option>
-                      <option value="ARBAA" data-country="Argentina" data-port="Buenos Aires (TRP / BACTSSA)" data-region="Americas">🇦🇷 Argentina — Buenos Aires (TRP / BACTSSA) (ARBAA)</option>
-                      <option value="AMEVN" data-country="Armenia" data-port="Yerevan (Poti Gateway)" data-region="Europe">🇦🇲 Armenia — Yerevan (Poti Gateway) (AMEVN)</option>
-                      <option value="AUBNE" data-country="Australia" data-port="Brisbane" data-region="Oceania">🇦🇺 Australia — Brisbane (AUBNE)</option>
-                      <option value="AUFRE" data-country="Australia" data-port="Fremantle (Perth)" data-region="Oceania">🇦🇺 Australia — Fremantle (Perth) (AUFRE)</option>
-                      <option value="AUMEL" data-country="Australia" data-port="Melbourne (Victoria Port)" data-region="Oceania">🇦🇺 Australia — Melbourne (Victoria Port) (AUMEL)</option>
-                      <option value="AUSYD" data-country="Australia" data-port="Sydney (Port Botany)" data-region="Oceania">🇦🇺 Australia — Sydney (Port Botany) (AUSYD)</option>
-                      <option value="ATVIE" data-country="Austria" data-port="Vienna (Hamburg / Koper GW)" data-region="Europe">🇦🇹 Austria — Vienna (Hamburg / Koper GW) (ATVIE)</option>
-                      <option value="AZBAK" data-country="Azerbaijan" data-port="Baku (Caspian Port)" data-region="Europe">🇦🇿 Azerbaijan — Baku (Caspian Port) (AZBAK)</option>
-                      <option value="BSFPO" data-country="Bahamas" data-port="Freeport (FCP)" data-region="Americas">🇧🇸 Bahamas — Freeport (FCP) (BSFPO)</option>
-                      <option value="BHKBS" data-country="Bahrain" data-port="Khalifa Bin Salman (KBSP)" data-region="Middle East">🇧🇭 Bahrain — Khalifa Bin Salman (KBSP) (BHKBS)</option>
-                      <option value="BDCGP" data-country="Bangladesh" data-port="Chittagong (Chattogram)" data-region="Asia">🇧🇩 Bangladesh — Chittagong (Chattogram) (BDCGP)</option>
-                      <option value="BBBGI" data-country="Barbados" data-port="Bridgetown" data-region="Americas">🇧🇧 Barbados — Bridgetown (BBBGI)</option>
-                      <option value="BYMSQ" data-country="Belarus" data-port="Minsk (Klaipeda Gateway)" data-region="Europe">🇧🇾 Belarus — Minsk (Klaipeda Gateway) (BYMSQ)</option>
-                      <option value="BEANR" data-country="Belgium" data-port="Antwerp (Port of Antwerp-Bruges)" data-region="Europe">🇧🇪 Belgium — Antwerp (Port of Antwerp-Bruges) (BEANR)</option>
-                      <option value="BEZEE" data-country="Belgium" data-port="Zeebrugge" data-region="Europe">🇧🇪 Belgium — Zeebrugge (BEZEE)</option>
-                      <option value="BZBZE" data-country="Belize" data-port="Belize City Port" data-region="Americas">🇧🇿 Belize — Belize City Port (BZBZE)</option>
-                      <option value="BJCOO" data-country="Benin" data-port="Cotonou" data-region="Africa">🇧🇯 Benin — Cotonou (BJCOO)</option>
-                      <option value="BMHAM" data-country="Bermuda" data-port="Hamilton" data-region="Americas">🇧🇲 Bermuda — Hamilton (BMHAM)</option>
-                      <option value="BTTHI" data-country="Bhutan" data-port="Phuentsholing (Kolkata Gateway)" data-region="Asia">🇧🇹 Bhutan — Phuentsholing (Kolkata Gateway) (BTTHI)</option>
-                      <option value="BOLPZ" data-country="Bolivia" data-port="La Paz (Arica / Iquique GW)" data-region="Americas">🇧🇴 Bolivia — La Paz (Arica / Iquique GW) (BOLPZ)</option>
-                      <option value="BAPLC" data-country="Bosnia and Herzegovina" data-port="Neum / Ploče Gateway" data-region="Europe">🇧🇦 Bosnia and Herzegovina — Neum / Ploče Gateway (BAPLC)</option>
-                      <option value="BWGBE" data-country="Botswana" data-port="Gaborone (Durban Gateway)" data-region="Africa">🇧🇼 Botswana — Gaborone (Durban Gateway) (BWGBE)</option>
-                      <option value="BRNVG" data-country="Brazil" data-port="Navegantes / Itajaí" data-region="Americas">🇧🇷 Brazil — Navegantes / Itajaí (BRNVG)</option>
-                      <option value="BRPNG" data-country="Brazil" data-port="Paranaguá" data-region="Americas">🇧🇷 Brazil — Paranaguá (BRPNG)</option>
-                      <option value="BRRIO" data-country="Brazil" data-port="Rio de Janeiro" data-region="Americas">🇧🇷 Brazil — Rio de Janeiro (BRRIO)</option>
-                      <option value="BRSSZ" data-country="Brazil" data-port="Santos (São Paulo)" data-region="Americas">🇧🇷 Brazil — Santos (São Paulo) (BRSSZ)</option>
-                      <option value="BNMUA" data-country="Brunei" data-port="Muara Port" data-region="Asia">🇧🇳 Brunei — Muara Port (BNMUA)</option>
-                      <option value="BGVAR" data-country="Bulgaria" data-port="Varna / Burgas" data-region="Europe">🇧🇬 Bulgaria — Varna / Burgas (BGVAR)</option>
-                      <option value="BFOUA" data-country="Burkina Faso" data-port="Ouagadougou (Tema Gateway)" data-region="Africa">🇧🇫 Burkina Faso — Ouagadougou (Tema Gateway) (BFOUA)</option>
-                      <option value="BJBJM" data-country="Burundi" data-port="Bujumbura (Dar es Salaam GW)" data-region="Africa">🇧🇮 Burundi — Bujumbura (Dar es Salaam GW) (BJBJM)</option>
-                      <option value="KHKOS" data-country="Cambodia" data-port="Sihanoukville (PAS)" data-region="Asia">🇰🇭 Cambodia — Sihanoukville (PAS) (KHKOS)</option>
-                      <option value="CMDLA" data-country="Cameroon" data-port="Douala / Kribi Deep Sea" data-region="Africa">🇨🇲 Cameroon — Douala / Kribi Deep Sea (CMDLA)</option>
-                      <option value="CAHAL" data-country="Canada" data-port="Halifax, NS" data-region="Americas">🇨🇦 Canada — Halifax, NS (CAHAL)</option>
-                      <option value="CAMTR" data-country="Canada" data-port="Montreal, QC" data-region="Americas">🇨🇦 Canada — Montreal, QC (CAMTR)</option>
-                      <option value="CAPRR" data-country="Canada" data-port="Prince Rupert, BC" data-region="Americas">🇨🇦 Canada — Prince Rupert, BC (CAPRR)</option>
-                      <option value="CAVAN" data-country="Canada" data-port="Vancouver, BC" data-region="Americas">🇨🇦 Canada — Vancouver, BC (CAVAN)</option>
-                      <option value="CVRAI" data-country="Cape Verde" data-port="Praia / Mindelo" data-region="Africa">🇨🇻 Cape Verde — Praia / Mindelo (CVRAI)</option>
-                      <option value="KYGEC" data-country="Cayman Islands" data-port="George Town" data-region="Americas">🇰🇾 Cayman Islands — George Town (KYGEC)</option>
-                      <option value="CFBGF" data-country="Central African Republic" data-port="Bangui (Douala Gateway)" data-region="Africa">🇨🇫 Central African Republic — Bangui (Douala Gateway) (CFBGF)</option>
-                      <option value="TDNDJ" data-country="Chad" data-port="N'Djamena (Douala Gateway)" data-region="Africa">🇹🇩 Chad — N'Djamena (Douala Gateway) (TDNDJ)</option>
-                      <option value="CLSAI" data-country="Chile" data-port="San Antonio" data-region="Americas">🇨🇱 Chile — San Antonio (CLSAI)</option>
-                      <option value="CLVAP" data-country="Chile" data-port="Valparaíso" data-region="Americas">🇨🇱 Chile — Valparaíso (CLVAP)</option>
-                      <option value="CNDLC" data-country="China" data-port="Dalian" data-region="Asia">🇨🇳 China — Dalian (CNDLC)</option>
-                      <option value="CNCAN" data-country="China" data-port="Guangzhou (Nansha)" data-region="Asia">🇨🇳 China — Guangzhou (Nansha) (CNCAN)</option>
-                      <option value="CNNGB" data-country="China" data-port="Ningbo-Zhoushan" data-region="Asia">🇨🇳 China — Ningbo-Zhoushan (CNNGB)</option>
-                      <option value="CNTAO" data-country="China" data-port="Qingdao (QCT)" data-region="Asia">🇨🇳 China — Qingdao (QCT) (CNTAO)</option>
-                      <option value="CNSHG" data-country="China" data-port="Shanghai (Yangshan / Waigaoqiao)" data-region="Asia">🇨🇳 China — Shanghai (Yangshan / Waigaoqiao) (CNSHG)</option>
-                      <option value="CNSZX" data-country="China" data-port="Shenzhen (Yantian / Shekou)" data-region="Asia">🇨🇳 China — Shenzhen (Yantian / Shekou) (CNSZX)</option>
-                      <option value="CNTXG" data-country="China" data-port="Tianjin / Xingang" data-region="Asia">🇨🇳 China — Tianjin / Xingang (CNTXG)</option>
-                      <option value="CNXMN" data-country="China" data-port="Xiamen" data-region="Asia">🇨🇳 China — Xiamen (CNXMN)</option>
-                      <option value="COBUN" data-country="Colombia" data-port="Buenaventura (Pacific)" data-region="Americas">🇨🇴 Colombia — Buenaventura (Pacific) (COBUN)</option>
-                      <option value="COCTG" data-country="Colombia" data-port="Cartagena (SPRC / Contecar)" data-region="Americas">🇨🇴 Colombia — Cartagena (SPRC / Contecar) (COCTG)</option>
-                      <option value="KMYVA" data-country="Comoros" data-port="Moroni" data-region="Africa">🇰🇲 Comoros — Moroni (KMYVA)</option>
-                      <option value="CDMAT" data-country="Congo, Dem. Rep." data-port="Matadi / Boma" data-region="Africa">🇨🇩 Congo, Dem. Rep. — Matadi / Boma (CDMAT)</option>
-                      <option value="CGPNR" data-country="Congo, Rep." data-port="Pointe-Noire" data-region="Africa">🇨🇬 Congo, Rep. — Pointe-Noire (CGPNR)</option>
-                      <option value="CRCAL" data-country="Costa Rica" data-port="Caldera (Pacific)" data-region="Americas">🇨🇷 Costa Rica — Caldera (Pacific) (CRCAL)</option>
-                      <option value="CRLIO" data-country="Costa Rica" data-port="Puerto Limón / Moin" data-region="Americas">🇨🇷 Costa Rica — Puerto Limón / Moin (CRLIO)</option>
-                      <option value="HRRJK" data-country="Croatia" data-port="Rijeka" data-region="Europe">🇭🇷 Croatia — Rijeka (HRRJK)</option>
-                      <option value="CUHAV" data-country="Cuba" data-port="Havana / Mariel" data-region="Americas">🇨🇺 Cuba — Havana / Mariel (CUHAV)</option>
-                      <option value="CWWIL" data-country="Curaçao" data-port="Willemstad" data-region="Americas">🇨🇼 Curaçao — Willemstad (CWWIL)</option>
-                      <option value="CYLMS" data-country="Cyprus" data-port="Limassol" data-region="Europe">🇨🇾 Cyprus — Limassol (CYLMS)</option>
-                      <option value="CZPRG" data-country="Czech Republic" data-port="Prague (Hamburg Gateway)" data-region="Europe">🇨🇿 Czech Republic — Prague (Hamburg Gateway) (CZPRG)</option>
-                      <option value="DKAAR" data-country="Denmark" data-port="Aarhus / Copenhagen" data-region="Europe">🇩🇰 Denmark — Aarhus / Copenhagen (DKAAR)</option>
-                      <option value="DJJIB" data-country="Djibouti" data-port="Djibouti (Doraleh Container Terminal)" data-region="Africa">🇩🇯 Djibouti — Djibouti (Doraleh Container Terminal) (DJJIB)</option>
-                      <option value="DMRSU" data-country="Dominica" data-port="Roseau" data-region="Americas">🇩🇲 Dominica — Roseau (DMRSU)</option>
-                      <option value="DOCAU" data-country="Dominican Republic" data-port="Caucedo (DP World)" data-region="Americas">🇩🇴 Dominican Republic — Caucedo (DP World) (DOCAU)</option>
-                      <option value="ECGYE" data-country="Ecuador" data-port="Guayaquil (Contecon)" data-region="Americas">🇪🇨 Ecuador — Guayaquil (Contecon) (ECGYE)</option>
-                      <option value="EGALY" data-country="Egypt" data-port="Alexandria / Dekheila" data-region="Africa">🇪🇬 Egypt — Alexandria / Dekheila (EGALY)</option>
-                      <option value="EGDAM" data-country="Egypt" data-port="Damietta" data-region="Africa">🇪🇬 Egypt — Damietta (EGDAM)</option>
-                      <option value="EGPSD" data-country="Egypt" data-port="Port Said (SCCT / Suez Canal)" data-region="Africa">🇪🇬 Egypt — Port Said (SCCT / Suez Canal) (EGPSD)</option>
-                      <option value="SVAQJ" data-country="El Salvador" data-port="Acajutla" data-region="Americas">🇸🇻 El Salvador — Acajutla (SVAQJ)</option>
-                      <option value="GQSSG" data-country="Equatorial Guinea" data-port="Malabo / Bata" data-region="Africa">🇬🇶 Equatorial Guinea — Malabo / Bata (GQSSG)</option>
-                      <option value="ERMSW" data-country="Eritrea" data-port="Massawa / Assab" data-region="Africa">🇪🇷 Eritrea — Massawa / Assab (ERMSW)</option>
-                      <option value="EETLL" data-country="Estonia" data-port="Tallinn (Muuga)" data-region="Europe">🇪🇪 Estonia — Tallinn (Muuga) (EETLL)</option>
-                      <option value="SZQUT" data-country="Eswatini" data-port="Mbabane (Maputo Gateway)" data-region="Africa">🇸🇿 Eswatini — Mbabane (Maputo Gateway) (SZQUT)</option>
-                      <option value="ETADD" data-country="Ethiopia" data-port="Addis Ababa (Djibouti Gateway)" data-region="Africa">🇪🇹 Ethiopia — Addis Ababa (Djibouti Gateway) (ETADD)</option>
-                      <option value="FJSUV" data-country="Fiji" data-port="Suva / Lautoka" data-region="Oceania">🇫🇯 Fiji — Suva / Lautoka (FJSUV)</option>
-                      <option value="FIHEL" data-country="Finland" data-port="Helsinki / Kotka" data-region="Europe">🇫🇮 Finland — Helsinki / Kotka (FIHEL)</option>
-                      <option value="FRLEH" data-country="France" data-port="Le Havre (HAROPA)" data-region="Europe">🇫🇷 France — Le Havre (HAROPA) (FRLEH)</option>
-                      <option value="FRMRS" data-country="France" data-port="Marseille-Fos" data-region="Europe">🇫🇷 France — Marseille-Fos (FRMRS)</option>
-                      <option value="GALBV" data-country="Gabon" data-port="Libreville (Owendo)" data-region="Africa">🇬🇦 Gabon — Libreville (Owendo) (GALBV)</option>
-                      <option value="GMBJL" data-country="Gambia" data-port="Banjul" data-region="Africa">🇬🇲 Gambia — Banjul (GMBJL)</option>
-                      <option value="GEPTI" data-country="Georgia" data-port="Poti / Batumi" data-region="Europe">🇬🇪 Georgia — Poti / Batumi (GEPTI)</option>
-                      <option value="DEBRE" data-country="Germany" data-port="Bremerhaven" data-region="Europe">🇩🇪 Germany — Bremerhaven (DEBRE)</option>
-                      <option value="DEHAM" data-country="Germany" data-port="Hamburg (HHLA / Eurogate)" data-region="Europe">🇩🇪 Germany — Hamburg (HHLA / Eurogate) (DEHAM)</option>
-                      <option value="GHTKD" data-country="Ghana" data-port="Takoradi" data-region="Africa">🇬🇭 Ghana — Takoradi (GHTKD)</option>
-                      <option value="GHTEM" data-country="Ghana" data-port="Tema (MPS Terminal 3)" data-region="Africa">🇬🇭 Ghana — Tema (MPS Terminal 3) (GHTEM)</option>
-                      <option value="GRPIR" data-country="Greece" data-port="Piraeus (Athens)" data-region="Europe">🇬🇷 Greece — Piraeus (Athens) (GRPIR)</option>
-                      <option value="GRSKG" data-country="Greece" data-port="Thessaloniki" data-region="Europe">🇬🇷 Greece — Thessaloniki (GRSKG)</option>
-                      <option value="GDSTG" data-country="Grenada" data-port="St. George's" data-region="Americas">🇬🇩 Grenada — St. George's (GDSTG)</option>
-                      <option value="GTPRQ" data-country="Guatemala" data-port="Puerto Quetzal" data-region="Americas">🇬🇹 Guatemala — Puerto Quetzal (GTPRQ)</option>
-                      <option value="GTSTC" data-country="Guatemala" data-port="Santo Tomás de Castilla" data-region="Americas">🇬🇹 Guatemala — Santo Tomás de Castilla (GTSTC)</option>
-                      <option value="GNCKY" data-country="Guinea" data-port="Conakry" data-region="Africa">🇬🇳 Guinea — Conakry (GNCKY)</option>
-                      <option value="GWOXB" data-country="Guinea-Bissau" data-port="Bissau" data-region="Africa">🇬🇼 Guinea-Bissau — Bissau (GWOXB)</option>
-                      <option value="GYGEO" data-country="Guyana" data-port="Georgetown" data-region="Americas">🇬🇾 Guyana — Georgetown (GYGEO)</option>
-                      <option value="HTPAP" data-country="Haiti" data-port="Port-au-Prince" data-region="Americas">🇭🇹 Haiti — Port-au-Prince (HTPAP)</option>
-                      <option value="HNPCR" data-country="Honduras" data-port="Puerto Cortés" data-region="Americas">🇭🇳 Honduras — Puerto Cortés (HNPCR)</option>
-                      <option value="HKHKG" data-country="Hong Kong" data-port="Hong Kong (Kwai Tsing)" data-region="Asia">🇭🇰 Hong Kong — Hong Kong (Kwai Tsing) (HKHKG)</option>
-                      <option value="HUBUD" data-country="Hungary" data-port="Budapest (Koper Gateway)" data-region="Europe">🇭🇺 Hungary — Budapest (Koper Gateway) (HUBUD)</option>
-                      <option value="ISREY" data-country="Iceland" data-port="Reykjavik" data-region="Europe">🇮🇸 Iceland — Reykjavik (ISREY)</option>
-                      <option value="INMAA" data-country="India" data-port="Chennai" data-region="Asia">🇮🇳 India — Chennai (INMAA)</option>
-                      <option value="INCOK" data-country="India" data-port="Cochin (Vallarpadam)" data-region="Asia">🇮🇳 India — Cochin (Vallarpadam) (INCOK)</option>
-                      <option value="INCCU" data-country="India" data-port="Kolkata / Haldia" data-region="Asia">🇮🇳 India — Kolkata / Haldia (INCCU)</option>
-                      <option value="INMUN" data-country="India" data-port="Mundra" data-region="Asia">🇮🇳 India — Mundra (INMUN)</option>
-                      <option value="INNSA" data-country="India" data-port="Nhava Sheva / Mumbai (JNPT)" data-region="Asia">🇮🇳 India — Nhava Sheva / Mumbai (JNPT) (INNSA)</option>
-                      <option value="IDBTH" data-country="Indonesia" data-port="Batam (Batu Ampar)" data-region="Asia">🇮🇩 Indonesia — Batam (Batu Ampar) (IDBTH)</option>
-                      <option value="IDJKT" data-country="Indonesia" data-port="Jakarta (Tanjung Priok)" data-region="Asia">🇮🇩 Indonesia — Jakarta (Tanjung Priok) (IDJKT)</option>
-                      <option value="IDMAK" data-country="Indonesia" data-port="Makassar (Soekarno-Hatta)" data-region="Asia">🇮🇩 Indonesia — Makassar (Soekarno-Hatta) (IDMAK)</option>
-                      <option value="IDBLW" data-country="Indonesia" data-port="Medan (Belawan)" data-region="Asia">🇮🇩 Indonesia — Medan (Belawan) (IDBLW)</option>
-                      <option value="IDSRG" data-country="Indonesia" data-port="Semarang (Tanjung Emas)" data-region="Asia">🇮🇩 Indonesia — Semarang (Tanjung Emas) (IDSRG)</option>
-                      <option value="IDSUB" data-country="Indonesia" data-port="Surabaya (Tanjung Perak)" data-region="Asia">🇮🇩 Indonesia — Surabaya (Tanjung Perak) (IDSUB)</option>
-                      <option value="IRBND" data-country="Iran" data-port="Bandar Abbas (Shahid Rajaee)" data-region="Middle East">🇮🇷 Iran — Bandar Abbas (Shahid Rajaee) (IRBND)</option>
-                      <option value="IQUQR" data-country="Iraq" data-port="Umm Qasr / Basra" data-region="Middle East">🇮🇶 Iraq — Umm Qasr / Basra (IQUQR)</option>
-                      <option value="IEDUB" data-country="Ireland" data-port="Dublin" data-region="Europe">🇮🇪 Ireland — Dublin (IEDUB)</option>
-                      <option value="ILHFA" data-country="Israel" data-port="Haifa / Ashdod" data-region="Middle East">🇮🇱 Israel — Haifa / Ashdod (ILHFA)</option>
-                      <option value="ITGOA" data-country="Italy" data-port="Genoa" data-region="Europe">🇮🇹 Italy — Genoa (ITGOA)</option>
-                      <option value="ITGIT" data-country="Italy" data-port="Gioia Tauro" data-region="Europe">🇮🇹 Italy — Gioia Tauro (ITGIT)</option>
-                      <option value="ITSPE" data-country="Italy" data-port="La Spezia" data-region="Europe">🇮🇹 Italy — La Spezia (ITSPE)</option>
-                      <option value="ITTRS" data-country="Italy" data-port="Trieste" data-region="Europe">🇮🇹 Italy — Trieste (ITTRS)</option>
-                      <option value="CIABJ" data-country="Ivory Coast" data-port="Abidjan (Abidjan Terminal)" data-region="Africa">🇨🇮 Ivory Coast — Abidjan (Abidjan Terminal) (CIABJ)</option>
-                      <option value="JMKIN" data-country="Jamaica" data-port="Kingston (KFTL)" data-region="Americas">🇯🇲 Jamaica — Kingston (KFTL) (JMKIN)</option>
-                      <option value="JPNGO" data-country="Japan" data-port="Nagoya" data-region="Asia">🇯🇵 Japan — Nagoya (JPNGO)</option>
-                      <option value="JPOSA" data-country="Japan" data-port="Osaka / Kobe (Hanshin Port)" data-region="Asia">🇯🇵 Japan — Osaka / Kobe (Hanshin Port) (JPOSA)</option>
-                      <option value="JPYOK" data-country="Japan" data-port="Tokyo / Yokohama" data-region="Asia">🇯🇵 Japan — Tokyo / Yokohama (JPYOK)</option>
-                      <option value="JOAQB" data-country="Jordan" data-port="Aqaba" data-region="Middle East">🇯🇴 Jordan — Aqaba (JOAQB)</option>
-                      <option value="KZAKU" data-country="Kazakhstan" data-port="Aktau / Almaty Gateway" data-region="Asia">🇰🇿 Kazakhstan — Aktau / Almaty Gateway (KZAKU)</option>
-                      <option value="KEMBA" data-country="Kenya" data-port="Mombasa (Kilindini Harbour)" data-region="Africa">🇰🇪 Kenya — Mombasa (Kilindini Harbour) (KEMBA)</option>
-                      <option value="KIBTO" data-country="Kiribati" data-port="Betio / Tarawa" data-region="Oceania">🇰🇮 Kiribati — Betio / Tarawa (KIBTO)</option>
-                      <option value="KWSWK" data-country="Kuwait" data-port="Shuwaikh / Shuaiba" data-region="Middle East">🇰🇼 Kuwait — Shuwaikh / Shuaiba (KWSWK)</option>
-                      <option value="KGFRU" data-country="Kyrgyzstan" data-port="Bishkek (Qingdao Gateway)" data-region="Asia">🇰🇬 Kyrgyzstan — Bishkek (Qingdao Gateway) (KGFRU)</option>
-                      <option value="LAXAY" data-country="Laos" data-port="Vientiane (Laem Chabang Gateway)" data-region="Asia">🇱🇦 Laos — Vientiane (Laem Chabang Gateway) (LAXAY)</option>
-                      <option value="LVRIG" data-country="Latvia" data-port="Riga" data-region="Europe">🇱🇻 Latvia — Riga (LVRIG)</option>
-                      <option value="LBBEY" data-country="Lebanon" data-port="Beirut" data-region="Middle East">🇱🇧 Lebanon — Beirut (LBBEY)</option>
-                      <option value="LSMSU" data-country="Lesotho" data-port="Maseru (Durban Gateway)" data-region="Africa">🇱🇸 Lesotho — Maseru (Durban Gateway) (LSMSU)</option>
-                      <option value="LRMLW" data-country="Liberia" data-port="Monrovia (Freeport of Monrovia)" data-region="Africa">🇱🇷 Liberia — Monrovia (Freeport of Monrovia) (LRMLW)</option>
-                      <option value="LYTIP" data-country="Libya" data-port="Tripoli / Misrata" data-region="Africa">🇱🇾 Libya — Tripoli / Misrata (LYTIP)</option>
-                      <option value="LIVAZ" data-country="Liechtenstein" data-port="Vaduz (Basel Gateway)" data-region="Europe">🇱🇮 Liechtenstein — Vaduz (Basel Gateway) (LIVAZ)</option>
-                      <option value="LTKLJ" data-country="Lithuania" data-port="Klaipeda" data-region="Europe">🇱🇹 Lithuania — Klaipeda (LTKLJ)</option>
-                      <option value="LUXLU" data-country="Luxembourg" data-port="Luxembourg / Mertert Port" data-region="Europe">🇱🇺 Luxembourg — Luxembourg / Mertert Port (LUXLU)</option>
-                      <option value="MGTMM" data-country="Madagascar" data-port="Toamasina (Tamatave)" data-region="Africa">🇲🇬 Madagascar — Toamasina (Tamatave) (MGTMM)</option>
-                      <option value="MWLLW" data-country="Malawi" data-port="Lilongwe (Nacala Gateway)" data-region="Africa">🇲🇼 Malawi — Lilongwe (Nacala Gateway) (MWLLW)</option>
-                      <option value="MYPEN" data-country="Malaysia" data-port="Penang" data-region="Asia">🇲🇾 Malaysia — Penang (MYPEN)</option>
-                      <option value="MYPKG" data-country="Malaysia" data-port="Port Klang" data-region="Asia">🇲🇾 Malaysia — Port Klang (MYPKG)</option>
-                      <option value="MYTPP" data-country="Malaysia" data-port="Tanjung Pelepas (PTP)" data-region="Asia">🇲🇾 Malaysia — Tanjung Pelepas (PTP) (MYTPP)</option>
-                      <option value="MVMLE" data-country="Maldives" data-port="Malé Port" data-region="Asia">🇲🇻 Maldives — Malé Port (MVMLE)</option>
-                      <option value="MLBKO" data-country="Mali" data-port="Bamako (Dakar Gateway)" data-region="Africa">🇲🇱 Mali — Bamako (Dakar Gateway) (MLBKO)</option>
-                      <option value="MTMAR" data-country="Malta" data-port="Marsaxlokk (Malta Freeport)" data-region="Europe">🇲🇹 Malta — Marsaxlokk (Malta Freeport) (MTMAR)</option>
-                      <option value="MHMAJ" data-country="Marshall Islands" data-port="Majuro" data-region="Oceania">🇲🇭 Marshall Islands — Majuro (MHMAJ)</option>
-                      <option value="MRNKC" data-country="Mauritania" data-port="Nouakchott / Nouadhibou" data-region="Africa">🇲🇷 Mauritania — Nouakchott / Nouadhibou (MRNKC)</option>
-                      <option value="MUPLU" data-country="Mauritius" data-port="Port Louis" data-region="Africa">🇲🇺 Mauritius — Port Louis (MUPLU)</option>
-                      <option value="MXATM" data-country="Mexico" data-port="Altamira" data-region="Americas">🇲🇽 Mexico — Altamira (MXATM)</option>
-                      <option value="MXLZC" data-country="Mexico" data-port="Lázaro Cárdenas" data-region="Americas">🇲🇽 Mexico — Lázaro Cárdenas (MXLZC)</option>
-                      <option value="MXZLO" data-country="Mexico" data-port="Manzanillo (Colima)" data-region="Americas">🇲🇽 Mexico — Manzanillo (Colima) (MXZLO)</option>
-                      <option value="MXVER" data-country="Mexico" data-port="Veracruz" data-region="Americas">🇲🇽 Mexico — Veracruz (MXVER)</option>
-                      <option value="FMPNI" data-country="Micronesia" data-port="Pohnpei" data-region="Oceania">🇫🇲 Micronesia — Pohnpei (FMPNI)</option>
-                      <option value="MDGIU" data-country="Moldova" data-port="Giurgiulești (Danube Port)" data-region="Europe">🇲🇩 Moldova — Giurgiulești (Danube Port) (MDGIU)</option>
-                      <option value="MCMON" data-country="Monaco" data-port="Port Hercules / Marseille GW" data-region="Europe">🇲🇨 Monaco — Port Hercules / Marseille GW (MCMON)</option>
-                      <option value="MNUBN" data-country="Mongolia" data-port="Ulaanbaatar (Tianjin Gateway)" data-region="Asia">🇲🇳 Mongolia — Ulaanbaatar (Tianjin Gateway) (MNUBN)</option>
-                      <option value="MEMBR" data-country="Montenegro" data-port="Bar Port" data-region="Europe">🇲🇪 Montenegro — Bar Port (MEMBR)</option>
-                      <option value="MACAS" data-country="Morocco" data-port="Casablanca" data-region="Africa">🇲🇦 Morocco — Casablanca (MACAS)</option>
-                      <option value="MATNG" data-country="Morocco" data-port="Tanger Med" data-region="Africa">🇲🇦 Morocco — Tanger Med (MATNG)</option>
-                      <option value="MZMPM" data-country="Mozambique" data-port="Maputo / Beira" data-region="Africa">🇲🇿 Mozambique — Maputo / Beira (MZMPM)</option>
-                      <option value="MMRGN" data-country="Myanmar" data-port="Yangon (Thilawa)" data-region="Asia">🇲🇲 Myanmar — Yangon (Thilawa) (MMRGN)</option>
-                      <option value="NAWVB" data-country="Namibia" data-port="Walvis Bay" data-region="Africa">🇳🇦 Namibia — Walvis Bay (NAWVB)</option>
-                      <option value="NRINU" data-country="Nauru" data-port="Aiwo Port" data-region="Oceania">🇳🇷 Nauru — Aiwo Port (NRINU)</option>
-                      <option value="NPRTH" data-country="Nepal" data-port="Birgunj (Kolkata Gateway)" data-region="Asia">🇳🇵 Nepal — Birgunj (Kolkata Gateway) (NPRTH)</option>
-                      <option value="NLAMS" data-country="Netherlands" data-port="Amsterdam" data-region="Europe">🇳🇱 Netherlands — Amsterdam (NLAMS)</option>
-                      <option value="NLRTM" data-country="Netherlands" data-port="Rotterdam (Maasvlakte)" data-region="Europe" selected>🇳🇱 Netherlands — Rotterdam (Maasvlakte) (NLRTM)</option>
-                      <option value="NZAKL" data-country="New Zealand" data-port="Auckland" data-region="Oceania">🇳🇿 New Zealand — Auckland (NZAKL)</option>
-                      <option value="NZLYT" data-country="New Zealand" data-port="Lyttelton / Christchurch" data-region="Oceania">🇳🇿 New Zealand — Lyttelton / Christchurch (NZLYT)</option>
-                      <option value="NZTRG" data-country="New Zealand" data-port="Tauranga" data-region="Oceania">🇳🇿 New Zealand — Tauranga (NZTRG)</option>
-                      <option value="NICIO" data-country="Nicaragua" data-port="Corinto" data-region="Americas">🇳🇮 Nicaragua — Corinto (NICIO)</option>
-                      <option value="NENIM" data-country="Niger" data-port="Niamey (Cotonou Gateway)" data-region="Africa">🇳🇪 Niger — Niamey (Cotonou Gateway) (NENIM)</option>
-                      <option value="NGLOS" data-country="Nigeria" data-port="Lagos (Apapa / Tin Can Island)" data-region="Africa">🇳🇬 Nigeria — Lagos (Apapa / Tin Can Island) (NGLOS)</option>
-                      <option value="NGLEK" data-country="Nigeria" data-port="Lekki Deep Sea Port" data-region="Africa">🇳🇬 Nigeria — Lekki Deep Sea Port (NGLEK)</option>
-                      <option value="NGONN" data-country="Nigeria" data-port="Onne Port (Port Harcourt)" data-region="Africa">🇳🇬 Nigeria — Onne Port (Port Harcourt) (NGONN)</option>
-                      <option value="KPKAN" data-country="North Korea" data-port="Nampo" data-region="Asia">🇰🇵 North Korea — Nampo (KPKAN)</option>
-                      <option value="MKSKP" data-country="North Macedonia" data-port="Skopje (Thessaloniki Gateway)" data-region="Europe">🇲🇰 North Macedonia — Skopje (Thessaloniki Gateway) (MKSKP)</option>
-                      <option value="NOOSL" data-country="Norway" data-port="Oslo" data-region="Europe">🇳🇴 Norway — Oslo (NOOSL)</option>
-                      <option value="OMSLL" data-country="Oman" data-port="Salalah" data-region="Middle East">🇴🇲 Oman — Salalah (OMSLL)</option>
-                      <option value="OMSOH" data-country="Oman" data-port="Sohar" data-region="Middle East">🇴🇲 Oman — Sohar (OMSOH)</option>
-                      <option value="PKKHI" data-country="Pakistan" data-port="Karachi (QICT / KICT)" data-region="Asia">🇵🇰 Pakistan — Karachi (QICT / KICT) (PKKHI)</option>
-                      <option value="PKBQM" data-country="Pakistan" data-port="Port Qasim" data-region="Asia">🇵🇰 Pakistan — Port Qasim (PKBQM)</option>
-                      <option value="PWKOR" data-country="Palau" data-port="Koror" data-region="Oceania">🇵🇼 Palau — Koror (PWKOR)</option>
-                      <option value="PABLB" data-country="Panama" data-port="Balboa (Pacific)" data-region="Americas">🇵🇦 Panama — Balboa (Pacific) (PABLB)</option>
-                      <option value="PAONX" data-country="Panama" data-port="Colon / Manzanillo (Atlantic)" data-region="Americas">🇵🇦 Panama — Colon / Manzanillo (Atlantic) (PAONX)</option>
-                      <option value="PGPOM" data-country="Papua New Guinea" data-port="Port Moresby / Lae" data-region="Oceania">🇵🇬 Papua New Guinea — Port Moresby / Lae (PGPOM)</option>
-                      <option value="PYASU" data-country="Paraguay" data-port="Asunción / Villeta Port" data-region="Americas">🇵🇾 Paraguay — Asunción / Villeta Port (PYASU)</option>
-                      <option value="PECLO" data-country="Peru" data-port="Callao (Lima / DP World)" data-region="Americas">🇵🇪 Peru — Callao (Lima / DP World) (PECLO)</option>
-                      <option value="PHCEB" data-country="Philippines" data-port="Cebu" data-region="Asia">🇵🇭 Philippines — Cebu (PHCEB)</option>
-                      <option value="PHMNL" data-country="Philippines" data-port="Manila (MICT)" data-region="Asia">🇵🇭 Philippines — Manila (MICT) (PHMNL)</option>
-                      <option value="PLGDN" data-country="Poland" data-port="Gdansk (Baltic Hub)" data-region="Europe">🇵🇱 Poland — Gdansk (Baltic Hub) (PLGDN)</option>
-                      <option value="PLGDY" data-country="Poland" data-port="Gdynia" data-region="Europe">🇵🇱 Poland — Gdynia (PLGDY)</option>
-                      <option value="PTLIS" data-country="Portugal" data-port="Lisbon / Leixões" data-region="Europe">🇵🇹 Portugal — Lisbon / Leixões (PTLIS)</option>
-                      <option value="PTSIE" data-country="Portugal" data-port="Sines" data-region="Europe">🇵🇹 Portugal — Sines (PTSIE)</option>
-                      <option value="PRSJU" data-country="Puerto Rico" data-port="San Juan" data-region="Americas">🇵🇷 Puerto Rico — San Juan (PRSJU)</option>
-                      <option value="QAHMD" data-country="Qatar" data-port="Hamad Port / Doha" data-region="Middle East">🇶🇦 Qatar — Hamad Port / Doha (QAHMD)</option>
-                      <option value="ROKOS" data-country="Romania" data-port="Constanta" data-region="Europe">🇷🇴 Romania — Constanta (ROKOS)</option>
-                      <option value="RUNVS" data-country="Russia" data-port="Novorossiysk (Black Sea)" data-region="Europe">🇷🇺 Russia — Novorossiysk (Black Sea) (RUNVS)</option>
-                      <option value="RUSPT" data-country="Russia" data-port="St. Petersburg (Baltic)" data-region="Europe">🇷🇺 Russia — St. Petersburg (Baltic) (RUSPT)</option>
-                      <option value="RUVVO" data-country="Russia" data-port="Vladivostok (Pacific)" data-region="Europe">🇷🇺 Russia — Vladivostok (Pacific) (RUVVO)</option>
-                      <option value="RWKGL" data-country="Rwanda" data-port="Kigali (Dar es Salaam Gateway)" data-region="Africa">🇷🇼 Rwanda — Kigali (Dar es Salaam Gateway) (RWKGL)</option>
-                      <option value="KNBAS" data-country="Saint Kitts and Nevis" data-port="Basseterre" data-region="Americas">🇰🇳 Saint Kitts and Nevis — Basseterre (KNBAS)</option>
-                      <option value="LCCAS" data-country="Saint Lucia" data-port="Castries" data-region="Americas">🇱🇨 Saint Lucia — Castries (LCCAS)</option>
-                      <option value="VCKTN" data-country="Saint Vincent & Grenadines" data-port="Kingstown" data-region="Americas">🇻🇨 Saint Vincent & Grenadines — Kingstown (VCKTN)</option>
-                      <option value="WSAPW" data-country="Samoa" data-port="Apia" data-region="Oceania">🇼🇸 Samoa — Apia (WSAPW)</option>
-                      <option value="SMSMR" data-country="San Marino" data-port="San Marino (Ravenna Gateway)" data-region="Europe">🇸🇲 San Marino — San Marino (Ravenna Gateway) (SMSMR)</option>
-                      <option value="STTMS" data-country="Sao Tome and Principe" data-port="São Tomé" data-region="Africa">🇸🇹 Sao Tome and Principe — São Tomé (STTMS)</option>
-                      <option value="SADMM" data-country="Saudi Arabia" data-port="Dammam (King Abdulaziz)" data-region="Middle East">🇸🇦 Saudi Arabia — Dammam (King Abdulaziz) (SADMM)</option>
-                      <option value="SAJED" data-country="Saudi Arabia" data-port="Jeddah Islamic Port" data-region="Middle East">🇸🇦 Saudi Arabia — Jeddah Islamic Port (SAJED)</option>
-                      <option value="SNDKR" data-country="Senegal" data-port="Dakar (DP World)" data-region="Africa">🇸🇳 Senegal — Dakar (DP World) (SNDKR)</option>
-                      <option value="RSBEG" data-country="Serbia" data-port="Belgrade (Constanta / Bar GW)" data-region="Europe">🇷🇸 Serbia — Belgrade (Constanta / Bar GW) (RSBEG)</option>
-                      <option value="SCPOV" data-country="Seychelles" data-port="Victoria / Mahé" data-region="Africa">🇸🇨 Seychelles — Victoria / Mahé (SCPOV)</option>
-                      <option value="SLFNA" data-country="Sierra Leone" data-port="Freetown (Queen Elizabeth II Quay)" data-region="Africa">🇸🇱 Sierra Leone — Freetown (Queen Elizabeth II Quay) (SLFNA)</option>
-                      <option value="SGSIN" data-country="Singapore" data-port="Singapore Port / PSA" data-region="Asia">🇸🇬 Singapore — Singapore Port / PSA (SGSIN)</option>
-                      <option value="SKBTS" data-country="Slovakia" data-port="Bratislava (Koper Gateway)" data-region="Europe">🇸🇰 Slovakia — Bratislava (Koper Gateway) (SKBTS)</option>
-                      <option value="SIKOP" data-country="Slovenia" data-port="Koper" data-region="Europe">🇸🇮 Slovenia — Koper (SIKOP)</option>
-                      <option value="SBHIR" data-country="Solomon Islands" data-port="Honiara" data-region="Oceania">🇸🇧 Solomon Islands — Honiara (SBHIR)</option>
-                      <option value="SOMOG" data-country="Somalia" data-port="Mogadishu / Berbera" data-region="Africa">🇸🇴 Somalia — Mogadishu / Berbera (SOMOG)</option>
-                      <option value="ZACPT" data-country="South Africa" data-port="Cape Town" data-region="Africa">🇿🇦 South Africa — Cape Town (ZACPT)</option>
-                      <option value="ZADUR" data-country="South Africa" data-port="Durban (DCT)" data-region="Africa">🇿🇦 South Africa — Durban (DCT) (ZADUR)</option>
-                      <option value="ZAPLZ" data-country="South Africa" data-port="Port Elizabeth / Ngqura" data-region="Africa">🇿🇦 South Africa — Port Elizabeth / Ngqura (ZAPLZ)</option>
-                      <option value="KRPUS" data-country="South Korea" data-port="Busan (PNC)" data-region="Asia">🇰🇷 South Korea — Busan (PNC) (KRPUS)</option>
-                      <option value="KRINC" data-country="South Korea" data-port="Incheon" data-region="Asia">🇰🇷 South Korea — Incheon (KRINC)</option>
-                      <option value="SSJUB" data-country="South Sudan" data-port="Juba (Mombasa Gateway)" data-region="Africa">🇸🇸 South Sudan — Juba (Mombasa Gateway) (SSJUB)</option>
-                      <option value="ESALG" data-country="Spain" data-port="Algeciras" data-region="Europe">🇪🇸 Spain — Algeciras (ESALG)</option>
-                      <option value="ESBCN" data-country="Spain" data-port="Barcelona" data-region="Europe">🇪🇸 Spain — Barcelona (ESBCN)</option>
-                      <option value="ESVLC" data-country="Spain" data-port="Valencia" data-region="Europe">🇪🇸 Spain — Valencia (ESVLC)</option>
-                      <option value="LKCMB" data-country="Sri Lanka" data-port="Colombo (CICT)" data-region="Asia">🇱🇰 Sri Lanka — Colombo (CICT) (LKCMB)</option>
-                      <option value="SDPZU" data-country="Sudan" data-port="Port Sudan" data-region="Africa">🇸🇩 Sudan — Port Sudan (SDPZU)</option>
-                      <option value="SRPBM" data-country="Suriname" data-port="Paramaribo" data-region="Americas">🇸🇷 Suriname — Paramaribo (SRPBM)</option>
-                      <option value="SEGOT" data-country="Sweden" data-port="Gothenburg (Göteborg)" data-region="Europe">🇸🇪 Sweden — Gothenburg (Göteborg) (SEGOT)</option>
-                      <option value="CHBSL" data-country="Switzerland" data-port="Basel (Rotterdam / Genoa GW)" data-region="Europe">🇨🇭 Switzerland — Basel (Rotterdam / Genoa GW) (CHBSL)</option>
-                      <option value="SYLTK" data-country="Syria" data-port="Latakia" data-region="Middle East">🇸🇾 Syria — Latakia (SYLTK)</option>
-                      <option value="TWKHH" data-country="Taiwan" data-port="Kaohsiung" data-region="Asia">🇹🇼 Taiwan — Kaohsiung (TWKHH)</option>
-                      <option value="TWKEL" data-country="Taiwan" data-port="Keelung / Taipei" data-region="Asia">🇹🇼 Taiwan — Keelung / Taipei (TWKEL)</option>
-                      <option value="TJDYU" data-country="Tajikistan" data-port="Dushanbe Gateway" data-region="Asia">🇹🇯 Tajikistan — Dushanbe Gateway (TJDYU)</option>
-                      <option value="TZDAR" data-country="Tanzania" data-port="Dar es Salaam (TICTS)" data-region="Africa">🇹🇿 Tanzania — Dar es Salaam (TICTS) (TZDAR)</option>
-                      <option value="TZZNZ" data-country="Tanzania" data-port="Zanzibar (Malindi Port)" data-region="Africa">🇹🇿 Tanzania — Zanzibar (Malindi Port) (TZZNZ)</option>
-                      <option value="THBKK" data-country="Thailand" data-port="Bangkok (Klong Toey)" data-region="Asia">🇹🇭 Thailand — Bangkok (Klong Toey) (THBKK)</option>
-                      <option value="THLCH" data-country="Thailand" data-port="Laem Chabang" data-region="Asia">🇹🇭 Thailand — Laem Chabang (THLCH)</option>
-                      <option value="TLDIL" data-country="Timor-Leste" data-port="Dili (Tibai Port)" data-region="Asia">🇹🇱 Timor-Leste — Dili (Tibai Port) (TLDIL)</option>
-                      <option value="TGLFW" data-country="Togo" data-port="Lomé (LCT)" data-region="Africa">🇹🇬 Togo — Lomé (LCT) (TGLFW)</option>
-                      <option value="TONUK" data-country="Tonga" data-port="Nuku'alofa" data-region="Oceania">🇹🇴 Tonga — Nuku'alofa (TONUK)</option>
-                      <option value="TTPOS" data-country="Trinidad and Tobago" data-port="Port of Spain / Point Lisas" data-region="Americas">🇹🇹 Trinidad and Tobago — Port of Spain / Point Lisas (TTPOS)</option>
-                      <option value="TNRAD" data-country="Tunisia" data-port="Tunis / Rades" data-region="Africa">🇹🇳 Tunisia — Tunis / Rades (TNRAD)</option>
-                      <option value="TRIST" data-country="Turkey" data-port="Istanbul (Ambarli)" data-region="Middle East">🇹🇷 Turkey — Istanbul (Ambarli) (TRIST)</option>
-                      <option value="TRIZM" data-country="Turkey" data-port="Izmir (Aliaga)" data-region="Middle East">🇹🇷 Turkey — Izmir (Aliaga) (TRIZM)</option>
-                      <option value="TRMER" data-country="Turkey" data-port="Mersin" data-region="Middle East">🇹🇷 Turkey — Mersin (TRMER)</option>
-                      <option value="TMKRW" data-country="Turkmenistan" data-port="Turkmenbashi" data-region="Asia">🇹🇲 Turkmenistan — Turkmenbashi (TMKRW)</option>
-                      <option value="TVFUN" data-country="Tuvalu" data-port="Funafuti" data-region="Oceania">🇹🇻 Tuvalu — Funafuti (TVFUN)</option>
-                      <option value="UGKLA" data-country="Uganda" data-port="Kampala (Mombasa Gateway)" data-region="Africa">🇺🇬 Uganda — Kampala (Mombasa Gateway) (UGKLA)</option>
-                      <option value="UAODS" data-country="Ukraine" data-port="Odesa / Chornomorsk" data-region="Europe">🇺🇦 Ukraine — Odesa / Chornomorsk (UAODS)</option>
-                      <option value="AEAUH" data-country="United Arab Emirates" data-port="Abu Dhabi (Khalifa Port)" data-region="Middle East">🇦🇪 United Arab Emirates — Abu Dhabi (Khalifa Port) (AEAUH)</option>
-                      <option value="AEJEA" data-country="United Arab Emirates" data-port="Jebel Ali / Dubai" data-region="Middle East">🇦🇪 United Arab Emirates — Jebel Ali / Dubai (AEJEA)</option>
-                      <option value="GBFXT" data-country="United Kingdom" data-port="Felixstowe" data-region="Europe">🇬🇧 United Kingdom — Felixstowe (GBFXT)</option>
-                      <option value="GBLON" data-country="United Kingdom" data-port="London Gateway" data-region="Europe">🇬🇧 United Kingdom — London Gateway (GBLON)</option>
-                      <option value="GBSOU" data-country="United Kingdom" data-port="Southampton" data-region="Europe">🇬🇧 United Kingdom — Southampton (GBSOU)</option>
-                      <option value="USCHS" data-country="United States" data-port="Charleston, SC" data-region="Americas">🇺🇸 United States — Charleston, SC (USCHS)</option>
-                      <option value="USHOU" data-country="United States" data-port="Houston, TX" data-region="Americas">🇺🇸 United States — Houston, TX (USHOU)</option>
-                      <option value="USLGB" data-country="United States" data-port="Long Beach, CA" data-region="Americas">🇺🇸 United States — Long Beach, CA (USLGB)</option>
-                      <option value="USLAX" data-country="United States" data-port="Los Angeles, CA" data-region="Americas">🇺🇸 United States — Los Angeles, CA (USLAX)</option>
-                      <option value="USMIA" data-country="United States" data-port="Miami, FL" data-region="Americas">🇺🇸 United States — Miami, FL (USMIA)</option>
-                      <option value="USNYC" data-country="United States" data-port="New York / New Jersey" data-region="Americas">🇺🇸 United States — New York / New Jersey (USNYC)</option>
-                      <option value="USORF" data-country="United States" data-port="Norfolk / Virginia" data-region="Americas">🇺🇸 United States — Norfolk / Virginia (USORF)</option>
-                      <option value="USOAK" data-country="United States" data-port="Oakland, CA" data-region="Americas">🇺🇸 United States — Oakland, CA (USOAK)</option>
-                      <option value="USSAV" data-country="United States" data-port="Savannah, GA" data-region="Americas">🇺🇸 United States — Savannah, GA (USSAV)</option>
-                      <option value="USSEA" data-country="United States" data-port="Seattle / Tacoma, WA" data-region="Americas">🇺🇸 United States — Seattle / Tacoma, WA (USSEA)</option>
-                      <option value="UYMVD" data-country="Uruguay" data-port="Montevideo (TCP)" data-region="Americas">🇺🇾 Uruguay — Montevideo (TCP) (UYMVD)</option>
-                      <option value="UZTAS" data-country="Uzbekistan" data-port="Tashkent (Bandar Abbas Gateway)" data-region="Asia">🇺🇿 Uzbekistan — Tashkent (Bandar Abbas Gateway) (UZTAS)</option>
-                      <option value="VUVLI" data-country="Vanuatu" data-port="Port Vila" data-region="Oceania">🇻🇺 Vanuatu — Port Vila (VUVLI)</option>
-                      <option value="VAVAT" data-country="Vatican City" data-port="Vatican City (Civitavecchia GW)" data-region="Europe">🇻🇦 Vatican City — Vatican City (Civitavecchia GW) (VAVAT)</option>
-                      <option value="VEPBL" data-country="Venezuela" data-port="Puerto Cabello / La Guaira" data-region="Americas">🇻🇪 Venezuela — Puerto Cabello / La Guaira (VEPBL)</option>
-                      <option value="VNDAD" data-country="Vietnam" data-port="Da Nang" data-region="Asia">🇻🇳 Vietnam — Da Nang (VNDAD)</option>
-                      <option value="VNHPH" data-country="Vietnam" data-port="Haiphong" data-region="Asia">🇻🇳 Vietnam — Haiphong (VNHPH)</option>
-                      <option value="VNSGN" data-country="Vietnam" data-port="Ho Chi Minh City (Cat Lai / Cai Mep)" data-region="Asia">🇻🇳 Vietnam — Ho Chi Minh City (Cat Lai / Cai Mep) (VNSGN)</option>
-                      <option value="YEADE" data-country="Yemen" data-port="Aden / Hodeidah" data-region="Middle East">🇾🇪 Yemen — Aden / Hodeidah (YEADE)</option>
-                      <option value="ZMLUN" data-country="Zambia" data-port="Lusaka (Dar es Salaam GW)" data-region="Africa">🇿🇲 Zambia — Lusaka (Dar es Salaam GW) (ZMLUN)</option>
-                      <option value="ZWHRE" data-country="Zimbabwe" data-port="Harare (Beira Gateway)" data-region="Africa">🇿🇼 Zimbabwe — Harare (Beira Gateway) (ZWHRE)</option>
+                  <select id="calc-dest" class="hidden">
+                    <option value="NLRTM" selected>Rotterdam (NLRTM), Netherlands</option>
                   </select>
                 </div>
               </div>
