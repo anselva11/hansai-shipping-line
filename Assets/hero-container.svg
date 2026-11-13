@@ -1,0 +1,303 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 750" width="100%" height="100%" style="overflow: visible;">
+  <defs>
+    <!-- Shadow beneath containers -->
+    <filter id="containerShadow" x="-10%" y="-10%" width="120%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000000" flood-opacity="0.18" />
+    </filter>
+
+    <!-- Corrugation Rib Gradient (Green) -->
+    <linearGradient id="ribGradGreen" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2D4434" />
+      <stop offset="25%" stop-color="#3D5A45" />
+      <stop offset="65%" stop-color="#4E7058" />
+      <stop offset="85%" stop-color="#385440" />
+      <stop offset="100%" stop-color="#223528" />
+    </linearGradient>
+
+    <!-- Corrugation Rib Gradient (White) -->
+    <linearGradient id="ribGradWhite" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#B8C0C6" />
+      <stop offset="25%" stop-color="#D6DCE0" />
+      <stop offset="65%" stop-color="#FFFFFF" />
+      <stop offset="85%" stop-color="#DEE3E6" />
+      <stop offset="100%" stop-color="#A8B2B8" />
+    </linearGradient>
+
+    <!-- Corner Casting Gradient -->
+    <linearGradient id="castingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#557560" />
+      <stop offset="100%" stop-color="#1A281E" />
+    </linearGradient>
+
+    <!-- Top Rail Highlight -->
+    <linearGradient id="topRailGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#5A8066" />
+      <stop offset="50%" stop-color="#3A5642" />
+      <stop offset="100%" stop-color="#263A2C" />
+    </linearGradient>
+
+    <!-- White Top Rail Highlight -->
+    <linearGradient id="whiteTopRail" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="60%" stop-color="#D8DFE3" />
+      <stop offset="100%" stop-color="#B0B9BF" />
+    </linearGradient>
+  </defs>
+
+  <!-- AMBIENT BASE SHADOW -->
+  <ellipse cx="650" cy="710" rx="600" ry="24" fill="#000000" opacity="0.12" filter="blur(16px)" />
+
+  <!-- ==============================================================
+       1. LEFT CONTAINER (IN PERSPECTIVE)
+       ============================================================== -->
+  <g id="left-container" opacity="0.95">
+    <!-- Left face of adjacent green container -->
+    <polygon points="0,290 160,310 160,700 0,680" fill="#223326" />
+    <!-- Perspective ribs on left container -->
+    <polygon points="20,293 45,296 45,683 20,680" fill="#2E4433" />
+    <polygon points="55,297 80,300 80,687 55,684" fill="#2E4433" />
+    <polygon points="90,301 115,304 115,692 90,689" fill="#2E4433" />
+    <polygon points="125,305 150,308 150,696 125,693" fill="#2E4433" />
+    <!-- Front corner vertical post -->
+    <polygon points="152,308 162,310 162,700 152,698" fill="#18241B" />
+  </g>
+
+  <!-- ==============================================================
+       2. RIGHT REAR CONTAINER (LIGHT ACCENT PEAKING BEHIND)
+       ============================================================== -->
+  <g id="right-rear-container" opacity="0.85">
+    <polygon points="1220,400 1400,380 1400,700 1220,700" fill="#D2D8DC" />
+    <polygon points="1230,402 1260,398 1260,700 1230,700" fill="#E4E9EC" />
+    <polygon points="1275,396 1305,392 1305,700 1275,700" fill="#E4E9EC" />
+    <polygon points="1320,390 1350,386 1350,700 1320,700" fill="#E4E9EC" />
+    <polygon points="1365,384 1395,380 1395,700 1365,700" fill="#E4E9EC" />
+  </g>
+
+  <!-- ==============================================================
+       3. MAIN STACK: BOTTOM CONTAINER (WHITE)
+       ============================================================== -->
+  <g id="bottom-white-container" filter="url(#containerShadow)">
+    <!-- Base container body -->
+    <rect x="160" y="470" width="1070" height="230" fill="#D0D6DA" rx="3" />
+    
+    <!-- Corrugation Ribs (White) -->
+    <!-- We generate 32 realistic vertical corrugated panels -->
+    <rect x="175" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="208" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="241" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="274" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="307" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="340" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="373" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="406" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="439" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="472" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="505" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="538" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="571" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="604" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="637" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="670" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="703" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="736" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="769" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="802" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="835" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="868" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="901" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="934" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="967" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="1000" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="1033" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="1066" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="1099" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="1132" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="1165" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+    <rect x="1198" y="482" width="24" height="206" fill="url(#ribGradWhite)" rx="1.5" />
+
+    <!-- Bottom White Container Top Rail -->
+    <rect x="160" y="468" width="1070" height="15" fill="url(#whiteTopRail)" />
+    <!-- Bottom White Container Bottom Rail -->
+    <rect x="160" y="688" width="1070" height="14" fill="#A4AEB5" />
+
+    <!-- Corner Post (Left) -->
+    <rect x="160" y="468" width="15" height="234" fill="#9BA5AC" />
+    <!-- Corner Casting Top Left -->
+    <rect x="158" y="466" width="19" height="19" fill="#7D878E" rx="2" />
+    <circle cx="167" cy="475" r="4.5" fill="#4B5358" />
+
+    <!-- Stencil Text on White Container (Left Side) -->
+    <g transform="translate(240, 508)" fill="#6B7882" font-family="'JetBrains Mono', 'Plus Jakarta Sans', monospace">
+      <text x="0" y="0" font-size="10.5" font-weight="600" letter-spacing="0.05em">Cargo container</text>
+      <text x="0" y="16" font-size="11.5" font-weight="700" letter-spacing="0.08em">No. 025387162/53</text>
+      <!-- Small weight details -->
+      <text x="0" y="32" font-size="8.5" font-weight="500" letter-spacing="0.05em" opacity="0.8">MAX GROSS  32,500 KG</text>
+      <text x="0" y="44" font-size="8.5" font-weight="500" letter-spacing="0.05em" opacity="0.8">TARE WEIGHT  3,980 KG</text>
+    </g>
+
+    <!-- Subtle Drop Shadow Cast by Top Container -->
+    <rect x="160" y="468" width="1070" height="18" fill="#000000" opacity="0.32" />
+  </g>
+
+  <!-- ==============================================================
+       4. MAIN STACK: TOP CONTAINER (GREEN - THE HERO PIECE)
+       ============================================================== -->
+  <g id="top-green-container" filter="url(#containerShadow)">
+    
+    <!-- Main Green Container Outer Box -->
+    <!-- Top left corner at (160, 110) -->
+    <rect x="160" y="110" width="1070" height="360" fill="#2C4232" rx="4" />
+    
+    <!-- Top Rail of Green Container -->
+    <rect x="160" y="110" width="1070" height="20" fill="url(#topRailGrad)" rx="2" />
+    <!-- Top Rail Highlight Line -->
+    <line x1="160" y1="111" x2="1230" y2="111" stroke="#689374" stroke-width="1.5" opacity="0.8" />
+
+    <!-- Bottom Rail of Green Container -->
+    <rect x="160" y="452" width="1070" height="18" fill="#203225" />
+    <line x1="160" y1="453" x2="1230" y2="453" stroke="#486851" stroke-width="1" opacity="0.6" />
+
+    <!-- Corrugation Ribs (Green) -->
+    <rect x="175" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="186" y1="130" x2="186" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="208" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="219" y1="130" x2="219" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="241" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="252" y1="130" x2="252" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="274" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="285" y1="130" x2="285" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="307" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="318" y1="130" x2="318" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="340" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="351" y1="130" x2="351" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="373" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="384" y1="130" x2="384" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="406" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="417" y1="130" x2="417" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="439" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="450" y1="130" x2="450" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="472" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="483" y1="130" x2="483" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="505" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="516" y1="130" x2="516" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="538" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="549" y1="130" x2="549" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="571" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="582" y1="130" x2="582" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="604" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="615" y1="130" x2="615" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="637" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="648" y1="130" x2="648" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="670" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="681" y1="130" x2="681" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="703" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="714" y1="130" x2="714" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="736" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="747" y1="130" x2="747" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="769" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="780" y1="130" x2="780" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="802" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="813" y1="130" x2="813" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="835" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="846" y1="130" x2="846" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="868" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="879" y1="130" x2="879" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="901" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="912" y1="130" x2="912" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="934" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="945" y1="130" x2="945" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="967" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="978" y1="130" x2="978" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="1000" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="1011" y1="130" x2="1011" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="1033" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="1044" y1="130" x2="1044" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="1066" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="1077" y1="130" x2="1077" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="1099" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="1110" y1="130" x2="1110" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="1132" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="1143" y1="130" x2="1143" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="1165" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="1176" y1="130" x2="1176" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+    <rect x="1198" y="129" width="24" height="324" fill="url(#ribGradGreen)" rx="2" />
+    <line x1="1209" y1="130" x2="1209" y2="452" stroke="#5E876A" stroke-width="1" opacity="0.35" />
+
+    <!-- Left Vertical Structural Post -->
+    <rect x="160" y="110" width="16" height="360" fill="#1D2C21" />
+    <!-- Left Post Highlight -->
+    <line x1="175" y1="110" x2="175" y2="470" stroke="#3D5B45" stroke-width="1" />
+
+    <!-- Right Vertical Structural Post -->
+    <rect x="1214" y="110" width="16" height="360" fill="#1D2C21" />
+
+    <!-- Corner Castings (Top-Left & Top-Right) -->
+    <!-- Top Left -->
+    <rect x="156" y="106" width="22" height="22" fill="url(#castingGrad)" rx="2.5" />
+    <circle cx="167" cy="117" r="5" fill="#111B14" />
+    <ellipse cx="167" cy="117" rx="3" ry="5.5" fill="#0B120D" />
+
+    <!-- Bottom Left Casting -->
+    <rect x="156" y="450" width="22" height="22" fill="url(#castingGrad)" rx="2.5" />
+    <circle cx="167" cy="461" r="5" fill="#111B14" />
+
+    <!-- Top Right Casting -->
+    <rect x="1212" y="106" width="22" height="22" fill="url(#castingGrad)" rx="2.5" />
+    <circle cx="1223" cy="117" r="5" fill="#111B14" />
+
+    <!-- Bottom Right Casting -->
+    <rect x="1212" y="450" width="22" height="22" fill="url(#castingGrad)" rx="2.5" />
+    <circle cx="1223" cy="461" r="5" fill="#111B14" />
+
+    <!-- ==========================================================
+         CONTAINER STENCIL MARKINGS (Exact match to reference image)
+         ========================================================== -->
+    
+    <!-- Left Stencil: Cargo Container No. & Triangle Recycling Badge -->
+    <g transform="translate(240, 155)" fill="#B0C8B8" font-family="'JetBrains Mono', 'Plus Jakarta Sans', monospace">
+      <text x="0" y="0" font-size="12" font-weight="600" letter-spacing="0.06em">Cargo container</text>
+      <text x="0" y="19" font-size="13" font-weight="700" letter-spacing="0.08em">No. 025387162/53</text>
+
+      <!-- Triangle Recycling Symbol with '50' -->
+      <g transform="translate(2, 45)" stroke="#B0C8B8" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15,0 L30,26 L0,26 Z" />
+        <!-- Arrows indicating recycling loop -->
+        <polyline points="13,0 17,0" />
+        <text x="15" y="21" font-size="9" font-weight="700" fill="#B0C8B8" stroke="none" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif">50</text>
+      </g>
+
+      <!-- Standard Maritime ISO specifications on door flank -->
+      <g transform="translate(0, 95)" font-size="9" font-weight="600" letter-spacing="0.04em" opacity="0.85">
+        <text x="0" y="0">MAX. WT.   32,500 KG  71,650 LBS</text>
+        <text x="0" y="14">TARE WT.    3,980 KG   8,770 LBS</text>
+        <text x="0" y="28">PAYLOAD    28,520 KG  62,880 LBS</text>
+        <text x="0" y="42">CUBE         76.4 CBM   2,700 CU.FT.</text>
+      </g>
+    </g>
+
+    <!-- ==========================================================
+         HERO BRAND IDENTITY: /HANSAI (Emblazoned across ribs)
+         ========================================================== -->
+    <g transform="translate(680, 335)">
+      <!-- Subtle dark drop shadow for maximum 3D paint relief on metal ribs -->
+      <text x="2" y="4" font-family="'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif" font-size="108" font-weight="800" fill="#142217" letter-spacing="-0.03em" opacity="0.6">/HANSAI</text>
+      
+      <!-- Crisp White Brand Typography painted on ribs -->
+      <text x="0" y="0" font-family="'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif" font-size="108" font-weight="800" fill="#FFFFFF" letter-spacing="-0.03em">/HANSAI</text>
+      
+      <!-- Sub-label: SHIPPING LINE in elegant industrial tracking -->
+      <text x="6" y="32" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="700" fill="#FFFFFF" letter-spacing="0.42em" opacity="0.95">SHIPPING LINE</text>
+    </g>
+
+    <!-- Official HANSAI Logo Emblem Crest in crisp white on the left rib -->
+    <g transform="translate(560, 255)" fill="#FFFFFF" opacity="0.92">
+      <!-- Stylized nautical / shipping line crest -->
+      <circle cx="28" cy="28" r="26" fill="none" stroke="#FFFFFF" stroke-width="2.5" />
+      <path d="M12,28 C18,20 38,20 44,28 C38,36 18,36 12,28 Z" fill="#FFFFFF" />
+      <circle cx="28" cy="28" r="4.5" fill="#3B5844" />
+      <line x1="28" y1="8" x2="28" y2="48" stroke="#FFFFFF" stroke-width="2.5" />
+    </g>
+
+  </g>
+
+</svg>

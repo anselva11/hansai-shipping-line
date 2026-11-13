@@ -1,0 +1,198 @@
+@charset "UTF-8";
+
+/* ==========================================================================
+   HANSAI SHIPPING LINE — Premium Corporate Stylesheet
+   Brand Colors:
+   - Primary Navy:   #06345B
+   - Dark Navy:      #032746
+   - White:          #FFFFFF
+   - Light Gray:     #F4F5F6
+   - Secondary Gray: #8A929B
+   - Editorial Stone:#ECEEF2
+   ========================================================================== */
+
+:root {
+  --color-primary-navy: #06345B;
+  --color-dark-navy: #032746;
+  --color-brand-white: #FFFFFF;
+  --color-light-gray: #F4F5F6;
+  --color-secondary-gray: #8A929B;
+  --color-editorial-canvas: #ECEEF2;
+  --color-card-border: #E2E5EA;
+  --color-accent-blue: #0084FF;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-editorial-canvas);
+  color: #1A232E;
+}
+
+/* Custom Minimalist Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F4F5F6;
+}
+::-webkit-scrollbar-thumb {
+  background: #B4BCC6;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #06345B;
+}
+
+/* Editorial Container Canvas Card System */
+.editorial-canvas-card {
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-card-border);
+  border-radius: 28px;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+@media (min-width: 1024px) {
+  .editorial-canvas-card {
+    border-radius: 32px;
+  }
+}
+
+/* Container Rib Texture (Corrugated Steel Simulation for industrial aesthetic) */
+.container-rib-texture {
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.03) 0px,
+    rgba(255, 255, 255, 0.03) 12px,
+    rgba(0, 0, 0, 0.08) 13px,
+    rgba(0, 0, 0, 0.15) 24px
+  );
+}
+
+.container-rib-dark {
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 0px,
+    rgba(255, 255, 255, 0.04) 14px,
+    rgba(0, 0, 0, 0.25) 15px,
+    rgba(0, 0, 0, 0.35) 28px
+  );
+}
+
+/* Smooth Image Scale on Hover */
+.image-zoom-container {
+  overflow: hidden;
+}
+.image-zoom-container img {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.image-zoom-container:hover img {
+  transform: scale(1.05);
+}
+
+/* Subtle Shimmer & Radar Pulse */
+@keyframes pulse-radar {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 132, 255, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 8px rgba(0, 132, 255, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 132, 255, 0);
+  }
+}
+
+.radar-pulse {
+  animation: pulse-radar 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+@keyframes float-subtle {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-float {
+  animation: float-subtle 4s ease-in-out infinite;
+}
+
+/* Glassmorphism Panel */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.glass-panel-dark {
+  background: rgba(3, 39, 70, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Editorial Monospace Code / Spec Tag */
+.editorial-tag {
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.05em;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+/* Modal Transitions */
+.modal-backdrop {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.modal-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  transform: scale(0.95) translateY(12px);
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+.modal-backdrop.active .modal-content {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+/* Hide scrollbar when modal active */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Focus styles for accessibility */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid var(--color-primary-navy);
+  outline-offset: 2px;
+}
+
+/* Ticker Animation for Port Status */
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker 40s linear infinite;
+}
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+

@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HANSAI SHIPPING LINE — Moving Your Business Beyond Borders</title>
+  <meta name="description"
+    content="Official corporate website of HANSAI SHIPPING LINE. Global ocean freight, container shipping, integrated logistics, and intelligent supply chain management.">
+
+  <!-- Favicon / Brand Icon -->
+  <link rel="icon" type="image/png" href="Assets/logo-transparent.png">
+
+  <!-- Google Fonts (Plus Jakarta Sans & JetBrains Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#06345B',
+              dark: '#032746',
+              white: '#FFFFFF',
+              light: '#F4F5F6',
+              gray: '#8A929B',
+              canvas: '#ECEEF2',
+              card: '#FFFFFF',
+              border: '#E2E5EA',
+              accent: '#0084FF',
+              accentHover: '#0070D8'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          },
+          boxShadow: {
+            'editorial': '0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.02)',
+            'editorial-card': '0 4px 24px -2px rgba(6, 52, 91, 0.06)',
+            'editorial-hover': '0 16px 36px -4px rgba(6, 52, 91, 0.12)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Motion for JavaScript (Framer Motion Vanilla Engine) CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/motion@11.11.13/dist/motion.js"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="bg-white text-gray-900 antialiased selection:bg-[#06345B] selection:text-white">
+
+  <!-- SECTION 1 — NAVIGATION BAR (Minimalist Editorial Style - Exact Match to Reference) -->
+  <header id="main-navbar"
+    class="sticky top-0 z-40 bg-white/95 backdrop-blur-md transition-all duration-300 py-4 px-6 sm:px-10 lg:px-16 border-b border-gray-100">
+    <div class="max-w-[1400px] mx-auto flex items-center justify-between">
+
+      <!-- Brand Logo: Official HANSAI Logo from logo-white.png -->
+      <a href="#" class="flex items-center group focus:outline-none" aria-label="HANSAI SHIPPING LINE Home">
+        <img src="Assets/logo-white.png" alt="HANSAI SHIPPING LINE"
+          class="h-9 sm:h-11 w-auto object-contain [filter:brightness(0)] hover:[filter:brightness(0)_saturate(100%)_invert(14%)_sepia(85%)_saturate(1915%)_hue-rotate(186deg)] transition-all duration-200 group-hover:scale-[1.02]">
+      </a>
+
+      <!-- Center Navigation Links (Matching Reference) -->
+      <nav class="hidden lg:flex items-center space-x-9 text-[14px] font-medium text-gray-700">
+        <a href="#about" class="nav-anchor hover:text-black transition-colors py-1">About us</a>
+        <a href="#services" class="nav-anchor hover:text-black transition-colors py-1">Services</a>
+        <a href="#industries" class="nav-anchor hover:text-black transition-colors py-1">Our Approach</a>
+        <a href="#technology" class="nav-anchor hover:text-black transition-colors py-1">Technology</a>
+      </nav>
+
+      <!-- Right CTAs: Contact Us & Sign In Pill Buttons -->
+      <div class="hidden sm:flex items-center space-x-3">
+        <a href="#contact"
+          class="px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold text-white bg-[#111827] hover:bg-[#06345B] transition-all duration-200 shadow-sm">
+          Contact Us
+        </a>
+        <button data-open-modal="quote-modal"
+          class="px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold text-gray-800 bg-white border border-gray-300 hover:border-gray-500 transition-all duration-200 shadow-sm">
+          Sign In
+        </button>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobile-menu-btn" type="button"
+        class="lg:hidden p-2 rounded-xl text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#06345B]"
+        aria-label="Open Mobile Menu">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- Mobile Menu Drawer Overlay -->
+  <div id="mobile-menu"
+    class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
+    <div
+      class="mobile-menu-drawer fixed top-0 right-0 w-full max-w-sm h-full bg-white shadow-2xl p-6 flex flex-col justify-between transform translate-x-full transition-transform duration-300 ease-out">
+      <div>
+        <!-- Drawer Header -->
+        <div class="flex items-center justify-between pb-6 border-b border-gray-100">
+          <img src="Assets/logo-white.png" alt="HANSAI" class="h-8 w-auto object-contain [filter:brightness(0)]">
+          <button id="mobile-menu-close" class="p-2 rounded-full hover:bg-gray-100 text-gray-500 hover:text-gray-900"
+            aria-label="Close menu">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <!-- Drawer Links -->
+        <nav class="flex flex-col space-y-4 py-6 text-lg font-medium text-gray-800">
+          <a href="#about" class="nav-anchor hover:text-[#06345B] py-2 border-b border-gray-50">About us</a>
+          <a href="#services" class="nav-anchor hover:text-[#06345B] py-2 border-b border-gray-50">Services</a>
+          <a href="#industries" class="nav-anchor hover:text-[#06345B] py-2 border-b border-gray-50">Our Approach</a>
+          <a href="#fleet" class="nav-anchor hover:text-[#06345B] py-2 border-b border-gray-50">Our Fleet &
+            Operations</a>
+          <a href="#technology" class="nav-anchor hover:text-[#06345B] py-2 border-b border-gray-50">Technology</a>
+          <a href="#contact" class="nav-anchor hover:text-[#06345B] py-2 border-b border-gray-50">Contact Us</a>
+        </nav>
+      </div>
+
+      <!-- Drawer Actions -->
+      <div class="space-y-3 pt-6 border-t border-gray-100">
+        <button data-open-modal="tracking-modal"
+          class="w-full py-3 rounded-full text-center font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 transition-colors flex items-center justify-center space-x-2">
+          <i data-lucide="crosshair" class="w-4 h-4 text-[#06345B]"></i>
+          <span>Live Container Tracker</span>
+        </button>
+        <button data-open-modal="quote-modal"
+          class="w-full py-3 rounded-full text-center font-semibold text-white bg-[#111827] hover:bg-[#06345B] transition-colors shadow-md">
+          Get a Shipping Quote
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       SECTION 2 — HERO LANDING PAGE (Exact 1:1 Match to Reference Image)
+       ==================================================================== -->
+  <section id="hero" class="w-full bg-white pt-8 sm:pt-14 pb-0 overflow-hidden" data-reveal>
+    <div class="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16">
+
+      <!-- Top Split Header (Headline Left, Description & Learn More Button Right) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-6 sm:mb-10">
+
+        <!-- Left: Main Bold Headline -->
+        <div class="lg:col-span-7">
+          <h1
+            class="text-5xl sm:text-7xl lg:text-[84px] font-extrabold text-[#111827] tracking-[-0.04em] leading-[1.04]">
+            Let's Move Your<br>Business Forward
+          </h1>
+        </div>
+
+        <!-- Right: Supporting Description & Learn More CTA Button -->
+        <div class="lg:col-span-5 flex flex-col justify-start lg:pt-4 space-y-5">
+          <p class="text-gray-500 text-base sm:text-lg leading-relaxed font-normal max-w-md">
+            We provide reliable shipping wherever you need it. With us, you get precision, speed, and confidence at
+            every step.
+          </p>
+
+          <div class="flex items-center space-x-3 pt-1">
+            <a href="#services"
+              class="inline-flex items-center justify-center px-8 py-3 rounded-full text-sm font-semibold text-white bg-[#111827] hover:bg-[#06345B] transition-all duration-200 shadow-sm">
+              Learn More
+            </a>
+
+            <!-- Quick Secondary Action -->
+            <button data-open-modal="tracking-modal"
+              class="inline-flex items-center space-x-1.5 px-4 py-2.5 rounded-full text-xs font-semibold text-gray-600 hover:text-[#111827] hover:bg-gray-100 transition-colors">
+              <i data-lucide="crosshair" class="w-3.5 h-3.5 text-[#06345B]"></i>
+              <span>Track Shipment</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Bottom Visual: Realistic 3D Corrugated Shipping Containers (Using Assets/background11.png) -->
+    <div class="w-full max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 relative select-none">
+      <div class="w-full relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg border border-gray-100">
+        <img src="Assets/background11.png" alt="HANSAI Shipping Line 3D Branded Shipping Containers"
+          class="w-full h-auto object-cover block select-none">
+      </div>
+    </div>
+
+  </section>
+
+  <!-- MAIN EDITORIAL CONTAINER WRAPPER FOR SUBSEQUENT SECTIONS -->
+  <main class="max-w-[1380px] mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6 sm:space-y-8">
+
+    <!-- ====================================================================
+         SECTION 3 — COMPREHENSIVE LOGISTICS SOLUTIONS
+         ==================================================================== -->
+    <section id="services" class="editorial-canvas-card p-6 sm:p-10 lg:p-12 shadow-editorial-card" data-reveal>
+
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-10 pb-6 border-b border-gray-100">
+        <div>
+          <span class="editorial-tag text-[#06345B] font-semibold text-xs tracking-wider block mb-2">/SOLUTIONS &
+            SERVICES</span>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#032746] tracking-tight">
+            Comprehensive Logistics Solutions
+          </h2>
+        </div>
+        <div class="mt-4 md:mt-0 flex items-center space-x-4">
+          <p class="text-gray-500 text-sm max-w-xs hidden lg:block">
+            Integrated maritime, intermodal, and customs services engineered for efficiency.
+          </p>
+          <a href="#contact"
+            class="px-5 py-2 rounded-full text-xs font-semibold text-[#032746] bg-gray-100 hover:bg-[#032746] hover:text-white transition-all duration-200">
+            See All Solutions
+          </a>
+        </div>
+      </div>
+
+      <!-- 5-Card Editorial Asymmetrical Grid (Matching Reference Top-Right Panel) -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6">
+
+        <!-- CARD 1: International Shipping (Wide Card - 8 Cols) -->
+        <div
+          class="md:col-span-12 lg:col-span-8 group relative rounded-2xl sm:rounded-3xl overflow-hidden image-zoom-container bg-slate-900 min-h-[300px] sm:min-h-[340px] flex flex-col justify-end p-6 sm:p-8 cursor-pointer border border-gray-200/50 shadow-sm"
+          data-service-key="international-shipping">
+          <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80"
+            alt="International Ocean Container Shipping Vessel"
+            class="absolute inset-0 w-full h-full object-cover object-center opacity-85 group-hover:opacity-95"
+            loading="lazy">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#032746] via-[#032746]/60 to-transparent"></div>
+
+          <div class="relative z-10 space-y-2">
+            <div
+              class="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-md bg-white/20 backdrop-blur-sm text-white text-[11px] font-mono">
+              <i data-lucide="ship" class="w-3.5 h-3.5 text-white"></i>
+              <span>CORE SERVICE 01</span>
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">International Shipping</h3>
+            <p class="text-gray-200 text-sm sm:text-base max-w-xl leading-relaxed">
+              Global ocean freight, Full Container Load (FCL), Less than Container Load (LCL), and dedicated container
+              liner transportation across 140+ ports.
+            </p>
+            <div class="pt-2 flex items-center justify-between">
+              <button
+                class="service-learn-more-btn text-white text-xs font-semibold inline-flex items-center space-x-1 group-hover:underline">
+                <span>Learn More Specifications</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </button>
+              <span class="text-white/60 font-mono text-xs">1.8M+ TEU Annual</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 2: Warehousing & Distribution (Tall / Accent Card - 4 Cols) -->
+        <div
+          class="md:col-span-12 lg:col-span-4 group relative rounded-2xl sm:rounded-3xl overflow-hidden image-zoom-container bg-slate-900 min-h-[300px] sm:min-h-[340px] flex flex-col justify-end p-6 sm:p-8 cursor-pointer border border-gray-200/50 shadow-sm"
+          data-service-key="warehousing">
+          <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80"
+            alt="Modern High-Bay Automated Warehouse"
+            class="absolute inset-0 w-full h-full object-cover object-center opacity-80 group-hover:opacity-95"
+            loading="lazy">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#032746] via-[#032746]/60 to-transparent"></div>
+
+          <div class="relative z-10 space-y-2">
+            <div
+              class="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-md bg-white/20 backdrop-blur-sm text-white text-[11px] font-mono">
+              <i data-lucide="warehouse" class="w-3.5 h-3.5 text-white"></i>
+              <span>FACILITY 02</span>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight">Warehousing & Distribution</h3>
+            <p class="text-gray-200 text-xs sm:text-sm leading-relaxed">
+              Efficient storage, climate-controlled cold storage, cross-docking, and omni-channel distribution
+              facilities.
+            </p>
+            <div class="pt-2">
+              <button
+                class="service-learn-more-btn text-white text-xs font-semibold inline-flex items-center space-x-1 group-hover:underline">
+                <span>Explore Facilities</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 3: Freight Forwarding (4 Cols) -->
+        <div
+          class="md:col-span-6 lg:col-span-4 group relative rounded-2xl sm:rounded-3xl overflow-hidden image-zoom-container bg-slate-900 min-h-[260px] sm:min-h-[290px] flex flex-col justify-end p-6 cursor-pointer border border-gray-200/50 shadow-sm"
+          data-service-key="freight-forwarding">
+          <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=800&q=80"
+            alt="Intermodal Freight Fleet"
+            class="absolute inset-0 w-full h-full object-cover object-center opacity-80 group-hover:opacity-95"
+            loading="lazy">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#032746] via-[#032746]/70 to-transparent"></div>
+
+          <div class="relative z-10 space-y-1.5">
+            <h3 class="text-xl font-bold text-white tracking-tight">Freight Forwarding</h3>
+            <p class="text-gray-200 text-xs leading-relaxed line-clamp-2">
+              Integrated multimodal international freight management combining sea, rail, and heavy drayage.
+            </p>
+            <button
+              class="service-learn-more-btn text-white text-xs font-semibold inline-flex items-center space-x-1 pt-1 group-hover:underline">
+              <span>View Multimodal Corridors</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- CARD 4: Supply Chain Management (4 Cols) -->
+        <div
+          class="md:col-span-6 lg:col-span-4 group relative rounded-2xl sm:rounded-3xl overflow-hidden image-zoom-container bg-slate-900 min-h-[260px] sm:min-h-[290px] flex flex-col justify-end p-6 cursor-pointer border border-gray-200/50 shadow-sm"
+          data-service-key="supply-chain">
+          <img src="https://images.unsplash.com/photo-1518527989017-5baca7a58d3c?auto=format&fit=crop&w=800&q=80"
+            alt="Intelligent Port Supply Chain Terminal"
+            class="absolute inset-0 w-full h-full object-cover object-center opacity-80 group-hover:opacity-95"
+            loading="lazy">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#032746] via-[#032746]/70 to-transparent"></div>
+
+          <div class="relative z-10 space-y-1.5">
+            <h3 class="text-xl font-bold text-white tracking-tight">Supply Chain Management</h3>
+            <p class="text-gray-200 text-xs leading-relaxed line-clamp-2">
+              Optimized logistics operations, digital control tower, and predictive cargo coordination.
+            </p>
+            <button
+              class="service-learn-more-btn text-white text-xs font-semibold inline-flex items-center space-x-1 pt-1 group-hover:underline">
+              <span>Discover Control Tower</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- CARD 5: Customs Clearance (4 Cols) -->
+        <div
+          class="md:col-span-12 lg:col-span-4 group relative rounded-2xl sm:rounded-3xl overflow-hidden image-zoom-container bg-slate-900 min-h-[260px] sm:min-h-[290px] flex flex-col justify-end p-6 cursor-pointer border border-gray-200/50 shadow-sm"
+          data-service-key="customs-clearance">
+          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80"
+            alt="Customs Documentation and Compliance"
+            class="absolute inset-0 w-full h-full object-cover object-center opacity-80 group-hover:opacity-95"
+            loading="lazy">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#032746] via-[#032746]/70 to-transparent"></div>
+
+          <div class="relative z-10 space-y-1.5">
+            <h3 class="text-xl font-bold text-white tracking-tight">Customs Clearance</h3>
+            <p class="text-gray-200 text-xs leading-relaxed line-clamp-2">
+              Professional customs documentation, tariff classification, and expedited port release assistance.
+            </p>
+            <button
+              class="service-learn-more-btn text-white text-xs font-semibold inline-flex items-center space-x-1 pt-1 group-hover:underline">
+              <span>Review Brokerage</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================================
+         SECTION 4 — INDUSTRIES WE SERVE (Bottom-Left Panel Layout)
+         ==================================================================== -->
+    <section id="industries" class="editorial-canvas-card p-6 sm:p-10 lg:p-12 shadow-editorial-card" data-reveal>
+
+      <!-- Section Header -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end mb-8 sm:mb-10 pb-6 border-b border-gray-100">
+        <div class="lg:col-span-7">
+          <span class="editorial-tag text-[#06345B] font-semibold text-xs tracking-wider block mb-2">/INDUSTRIES WE
+            SERVE</span>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#032746] tracking-tight">
+            Logistics Solutions for Every Industry.
+          </h2>
+        </div>
+
+        <div class="lg:col-span-5 flex items-center justify-between lg:justify-end space-x-6">
+          <p class="text-gray-500 text-sm max-w-sm">
+            At HANSAI, we understand that every industry has unique logistics challenges. That's why we offer tailored
+            supply chains for specialized sectors.
+          </p>
+
+          <!-- Slider Controls -->
+          <div class="flex items-center space-x-2 flex-shrink-0">
+            <button id="industry-prev"
+              class="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center text-gray-600 hover:border-[#06345B] hover:text-[#06345B] transition-colors"
+              aria-label="Previous Industry">
+              <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            </button>
+            <button id="industry-next"
+              class="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center text-gray-600 hover:border-[#06345B] hover:text-[#06345B] transition-colors"
+              aria-label="Next Industry">
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Premium Cards Grid (Matching Reference Bottom-Left Panel) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+
+        <!-- CARD 1: Mining & Natural Resources -->
+        <div
+          class="industry-interactive-card rounded-2xl sm:rounded-3xl p-6 sm:p-7 transition-all duration-300 cursor-pointer flex flex-col justify-between min-h-[320px] bg-[#F4F5F6] border border-gray-200/60">
+          <div>
+            <div
+              class="industry-icon-badge w-12 h-12 rounded-2xl bg-white shadow-sm flex items-center justify-center mb-8 border border-gray-200">
+              <i data-lucide="pickaxe" class="w-6 h-6 text-[#06345B]"></i>
+            </div>
+            <h3 class="text-xl font-bold tracking-tight mb-2.5">Mining & Natural Resources</h3>
+            <p class="industry-desc text-gray-600 text-xs sm:text-sm leading-relaxed">
+              Bulk carrier freight, ore concentrate containers, flat racks for mining equipment, and direct mine-to-port
+              logistics corridors.
+            </p>
+          </div>
+          <div class="pt-6 border-t border-black/5 flex items-center justify-between text-xs font-mono">
+            <span class="text-gray-400">ANNUAL VOLUME</span>
+            <span class="font-bold">14M+ Tons</span>
+          </div>
+        </div>
+
+        <!-- CARD 2: Manufacturing & Industrial (THE FEATURED CARD - Dark Navy Background!) -->
+        <div
+          class="industry-interactive-card rounded-2xl sm:rounded-3xl p-6 sm:p-7 transition-all duration-300 cursor-pointer flex flex-col justify-between min-h-[320px] bg-[#032746] text-white shadow-xl scale-[1.02]">
+          <div>
+            <div
+              class="industry-icon-badge w-12 h-12 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center mb-8 text-white">
+              <i data-lucide="factory" class="w-6 h-6 text-white"></i>
+            </div>
+            <div class="flex items-center space-x-2 mb-1">
+              <span
+                class="px-2 py-0.5 rounded bg-[#0084FF]/20 text-[#0084FF] text-[10px] font-mono font-bold uppercase">FEATURED
+                SECTOR</span>
+            </div>
+            <h3 class="text-xl font-bold tracking-tight mb-2.5 text-white">Manufacturing & Industrial</h3>
+            <p class="industry-desc text-white/80 text-xs sm:text-sm leading-relaxed">
+              Just-in-Time (JIT) component deliveries, automotive supply chains, heavy machinery transport, and
+              raw-to-finished cargo management.
+            </p>
+          </div>
+          <div class="pt-6 border-t border-white/10 flex items-center justify-between text-xs font-mono">
+            <span class="text-white/60">PRECISION METRIC</span>
+            <span class="font-bold text-white">99.8% On-Time</span>
+          </div>
+        </div>
+
+        <!-- CARD 3: Retail & E-Commerce -->
+        <div
+          class="industry-interactive-card rounded-2xl sm:rounded-3xl p-6 sm:p-7 transition-all duration-300 cursor-pointer flex flex-col justify-between min-h-[320px] bg-[#F4F5F6] border border-gray-200/60">
+          <div>
+            <div
+              class="industry-icon-badge w-12 h-12 rounded-2xl bg-white shadow-sm flex items-center justify-center mb-8 border border-gray-200">
+              <i data-lucide="shopping-bag" class="w-6 h-6 text-[#06345B]"></i>
+            </div>
+            <h3 class="text-xl font-bold tracking-tight mb-2.5">Retail & E-Commerce</h3>
+            <p class="industry-desc text-gray-600 text-xs sm:text-sm leading-relaxed">
+              Fast container devanning, high-velocity distribution to fulfillment hubs, seasonal peak surge buffers, and
+              SKU-level tracking.
+            </p>
+          </div>
+          <div class="pt-6 border-t border-black/5 flex items-center justify-between text-xs font-mono">
+            <span class="text-gray-400">TURNAROUND</span>
+            <span class="font-bold">24-48h Port-to-DC</span>
+          </div>
+        </div>
+
+        <!-- CARD 4: Energy & Infrastructure -->
+        <div
+          class="industry-interactive-card rounded-2xl sm:rounded-3xl p-6 sm:p-7 transition-all duration-300 cursor-pointer flex flex-col justify-between min-h-[320px] bg-[#F4F5F6] border border-gray-200/60">
+          <div>
+            <div
+              class="industry-icon-badge w-12 h-12 rounded-2xl bg-white shadow-sm flex items-center justify-center mb-8 border border-gray-200">
+              <i data-lucide="zap" class="w-6 h-6 text-[#06345B]"></i>
+            </div>
+            <h3 class="text-xl font-bold tracking-tight mb-2.5">Energy & Infrastructure</h3>
+            <p class="industry-desc text-gray-600 text-xs sm:text-sm leading-relaxed">
+              Heavy-lift project cargo, offshore wind turbine nacelles & blades, oil & gas modular plants, and certified
+              breakbulk vessel charters.
+            </p>
+          </div>
+          <div class="pt-6 border-t border-black/5 flex items-center justify-between text-xs font-mono">
+            <span class="text-gray-400">CAPACITY</span>
+            <span class="font-bold">Up to 500T Lift</span>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================================
+         SECTION 5 — OUR FLEET & OPERATIONS
+         ==================================================================== -->
+    <section id="fleet" class="editorial-canvas-card p-6 sm:p-10 lg:p-12 shadow-editorial-card" data-reveal>
+
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-6 border-b border-gray-100">
+        <div>
+          <span class="editorial-tag text-[#06345B] font-semibold text-xs tracking-wider block mb-2">/OUR FLEET &
+            OPERATIONS</span>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#032746] tracking-tight">
+            Built to Move. Designed to Deliver.
+          </h2>
+        </div>
+        <p class="text-gray-500 text-sm max-w-sm mt-3 md:mt-0">
+          From modern eco-efficient container vessels to automated deepwater port berths, HANSAI operates one of the
+          most reliable maritime networks.
+        </p>
+      </div>
+
+      <!-- Fleet Metrics Counter Bar -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <div class="p-4 sm:p-5 rounded-2xl bg-[#F4F5F6] border border-gray-200/80">
+          <div class="text-2xl sm:text-3xl font-extrabold text-[#032746]">85+</div>
+          <div class="text-xs font-medium text-gray-500 uppercase font-mono mt-1">Modern Vessels</div>
+        </div>
+        <div class="p-4 sm:p-5 rounded-2xl bg-[#F4F5F6] border border-gray-200/80">
+          <div class="text-2xl sm:text-3xl font-extrabold text-[#032746]">1.8M+</div>
+          <div class="text-xs font-medium text-gray-500 uppercase font-mono mt-1">Annual TEU Volume</div>
+        </div>
+        <div class="p-4 sm:p-5 rounded-2xl bg-[#F4F5F6] border border-gray-200/80">
+          <div class="text-2xl sm:text-3xl font-extrabold text-[#032746]">140+</div>
+          <div class="text-xs font-medium text-gray-500 uppercase font-mono mt-1">Ports of Call</div>
+        </div>
+        <div class="p-4 sm:p-5 rounded-2xl bg-[#F4F5F6] border border-gray-200/80">
+          <div class="text-2xl sm:text-3xl font-extrabold text-[#0084FF]">99.4%</div>
+          <div class="text-xs font-medium text-gray-500 uppercase font-mono mt-1">Schedule Reliability</div>
+        </div>
+      </div>
+
+      <!-- Fleet Interactive Category Tabs -->
+      <div class="flex items-center space-x-2 overflow-x-auto pb-4 mb-6">
+        <button
+          class="fleet-tab-btn px-5 py-2.5 rounded-full text-xs font-semibold bg-[#06345B] text-white shadow-sm flex items-center space-x-2 flex-shrink-0"
+          data-tab="fleet-vessels">
+          <i data-lucide="ship" class="w-3.5 h-3.5"></i>
+          <span>Container Vessels</span>
+        </button>
+        <button
+          class="fleet-tab-btn px-5 py-2.5 rounded-full text-xs font-semibold bg-white text-gray-600 hover:text-[#06345B] border border-gray-200 flex items-center space-x-2 flex-shrink-0"
+          data-tab="fleet-containers">
+          <i data-lucide="box" class="w-3.5 h-3.5"></i>
+          <span>HANSAI Containers</span>
+        </button>
+        <button
+          class="fleet-tab-btn px-5 py-2.5 rounded-full text-xs font-semibold bg-white text-gray-600 hover:text-[#06345B] border border-gray-200 flex items-center space-x-2 flex-shrink-0"
+          data-tab="fleet-terminals">
+          <i data-lucide="anchor" class="w-3.5 h-3.5"></i>
+          <span>Port Terminals</span>
+        </button>
+      </div>
+
+      <!-- Tab Content Panels -->
+      <div class="fleet-panels-container">
+
+        <!-- Panel 1: Container Vessels -->
+        <div id="fleet-vessels" class="fleet-panel block">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+            <div class="lg:col-span-7 rounded-2xl overflow-hidden shadow-sm h-[320px] sm:h-[400px]">
+              <img src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=1200&q=80"
+                alt="HANSAI Ultra Large Container Vessel at Sea" class="w-full h-full object-cover" loading="lazy">
+            </div>
+            <div class="lg:col-span-5 space-y-4">
+              <div
+                class="inline-flex items-center space-x-2 px-3 py-1 rounded-md bg-blue-50 text-[#06345B] text-xs font-mono font-semibold">
+                <span>FLAGSHIP: HANSAI TITAN CLASS (24,000 TEU)</span>
+              </div>
+              <h3 class="text-2xl font-bold text-[#032746]">Next-Gen Mega Vessels</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                Our core ocean liner fleet features state-of-the-art Ultra Large Container Vessels (ULCV) equipped with
+                bulbous bow hydrodynamics, air lubrication systems, and dual-fuel propulsion engines.
+              </p>
+              <div class="space-y-2.5 pt-2 font-mono text-xs text-gray-700">
+                <div class="flex justify-between pb-1.5 border-b border-gray-100">
+                  <span class="text-gray-500">LENGTH OVERALL (LOA):</span>
+                  <span class="font-bold">399.9 Meters</span>
+                </div>
+                <div class="flex justify-between pb-1.5 border-b border-gray-100">
+                  <span class="text-gray-500">BEAM (WIDTH):</span>
+                  <span class="font-bold">61.5 Meters (24 Rows)</span>
+                </div>
+                <div class="flex justify-between pb-1.5 border-b border-gray-100">
+                  <span class="text-gray-500">PROPULSION:</span>
+                  <span class="font-bold">LNG Ready / Dual-Fuel</span>
+                </div>
+                <div class="flex justify-between pb-1.5 border-b border-gray-100">
+                  <span class="text-gray-500">CRUISING SPEED:</span>
+                  <span class="font-bold">21.5 Knots</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 2: HANSAI Containers -->
+        <div id="fleet-containers" class="fleet-panel hidden">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+            <div class="lg:col-span-7 rounded-2xl overflow-hidden shadow-sm h-[320px] sm:h-[400px]">
+              <img src="Assets/background11.png" alt="HANSAI Shipping Containers"
+                class="w-full h-full object-cover object-center" loading="lazy">
+            </div>
+            <div class="lg:col-span-5 space-y-4">
+              <div
+                class="inline-flex items-center space-x-2 px-3 py-1 rounded-md bg-blue-50 text-[#06345B] text-xs font-mono font-semibold">
+                <span>STANDARDIZED HANSAI FLEET BOXES</span>
+              </div>
+              <h3 class="text-2xl font-bold text-[#032746]">Smart Branded Equipment</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                Built to rigorous ISO standards, our fleet of 200,000+ containers features heavy-gauge Corten steel,
+                marine-grade epoxy coatings, and factory-installed IoT telematics beacons.
+              </p>
+              <div class="grid grid-cols-2 gap-3 pt-2 text-xs">
+                <div class="p-3 rounded-xl bg-gray-50 border border-gray-100">
+                  <div class="font-bold text-gray-900">20ft Standard Dry</div>
+                  <div class="text-gray-500 font-mono text-[11px]">33.2 CBM Capacity</div>
+                </div>
+                <div class="p-3 rounded-xl bg-gray-50 border border-gray-100">
+                  <div class="font-bold text-gray-900">40ft High Cube</div>
+                  <div class="text-gray-500 font-mono text-[11px]">76.4 CBM Capacity</div>
+                </div>
+                <div class="p-3 rounded-xl bg-gray-50 border border-gray-100">
+                  <div class="font-bold text-gray-900">40ft Reefer Cold</div>
+                  <div class="text-gray-500 font-mono text-[11px]">-30°C to +30°C Range</div>
+                </div>
+                <div class="p-3 rounded-xl bg-gray-50 border border-gray-100">
+                  <div class="font-bold text-gray-900">Flat Rack / Open Top</div>
+                  <div class="text-gray-500 font-mono text-[11px]">Heavy Breakbulk</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 3: Port Terminals -->
+        <div id="fleet-terminals" class="fleet-panel hidden">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+            <div class="lg:col-span-7 rounded-2xl overflow-hidden shadow-sm h-[320px] sm:h-[400px]">
+              <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1200&q=80"
+                alt="Automated Seaport Terminal Gantry Cranes" class="w-full h-full object-cover" loading="lazy">
+            </div>
+            <div class="lg:col-span-5 space-y-4">
+              <div
+                class="inline-flex items-center space-x-2 px-3 py-1 rounded-md bg-blue-50 text-[#06345B] text-xs font-mono font-semibold">
+                <span>GLOBAL GATEWAYS</span>
+              </div>
+              <h3 class="text-2xl font-bold text-[#032746]">Tier-1 Deepwater Hubs</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                Dedicated priority berthing agreements at the world's most critical deepwater container facilities
+                ensure zero anchorage waiting times and rapid ship-to-shore turnaround.
+              </p>
+              <ul class="space-y-2 text-xs font-medium text-gray-700">
+                <li class="flex items-center space-x-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#06345B]"></span>
+                  <span>Port of Rotterdam — APM Terminal & ECT Delta Berth</span>
+                </li>
+                <li class="flex items-center space-x-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#06345B]"></span>
+                  <span>Port of Singapore — PSA Tuas Mega Port Berth 12-16</span>
+                </li>
+                <li class="flex items-center space-x-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#06345B]"></span>
+                  <span>Port of Shanghai — Yangshan Deepwater Phase IV</span>
+                </li>
+                <li class="flex items-center space-x-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#06345B]"></span>
+                  <span>Port of Los Angeles — Pier 400 Intermodal Container Berth</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================================
+         SECTION 6 — TECHNOLOGY & INNOVATION (Bottom-Right Panel Layout)
+         ==================================================================== -->
+    <section id="technology" class="editorial-canvas-card p-6 sm:p-10 lg:p-12 shadow-editorial-card" data-reveal>
+
+      <!-- Section Header -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end mb-8 sm:mb-10 pb-6 border-b border-gray-100">
+        <div class="lg:col-span-7">
+          <span class="editorial-tag text-[#06345B] font-semibold text-xs tracking-wider block mb-2">/TECHNOLOGY</span>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#032746] tracking-tight">
+            Innovation That Moves Your Business.
+          </h2>
+        </div>
+        <div class="lg:col-span-5">
+          <p class="text-gray-500 text-sm">
+            We leverage the latest technology to improve the way we manage your shipments, offering real-time
+            visibility, automated paperwork, and predictive intelligence.
+          </p>
+        </div>
+      </div>
+
+      <!-- Split Layout (Matching Reference Bottom-Right Panel) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+
+        <!-- Left: Smart Container / Telematics Hardware Card (5 Cols) -->
+        <div
+          class="lg:col-span-5 rounded-2xl sm:rounded-3xl bg-slate-900 text-white p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden border border-gray-800 shadow-md min-h-[460px]">
+
+          <!-- Background image of container telematics (Assets/kontainer3.jpg) -->
+          <img src="Assets/kontainer3.jpg" alt="Smart IoT Container"
+            class="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105"
+            loading="lazy">
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-[#032746] via-[#032746]/50 to-black/30 pointer-events-none">
+          </div>
+
+          <div class="relative z-10 space-y-4">
+            <div class="flex items-center justify-between">
+              <span
+                class="px-2.5 py-1 rounded bg-[#0084FF]/20 text-[#0084FF] text-xs font-mono font-semibold backdrop-blur-sm border border-blue-400/20">
+                IOT SENSOR PACK 4.0
+              </span>
+              <span
+                class="flex items-center text-xs font-mono text-emerald-400 bg-black/40 px-2.5 py-1 rounded-full backdrop-blur-sm border border-white/10">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 radar-pulse mr-1.5"></span> ONLINE
+              </span>
+            </div>
+
+            <h3 class="text-2xl font-bold text-white tracking-tight">Smart Container Telematics</h3>
+            <p class="text-gray-200 text-xs sm:text-sm leading-relaxed">
+              Every HANSAI high-cube and reefer container transmits satellite GPS, internal temperature, shock impact,
+              and electronic seal security 24/7.
+            </p>
+          </div>
+
+          <!-- Mock Sensor Console -->
+          <div class="relative z-10 pt-6 space-y-3 font-mono text-xs">
+            <div class="bg-black/60 backdrop-blur-md p-3.5 rounded-xl border border-white/15 space-y-2">
+              <div class="flex justify-between text-white/80">
+                <span>GPS POSITION:</span>
+                <span class="text-white font-semibold">01°17'N 103°51'E</span>
+              </div>
+              <div class="flex justify-between text-white/80">
+                <span>INTERNAL TEMP:</span>
+                <span class="text-emerald-400 font-semibold">+4.2°C (Optimal)</span>
+              </div>
+              <div class="flex justify-between text-white/80">
+                <span>E-SEAL STATUS:</span>
+                <span class="text-white font-semibold">LOCKED & SECURED</span>
+              </div>
+              <div class="flex justify-between text-white/80">
+                <span>BATTERY LEVEL:</span>
+                <span class="text-white font-semibold">98% (Solar Trickle)</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right: 4 Feature Blocks with Thin Dividers (7 Cols) -->
+        <div class="lg:col-span-7 flex flex-col justify-between space-y-4">
+
+          <!-- Block 1: Real-Time Shipment Tracking -->
+          <div
+            class="p-5 sm:p-6 rounded-2xl bg-[#F4F5F6] border border-gray-200/80 hover:border-[#06345B] transition-all group">
+            <div class="flex items-start justify-between">
+              <div class="space-y-1.5 pr-4">
+                <h3 class="text-lg font-bold text-[#032746] group-hover:text-[#06345B] transition-colors">
+                  Real-Time Shipment Tracking
+                </h3>
+                <p class="text-gray-600 text-xs sm:text-sm leading-relaxed">
+                  Stay up to date with your shipments from factory gate pick-up to ocean berth and final destination
+                  with millimetric satellite accuracy.
+                </p>
+              </div>
+              <button data-open-modal="tracking-modal"
+                class="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-700 group-hover:bg-[#06345B] group-hover:text-white transition-all flex-shrink-0"
+                aria-label="Track Shipment">
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Block 2: Digital Logistics Management -->
+          <div
+            class="p-5 sm:p-6 rounded-2xl bg-[#F4F5F6] border border-gray-200/80 hover:border-[#06345B] transition-all group">
+            <div class="flex items-start justify-between">
+              <div class="space-y-1.5 pr-4">
+                <h3 class="text-lg font-bold text-[#032746] group-hover:text-[#06345B] transition-colors">
+                  Digital Logistics Management
+                </h3>
+                <p class="text-gray-600 text-xs sm:text-sm leading-relaxed">
+                  Automated paperless electronic Bills of Lading (e-BL), instant cloud booking, automated customs
+                  filings, and verified freight invoicing.
+                </p>
+              </div>
+              <button data-open-modal="quote-modal"
+                class="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-700 group-hover:bg-[#06345B] group-hover:text-white transition-all flex-shrink-0"
+                aria-label="Digital Logistics">
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Block 3: Data Analytics -->
+          <div
+            class="p-5 sm:p-6 rounded-2xl bg-[#F4F5F6] border border-gray-200/80 hover:border-[#06345B] transition-all group">
+            <div class="flex items-start justify-between">
+              <div class="space-y-1.5 pr-4">
+                <h3 class="text-lg font-bold text-[#032746] group-hover:text-[#06345B] transition-colors">
+                  Data Analytics & Demurrage Mitigation
+                </h3>
+                <p class="text-gray-600 text-xs sm:text-sm leading-relaxed">
+                  Gain proactive insights into your supply chain, model port berth congestion, reduce dwell times, and
+                  make data-driven decisions.
+                </p>
+              </div>
+              <a href="#contact"
+                class="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-700 group-hover:bg-[#06345B] group-hover:text-white transition-all flex-shrink-0"
+                aria-label="Data Analytics">
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Block 4: Secure Customer Portal -->
+          <div
+            class="p-5 sm:p-6 rounded-2xl bg-[#F4F5F6] border border-gray-200/80 hover:border-[#06345B] transition-all group">
+            <div class="flex items-start justify-between">
+              <div class="space-y-1.5 pr-4">
+                <h3 class="text-lg font-bold text-[#032746] group-hover:text-[#06345B] transition-colors">
+                  Secure Customer Enterprise Portal
+                </h3>
+                <p class="text-gray-600 text-xs sm:text-sm leading-relaxed">
+                  Access your enterprise account anytime with single sign-on (SSO), role-based permissions, automated
+                  manifests, and multi-user tracking.
+                </p>
+              </div>
+              <button data-open-modal="quote-modal"
+                class="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-700 group-hover:bg-[#06345B] group-hover:text-white transition-all flex-shrink-0"
+                aria-label="Customer Portal">
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================================
+         SECTION 7 — ABOUT HANSAI
+         ==================================================================== -->
+    <section id="about" class="editorial-canvas-card p-6 sm:p-10 lg:p-12 shadow-editorial-card" data-reveal>
+
+      <!-- Split Layout: Shipping Port Photo Left, Editorial Story Right -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+
+        <!-- Left: Large Shipping Port Image -->
+        <div
+          class="lg:col-span-6 relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm h-[380px] sm:h-[480px] group">
+          <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=1200&q=80"
+            alt="International Shipping Port and Container Terminals"
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#032746]/80 via-transparent to-transparent"></div>
+          <!-- Overlaid Pill Badge -->
+          <div class="absolute bottom-6 left-6 right-6 glass-panel rounded-2xl p-4 shadow-lg border border-white/60">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-xs font-mono font-bold text-[#06345B] uppercase">GLOBAL FOOTPRINT</p>
+                <p class="text-sm font-extrabold text-gray-900">45+ Nations • 140+ Direct Ports</p>
+              </div>
+              <span class="px-3 py-1 rounded-full bg-[#06345B] text-white text-xs font-semibold">
+                Est. 2023
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Company Introduction & Core Values -->
+        <div class="lg:col-span-6 space-y-6">
+          <div>
+            <span class="editorial-tag text-[#06345B] font-semibold text-xs tracking-wider block mb-2">/ABOUT
+              HANSAI</span>
+            <h2 class="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#032746] tracking-tight leading-tight">
+              Connecting Global Trade Through Reliable Logistics.
+            </h2>
+          </div>
+
+          <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
+            HANSAI SHIPPING LINE was founded on an unyielding principle: that global trade flourishes when shipping is
+            predictable, transparent, and resilient. Today, we stand as a premier international container carrier,
+            moving millions of tonnes of vital commerce across the world's most demanding trade corridors.
+          </p>
+
+          <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
+            By pairing our modernized fleet with automated port terminal operations and proprietary digital tracking, we
+            deliver not just cargo, but competitive advantage to every client we serve.
+          </p>
+
+          <!-- Core Values Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+            <div class="p-4 rounded-2xl bg-[#F4F5F6] border border-gray-200/80">
+              <div class="w-8 h-8 rounded-lg bg-[#06345B] text-white flex items-center justify-center mb-2">
+                <i data-lucide="shield-check" class="w-4 h-4"></i>
+              </div>
+              <h3 class="font-bold text-sm text-[#032746] mb-1">Operational Integrity</h3>
+              <p class="text-xs text-gray-500">Uncompromising adherence to maritime safety, ISO compliance, and cargo
+                security.</p>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-[#F4F5F6] border border-gray-200/80">
+              <div class="w-8 h-8 rounded-lg bg-[#06345B] text-white flex items-center justify-center mb-2">
+                <i data-lucide="compass" class="w-4 h-4"></i>
+              </div>
+              <h3 class="font-bold text-sm text-[#032746] mb-1">Global Connectivity</h3>
+              <p class="text-xs text-gray-500">Fixed-day weekly departures bridging Asia, Europe, the Americas, and the
+                Middle East.</p>
+            </div>
+          </div>
+
+          <div class="pt-2 flex items-center space-x-6">
+            <a href="#contact"
+              class="inline-flex items-center space-x-2 px-6 py-3 rounded-full text-sm font-semibold text-white bg-[#032746] hover:bg-[#06345B] transition-all duration-200 shadow-sm">
+              <span>Learn About Our Leadership</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================================
+         SECTION 8 — CALL TO ACTION (With Live Rate Estimator)
+         ==================================================================== -->
+    <section id="cta"
+      class="editorial-canvas-card p-6 sm:p-10 lg:p-12 shadow-editorial-card bg-gradient-to-br from-white to-[#F4F5F6]"
+      data-reveal>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+
+        <!-- Left: Action Headline & Direct Contact -->
+        <div class="lg:col-span-6 space-y-6">
+          <div
+            class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-50 text-[#06345B] text-xs font-mono font-semibold">
+            <span>READY TO DISPATCH</span>
+          </div>
+
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#032746] tracking-tight leading-tight">
+            Let's Move Your <br>Business Forward.
+          </h2>
+
+          <p class="text-gray-600 text-base sm:text-lg leading-relaxed">
+            Partner with HANSAI SHIPPING LINE and discover smarter, more reliable logistics solutions. Our international
+            freight specialists are standing by to engineer your optimal ocean corridor.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-4 pt-2">
+            <a href="#contact"
+              class="px-7 py-3.5 rounded-full text-sm font-semibold text-white bg-[#032746] hover:bg-[#06345B] transition-all duration-200 shadow-md inline-flex items-center space-x-2">
+              <i data-lucide="mail" class="w-4 h-4"></i>
+              <span>Contact Our Team</span>
+            </a>
+
+            <button data-open-modal="quote-modal"
+              class="px-7 py-3.5 rounded-full text-sm font-semibold text-[#032746] bg-white border border-[#032746] hover:bg-gray-50 transition-all duration-200 shadow-sm">
+              Request a Quote
+            </button>
+          </div>
+
+          <div class="pt-4 flex items-center space-x-6 text-xs text-gray-500 font-mono">
+            <span>✓ Instant Manifest Verification</span>
+            <span>✓ Fixed-Day Liner Schedules</span>
+          </div>
+        </div>
+
+        <!-- Right: Interactive Quick Freight Rate Calculator Card -->
+        <div class="lg:col-span-6">
+          <div class="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-gray-200 shadow-xl space-y-5">
+
+            <div class="flex items-center justify-between pb-4 border-b border-gray-100">
+              <div>
+                <h3 class="font-bold text-gray-900 text-lg">Instant Ocean Rate Estimator</h3>
+                <p class="text-xs text-gray-500">Live liner index calculation for spot and contracted freight</p>
+              </div>
+              <span class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-[#06345B]">
+                <i data-lucide="calculator" class="w-4 h-4"></i>
+              </span>
+            </div>
+
+            <!-- Form -->
+            <form id="rate-calculator-form" class="space-y-4">
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div>
+                  <label class="block text-xs font-semibold text-gray-700 mb-1">Origin Port</label>
+                  <select id="calc-origin"
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#06345B] bg-white text-gray-800">
+                    <option value="CNSHG" selected>Shanghai (CNSHG), China</option>
+                    <option value="SGSIN">Singapore (SGSIN), Singapore</option>
+                    <option value="KRPUS">Busan (KRPUS), South Korea</option>
+                    <option value="NLRTM">Rotterdam (NLRTM), Netherlands</option>
+                    <option value="DEHAM">Hamburg (DEHAM), Germany</option>
+                    <option value="AEJEA">Jebel Ali / Dubai (AEJEA), UAE</option>
+                    <option value="USLAX">Los Angeles (USLAX), USA</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-semibold text-gray-700 mb-1">Destination Port</label>
+                  <select id="calc-dest"
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#06345B] bg-white text-gray-800">
+                    <option value="NLRTM" selected>Rotterdam (NLRTM), Netherlands</option>
+                    <option value="USLAX">Los Angeles (USLAX), USA</option>
+                    <option value="DEHAM">Hamburg (DEHAM), Germany</option>
+                    <option value="AEJEA">Jebel Ali / Dubai (AEJEA), UAE</option>
+                    <option value="SGSIN">Singapore (SGSIN), Singapore</option>
+                    <option value="CNSHG">Shanghai (CNSHG), China</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div>
+                  <label class="block text-xs font-semibold text-gray-700 mb-1">Container Specification</label>
+                  <select id="calc-container"
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#06345B] bg-white text-gray-800">
+                    <option value="40FT_HC" selected>40ft High Cube (76.4 CBM)</option>
+                    <option value="20FT_STD">20ft Standard Dry (33.2 CBM)</option>
+                    <option value="40FT_REEFER">40ft Reefer Temperature-Controlled</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-semibold text-gray-700 mb-1">Commodity Classification</label>
+                  <select id="calc-commodity"
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#06345B] bg-white text-gray-800">
+                    <option value="GEN">General Manufactured Cargo</option>
+                    <option value="AUTO">Automotive & Heavy Machinery</option>
+                    <option value="ELEC">High-Tech & Electronics</option>
+                    <option value="COLD">Perishables & Pharmaceuticals</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Estimated Output Card -->
+              <div class="p-4 rounded-xl bg-[#F4F5F6] border border-gray-200 flex items-center justify-between">
+                <div>
+                  <div class="text-[11px] text-gray-500 font-mono">ESTIMATED TRANSIT TIME</div>
+                  <div id="calc-result-transit" class="text-base font-bold text-gray-900">26 Days</div>
+                  <div id="calc-result-co2" class="text-[10px] text-gray-500 font-mono mt-0.5">134.40 MT CO2e</div>
+                </div>
+                <div class="text-right">
+                  <div class="text-[11px] text-gray-500 font-mono">INDICATIVE FREIGHT RATE</div>
+                  <div id="calc-result-rate" class="text-xl sm:text-2xl font-extrabold text-[#06345B]">$2,708 – $3,078
+                  </div>
+                </div>
+              </div>
+
+              <button id="calc-book-btn" type="button"
+                class="w-full py-3 rounded-xl bg-[#06345B] text-white font-semibold text-sm hover:bg-[#032746] transition-colors shadow-sm flex items-center justify-center space-x-2">
+                <span>Lock In Rate & Request Booking</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </button>
+
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================================
+         SECTION 10 — CONTACT DIRECTORY (Comprehensive Inquiries)
+         ==================================================================== -->
+    <section id="contact" class="editorial-canvas-card p-6 sm:p-10 lg:p-12 shadow-editorial-card" data-reveal>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+
+        <!-- Left: Contact Details & Regional Desks -->
+        <div class="lg:col-span-5 space-y-6">
+          <div>
+            <span class="editorial-tag text-[#06345B] font-semibold text-xs tracking-wider block mb-2">/CONNECT WITH
+              US</span>
+            <h2 class="text-3xl sm:text-4xl font-bold text-[#032746] tracking-tight">
+              Global Support & Inquiries
+            </h2>
+          </div>
+
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Reach our ocean liner operations, commercial booking teams, or 24/7 port dispatch desks around the globe.
+          </p>
+
+          <div class="space-y-4 pt-2">
+            <!-- Global HQ -->
+            <div class="flex items-start space-x-3.5">
+              <div class="w-9 h-9 rounded-xl bg-gray-100 flex items-center justify-center text-[#06345B] flex-shrink-0">
+                <i data-lucide="map-pin" class="w-4 h-4"></i>
+              </div>
+              <div class="text-sm">
+                <div class="font-bold text-gray-900">Global Corporate Headquarters</div>
+                <div class="text-gray-500">Jakarta, Indonesia</div>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="flex items-start space-x-3.5">
+              <div class="w-9 h-9 rounded-xl bg-gray-100 flex items-center justify-center text-[#06345B] flex-shrink-0">
+                <i data-lucide="mail" class="w-4 h-4"></i>
+              </div>
+              <div class="text-sm">
+                <div class="font-bold text-gray-900">Commercial & Operations Email</div>
+                <a href="mailto:hansaiocean@gmail.com"
+                  class="text-[#06345B] font-semibold hover:underline">hansaiocean@gmail.com</a>
+                <div class="text-xs text-gray-400">Quotes: <a href="mailto:booking@hansailine.com"
+                    class="hover:underline">booking@hansailine.com</a></div>
+              </div>
+            </div>
+
+            <!-- Phone -->
+            <div class="flex items-start space-x-3.5">
+              <div class="w-9 h-9 rounded-xl bg-gray-100 flex items-center justify-center text-[#06345B] flex-shrink-0">
+                <i data-lucide="phone" class="w-4 h-4"></i>
+              </div>
+              <div class="text-sm">
+                <div class="font-bold text-gray-900">24/7 Global Maritime Hotline</div>
+                <a href="tel:+6281805886644" class="text-[#06345B] font-semibold hover:underline">+62 818 0588 6644</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Regional Desks Badges -->
+          <div class="pt-4 border-t border-gray-100">
+            <div class="text-xs font-mono font-semibold text-gray-400 uppercase mb-2">Regional Operational Desks</div>
+            <div class="flex flex-wrap gap-2 text-xs">
+              <span class="px-2.5 py-1 rounded-md bg-gray-100 font-medium text-gray-700">Jakarta HQ</span>
+              <span class="px-2.5 py-1 rounded-md bg-gray-100 font-medium text-gray-700">Rotterdam</span>
+              <span class="px-2.5 py-1 rounded-md bg-gray-100 font-medium text-gray-700">Shanghai</span>
+              <span class="px-2.5 py-1 rounded-md bg-gray-100 font-medium text-gray-700">Los Angeles</span>
+              <span class="px-2.5 py-1 rounded-md bg-gray-100 font-medium text-gray-700">Dubai</span>
+              <span class="px-2.5 py-1 rounded-md bg-gray-100 font-medium text-gray-700">Busan</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right: Message Form -->
+        <div class="lg:col-span-7">
+          <form id="contact-us-form"
+            class="bg-[#F4F5F6] p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-gray-200/80 space-y-4">
+            <h3 class="text-xl font-bold text-[#032746]">Send an Official Inquiry</h3>
+            <p class="text-xs text-gray-500">Submit your cargo specifications, partnership request, or customer inquiry.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Full Name *</label>
+                <input type="text" required placeholder="Captain Ansel Roberts"
+                  class="w-full px-4 py-2.5 bg-white rounded-xl text-sm border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#06345B]">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Business Email *</label>
+                <input type="email" required placeholder="corporate@company.com"
+                  class="w-full px-4 py-2.5 bg-white rounded-xl text-sm border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#06345B]">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Company / Organization</label>
+                <input type="text" placeholder="Global Logistics Corp"
+                  class="w-full px-4 py-2.5 bg-white rounded-xl text-sm border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#06345B]">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Inquiry Subject</label>
+                <select
+                  class="w-full px-4 py-2.5 bg-white rounded-xl text-sm border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#06345B]">
+                  <option>Ocean Container Freight & Booking</option>
+                  <option>Specialized Project Cargo / Breakbulk</option>
+                  <option>Cold Chain Reefer Logistics</option>
+                  <option>Customs Brokerage & Port Release</option>
+                  <option>Enterprise Contract Inquiries</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-gray-700 mb-1">Message & Cargo Details *</label>
+              <textarea rows="4" required
+                placeholder="Describe your shipping lane requirements, cargo volume, or timeline..."
+                class="w-full px-4 py-2.5 bg-white rounded-xl text-sm border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#06345B]"></textarea>
+            </div>
+
+            <button type="submit"
+              class="w-full py-3.5 rounded-xl bg-[#032746] text-white font-semibold text-sm hover:bg-[#06345B] transition-colors shadow-sm flex items-center justify-center space-x-2">
+              <i data-lucide="send" class="w-4 h-4"></i>
+              <span>Dispatch Message to Commercial Desk</span>
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- ======================================================================
+       SECTION 9 — FOOTER (Dark Navy Background #032746)
+       ====================================================================== -->
+  <footer class="bg-[#032746] text-white mt-8 border-t border-white/10 pt-16 pb-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto space-y-12">
+
+      <!-- Top Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12 pb-12 border-b border-white/10">
+
+        <!-- Col 1 & 2: Brand Information (using Assets/logo-white.png) -->
+        <div class="lg:col-span-2 space-y-4">
+          <a href="#" class="inline-block">
+            <img src="Assets/logo-white.png" alt="HANSAI SHIPPING LINE White Logo" class="h-10 w-auto object-contain">
+          </a>
+
+          <p class="text-white/70 text-sm leading-relaxed max-w-sm">
+            HANSAI SHIPPING LINE is an international container carrier and integrated logistics corporation delivering
+            global ocean freight, smart warehousing, and resilient supply chain management.
+          </p>
+
+          <div class="text-xs text-white/50 font-mono space-y-1 pt-2">
+            <div>IMO CERTIFIED CARRIER • REGISTRATION 9821422</div>
+            <div>BIMCO MEMBER • ISO 9001:2015 & ISO 14001 CERTIFIED</div>
+          </div>
+
+          <!-- Social Icons -->
+          <div class="flex items-center space-x-3 pt-3">
+            <a href="#"
+              class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+              aria-label="LinkedIn">
+              <i data-lucide="linkedin" class="w-4 h-4"></i>
+            </a>
+            <a href="#"
+              class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+              aria-label="Twitter">
+              <i data-lucide="twitter" class="w-4 h-4"></i>
+            </a>
+            <a href="#"
+              class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+              aria-label="Facebook">
+              <i data-lucide="facebook" class="w-4 h-4"></i>
+            </a>
+            <a href="#"
+              class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+              aria-label="YouTube">
+              <i data-lucide="youtube" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Col 3: Quick Links -->
+        <div class="space-y-3">
+          <h4 class="text-xs font-mono font-bold uppercase tracking-wider text-white">Quick Links</h4>
+          <ul class="space-y-2 text-sm text-white/70">
+            <li><a href="#about" class="hover:text-white transition-colors">About Us</a></li>
+            <li><a href="#fleet" class="hover:text-white transition-colors">Our Fleet & Vessels</a></li>
+            <li><a href="#industries" class="hover:text-white transition-colors">Industries We Serve</a></li>
+            <li><a href="#technology" class="hover:text-white transition-colors">Technology & IoT</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Liner Sailing Schedules</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Sustainability & Net-Zero</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Maritime Careers</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Logistics Services -->
+        <div class="space-y-3">
+          <h4 class="text-xs font-mono font-bold uppercase tracking-wider text-white">Our Services</h4>
+          <ul class="space-y-2 text-sm text-white/70">
+            <li><a href="#services" class="hover:text-white transition-colors">International Ocean Shipping</a></li>
+            <li><a href="#services" class="hover:text-white transition-colors">Warehousing & Distribution</a></li>
+            <li><a href="#services" class="hover:text-white transition-colors">Freight Forwarding</a></li>
+            <li><a href="#services" class="hover:text-white transition-colors">Supply Chain Management</a></li>
+            <li><a href="#services" class="hover:text-white transition-colors">Customs Clearance</a></li>
+            <li><a href="#services" class="hover:text-white transition-colors">Reefer Cold Chain Logistics</a></li>
+            <li><a href="#services" class="hover:text-white transition-colors">Out-of-Gauge Breakbulk</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 5: Contact & Operations Desk -->
+        <div class="space-y-3">
+          <h4 class="text-xs font-mono font-bold uppercase tracking-wider text-white">Contact & Support</h4>
+          <div class="space-y-2 text-sm text-white/70">
+            <p><strong class="text-white">Commercial & Operations:</strong><br> <a href="mailto:hansaiocean@gmail.com"
+                class="hover:text-white transition-colors">hansaiocean@gmail.com</a></p>
+            <p><strong class="text-white">Rate Quotes:</strong><br> <a href="mailto:booking@hansailine.com"
+                class="hover:text-white transition-colors">booking@hansailine.com</a></p>
+            <p><strong class="text-white">24/7 Maritime Hotline:</strong><br> <a href="tel:+6281805886644"
+                class="hover:text-white transition-colors">+62 818 0588 6644</a></p>
+            <p><strong class="text-white">Global Corporate Headquarters:</strong><br> Jakarta, Indonesia</p>
+            <button data-open-modal="quote-modal"
+              class="mt-2 w-full py-2.5 rounded-full bg-white text-[#032746] font-semibold text-xs hover:bg-gray-100 transition-colors">
+              Request a Rate Quote
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar: Copyright & Compliance -->
+      <div class="flex flex-col sm:flex-row items-center justify-between text-xs text-white/50 space-y-4 sm:space-y-0">
+        <div>
+          © 2026 HANSAI SHIPPING LINE. All rights reserved. "Global Reach. Reliable Shipping. Intelligent Logistics."
+        </div>
+        <div class="flex items-center space-x-6 font-mono text-[11px]">
+          <a href="#" class="hover:text-white transition-colors">Terms of Carriage</a>
+          <a href="#" class="hover:text-white transition-colors">Bill of Lading Terms</a>
+          <a href="#" class="hover:text-white transition-colors">Port Tariffs</a>
+          <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- ======================================================================
+       INTERACTIVE MODAL 1: LIVE SHIPMENT TRACKER
+       ====================================================================== -->
+  <div id="tracking-modal"
+    class="modal-backdrop fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div
+      class="modal-content bg-white w-full max-w-2xl rounded-3xl p-6 sm:p-8 shadow-2xl border border-gray-100 max-h-[90vh] overflow-y-auto">
+
+      <!-- Modal Header -->
+      <div class="flex items-start justify-between pb-4 border-b border-gray-100">
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 radar-pulse"></span>
+            <span class="text-xs font-mono font-bold text-[#06345B] uppercase">LIVE SATELLITE TELEMETRY</span>
+          </div>
+          <h3 id="track-modal-container-no" class="text-2xl font-extrabold text-[#032746] font-mono mt-0.5">
+            HNSU-849201-9</h3>
+          <p id="track-modal-vessel" class="text-xs text-gray-500 font-medium">HANSAI PACIFIC STAR (Voyage HP-0428W)</p>
+        </div>
+        <button data-close-modal class="p-2 rounded-full hover:bg-gray-100 text-gray-400 hover:text-gray-900"
+          aria-label="Close modal">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Route Overview Bar -->
+      <div class="my-5 p-4 rounded-2xl bg-[#F4F5F6] border border-gray-200">
+        <div class="flex items-center justify-between text-xs font-semibold text-gray-700">
+          <span id="track-modal-origin">Port of Shanghai (CNSHG)</span>
+          <i data-lucide="arrow-right" class="w-4 h-4 text-[#06345B]"></i>
+          <span id="track-modal-dest">Port of Rotterdam (NLRTM)</span>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="w-full bg-gray-200 rounded-full h-2.5 mt-3 overflow-hidden">
+          <div id="track-modal-progress" class="bg-[#06345B] h-2.5 rounded-full transition-all duration-700"
+            style="width: 68%;"></div>
+        </div>
+
+        <div class="flex justify-between items-center text-[11px] font-mono text-gray-500 mt-2">
+          <span>Status: <strong id="track-modal-status" class="text-[#06345B]">In Transit</strong></span>
+          <span>ETA: <strong id="track-modal-eta" class="text-gray-900">Nov 22, 2026</strong></span>
+        </div>
+      </div>
+
+      <!-- Real-Time Telemetry Grid -->
+      <div class="grid grid-cols-3 gap-3 mb-6 font-mono text-xs">
+        <div class="p-3 rounded-xl bg-gray-50 border border-gray-100">
+          <div class="text-[10px] text-gray-400">VESSEL SPEED</div>
+          <div id="track-modal-speed" class="font-bold text-gray-900">21.4 knots</div>
+        </div>
+        <div class="p-3 rounded-xl bg-gray-50 border border-gray-100">
+          <div class="text-[10px] text-gray-400">COORDINATES</div>
+          <div id="track-modal-coords" class="font-bold text-gray-900 truncate">12°04'N 64°32'E</div>
+        </div>
+        <div class="p-3 rounded-xl bg-gray-50 border border-gray-100">
+          <div class="text-[10px] text-gray-400">SENSOR TEMP</div>
+          <div id="track-modal-temp" class="font-bold text-emerald-600">+4.2°C</div>
+        </div>
+      </div>
+
+      <!-- Milestone Timeline -->
+      <div class="space-y-2">
+        <h4 class="text-xs font-mono font-bold uppercase text-gray-400 mb-3">Voyage Checkpoint Milestones</h4>
+        <div id="track-modal-milestones" class="space-y-1">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
+        <button type="button"
+          class="text-xs text-[#06345B] font-semibold hover:underline inline-flex items-center space-x-1"
+          onclick="alert('Digital Ocean Bill of Lading Manifest #HSL-849201 generated.')">
+          <i data-lucide="download" class="w-3.5 h-3.5"></i>
+          <span>Download Verified Manifest (PDF)</span>
+        </button>
+        <button data-close-modal
+          class="px-5 py-2 rounded-full bg-[#032746] text-white text-xs font-semibold hover:bg-[#06345B]">
+          Close Window
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ======================================================================
+       INTERACTIVE MODAL 2: OFFICIAL RATE & BOOKING QUOTE
+       ====================================================================== -->
+  <div id="quote-modal"
+    class="modal-backdrop fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div
+      class="modal-content bg-white w-full max-w-xl rounded-3xl p-6 sm:p-8 shadow-2xl border border-gray-100 max-h-[90vh] overflow-y-auto">
+
+      <div class="flex items-start justify-between pb-4 border-b border-gray-100">
+        <div>
+          <span class="text-xs font-mono font-bold text-[#06345B] uppercase">COMMERCIAL OCEAN FREIGHT</span>
+          <h3 class="text-2xl font-extrabold text-[#032746] mt-0.5">Request a Shipping Quote</h3>
+          <p class="text-xs text-gray-500">Guaranteed fixed rate quote within 15 minutes</p>
+        </div>
+        <button data-close-modal class="p-2 rounded-full hover:bg-gray-100 text-gray-400 hover:text-gray-900"
+          aria-label="Close modal">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="official-quote-form" class="space-y-4 my-5">
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Port of Origin *</label>
+            <select id="quote-origin" required
+              class="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#06345B] bg-white">
+              <option value="CNSHG">Shanghai (CNSHG), China</option>
+              <option value="SGSIN">Singapore (SGSIN), Singapore</option>
+              <option value="KRPUS">Busan (KRPUS), South Korea</option>
+              <option value="NLRTM">Rotterdam (NLRTM), Netherlands</option>
+              <option value="DEHAM">Hamburg (DEHAM), Germany</option>
+              <option value="AEJEA">Jebel Ali (AEJEA), Dubai</option>
+              <option value="USLAX">Los Angeles (USLAX), USA</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Port of Discharge *</label>
+            <select id="quote-dest" required
+              class="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#06345B] bg-white">
+              <option value="NLRTM">Rotterdam (NLRTM), Netherlands</option>
+              <option value="USLAX">Los Angeles (USLAX), USA</option>
+              <option value="DEHAM">Hamburg (DEHAM), Germany</option>
+              <option value="AEJEA">Jebel Ali (AEJEA), Dubai</option>
+              <option value="SGSIN">Singapore (SGSIN), Singapore</option>
+              <option value="CNSHG">Shanghai (CNSHG), China</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Container Type *</label>
+            <select id="quote-container" required
+              class="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#06345B] bg-white">
+              <option value="40FT_HC">40ft High Cube (Standard)</option>
+              <option value="20FT_STD">20ft Standard Dry</option>
+              <option value="40FT_REEFER">40ft Cold-Chain Reefer</option>
+              <option value="FLAT_RACK">Specialized Flat Rack / Open Top</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Number of Containers *</label>
+            <input type="number" min="1" max="500" value="1" required
+              class="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#06345B]">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Estimated Cargo Weight (Tonnes)</label>
+            <input type="number" placeholder="22.5"
+              class="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#06345B]">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Target Loading Date</label>
+            <input type="date"
+              class="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#06345B]">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-gray-100">
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Contact Name *</label>
+            <input type="text" required placeholder="John Miller"
+              class="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#06345B]">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Company Email *</label>
+            <input type="email" required placeholder="john@enterprise.com"
+              class="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#06345B]">
+          </div>
+        </div>
+
+        <div class="pt-2">
+          <button type="submit"
+            class="w-full py-3.5 rounded-xl bg-[#032746] text-white font-semibold text-sm hover:bg-[#06345B] transition-colors shadow-md flex items-center justify-center space-x-2">
+            <i data-lucide="check-circle" class="w-4 h-4"></i>
+            <span>Submit Official Freight Quote Request</span>
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+
+  <!-- ======================================================================
+       INTERACTIVE MODAL 3: SERVICE SPECIFICATIONS MODAL
+       ====================================================================== -->
+  <div id="service-modal"
+    class="modal-backdrop fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="modal-content bg-white w-full max-w-lg rounded-3xl p-6 sm:p-8 shadow-2xl border border-gray-100">
+
+      <div class="flex items-start justify-between pb-4 border-b border-gray-100">
+        <div>
+          <span class="text-xs font-mono font-bold text-[#06345B] uppercase">LOGISTICS SPECIFICATION</span>
+          <h3 id="service-modal-title" class="text-2xl font-extrabold text-[#032746] mt-0.5">Service Details</h3>
+          <p id="service-modal-subtitle" class="text-xs text-gray-500">HANSAI Standardized Ocean Service</p>
+        </div>
+        <button data-close-modal class="p-2 rounded-full hover:bg-gray-100 text-gray-400 hover:text-gray-900"
+          aria-label="Close modal">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="my-5 space-y-4">
+        <p id="service-modal-description" class="text-sm text-gray-600 leading-relaxed">
+          Comprehensive logistics service overview.
+        </p>
+
+        <div class="p-4 rounded-2xl bg-[#F4F5F6] border border-gray-200">
+          <div class="text-xs font-mono font-bold text-[#06345B] uppercase mb-2">Key Service Capabilities</div>
+          <ul id="service-modal-features" class="space-y-2">
+            <!-- Populated by JS -->
+          </ul>
+        </div>
+
+        <div class="p-3 rounded-xl bg-blue-50 border border-blue-100 text-xs font-mono text-[#06345B]">
+          <span class="font-bold">METRICS: </span>
+          <span id="service-modal-specs">Annual Capacity: 1.8M+ TEU</span>
+        </div>
+      </div>
+
+      <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+        <button data-open-modal="quote-modal"
+          class="px-5 py-2.5 rounded-full bg-[#032746] text-white text-xs font-semibold hover:bg-[#06345B] transition-colors">
+          Book This Solution
+        </button>
+        <button data-close-modal class="px-4 py-2 rounded-full text-xs font-semibold text-gray-600 hover:bg-gray-100">
+          Dismiss
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- Main ES6 JavaScript -->
+  <script src="main.js"></script>
+
+</body>
+
+</html>
