@@ -377,8 +377,139 @@ function displayShipmentInModal(data) {
 }
 
 /* ==========================================================================
-   5. RATE ESTIMATOR & BOOKING CALCULATOR
+   5. RATE ESTIMATOR & BOOKING CALCULATOR (Global Searchable Ports & WhatsApp Bot)
    ========================================================================== */
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/[&<>"']/g, function (m) {
+    return {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#039;'
+    }[m];
+  });
+}
+
+function highlightMatch(text, query) {
+  if (!query || !query.trim()) return escapeHtml(text);
+  const escapedQuery = query.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const regex = new RegExp(`(${escapedQuery})`, 'gi');
+  const safeText = escapeHtml(text);
+  return safeText.replace(regex, '<span class="highlight-text">$1</span>');
+}
+
+function getPortByCode(code) {
+  const list = (window.HANSAI_WORLD_PORTS && window.HANSAI_WORLD_PORTS.length)
+    ? window.HANSAI_WORLD_PORTS
+    : [];
+  return list.find(p => p.code === code) || {
+    code: code || 'UNKNOWN',
+    country: 'International',
+    port: code || 'Port Gateway',
+    region: 'Global',
+    flag: '🌐',
+    lat: 0,
+    lng: 0
+  };
+}
+
+function calculateNauticalDistance(p1, p2) {
+  if (!p1 || !p2 || p1.code === p2.code) return 0;
+
+  // Haversine Great-Circle distance in Nautical Miles
+  const R = 3440.065; // Earth radius in NM
+  const dLat = (p2.lat - p1.lat) * Math.PI / 180;
+  const dLng = (p2.lng - p1.lng) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(p1.lat * Math.PI / 180) * Math.cos(p2.lat * Math.PI / 180) *
+    Math.sin(dLng / 2) * Math.sin(dLng / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const greatCircleNM = R * c;
+
+  // Maritime Detour Routing Factors (canal transit, rounding continents)
+  let detourFactor = 1.35;
+  if (p1.region === p2.region) {
+    detourFactor = 1.15;
+  } else if ((p1.region === 'Asia' && p2.region === 'Europe') || (p1.region === 'Europe' && p2.region === 'Asia')) {
+    detourFactor = 1.45; // Suez Canal route
+  } else if ((p1.region === 'Americas' && p2.region === 'Asia') || (p1.region === 'Asia' && p2.region === 'Americas')) {
+    detourFactor = 1.25; // Transpacific
+  }
+
+  return Math.round(greatCircleNM * detourFactor);
+}
+
+function setupLiveSelectFilter(selectId, searchInputId, clearBtnId, defaultCode) {
+  const select = document.getElementById(selectId);
+  const searchInput = document.getElementById(searchInputId);
+  const clearBtn = document.getElementById(clearBtnId);
+  if (!select) return;
+
+  const ports = (window.HANSAI_WORLD_PORTS && window.HANSAI_WORLD_PORTS.length)
+    ? window.HANSAI_WORLD_PORTS
+    : [];
+
+  function renderOptions(list, selectedCode) {
+    select.innerHTML = list.map(p => {
+      const isSel = p.code === selectedCode ? ' selected' : '';
+      return `<option value="${p.code}" data-country="${p.country}" data-port="${p.port}" data-region="${p.region}"${isSel}>${p.flag} ${p.country} — ${p.port} (${p.code})</option>`;
+    }).join('');
+  }
+
+  // Ensure default option is selected if not already
+  if (defaultCode && select.value !== defaultCode) {
+    select.value = defaultCode;
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase().trim();
+      if (clearBtn) {
+        if (q) clearBtn.classList.remove('hidden');
+        else clearBtn.classList.add('hidden');
+      }
+
+      if (!q) {
+        const currentVal = select.value || defaultCode;
+        renderOptions(ports, currentVal);
+        select.value = currentVal;
+        select.dispatchEvent(new Event('change', { bubbles: true }));
+        return;
+      }
+
+      const filtered = ports.filter(p =>
+        p.country.toLowerCase().includes(q) ||
+        p.port.toLowerCase().includes(q) ||
+        p.code.toLowerCase().includes(q) ||
+        p.region.toLowerCase().includes(q)
+      );
+
+      if (filtered.length > 0) {
+        renderOptions(filtered, filtered[0].code);
+        select.value = filtered[0].code;
+        select.dispatchEvent(new Event('change', { bubbles: true }));
+      } else {
+        select.innerHTML = `<option value="" disabled selected>⚠️ Tidak ditemukan negara/pelabuhan "${escapeHtml(q)}"</option>`;
+      }
+    });
+  }
+
+  if (clearBtn) {
+    clearBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      searchInput.value = '';
+      clearBtn.classList.add('hidden');
+      const currentVal = select.value || defaultCode;
+      renderOptions(ports, currentVal);
+      select.value = currentVal;
+      select.dispatchEvent(new Event('change', { bubbles: true }));
+      searchInput.focus();
+    });
+  }
+}
+
 function initRateEstimator() {
   const form = document.getElementById('rate-calculator-form');
   if (!form) return;
@@ -392,6 +523,7 @@ function initRateEstimator() {
   const resultCo2 = document.getElementById('calc-result-co2');
   const bookBtn = document.getElementById('calc-book-btn');
 
+  // Benchmark route data for exact matching
   const routeData = {
     'SGSIN-NLRTM': { transit: '22 Days', baseRate: 2450, nauticalMiles: 8280 },
     'CNSHG-NLRTM': { transit: '26 Days', baseRate: 2850, nauticalMiles: 10500 },
@@ -408,31 +540,61 @@ function initRateEstimator() {
     '40FT_REEFER': 2.35
   };
 
+  const commodityMultipliers = {
+    'GEN': 1.0,
+    'AUTO': 1.15,
+    'ELEC': 1.10,
+    'COLD': 1.25
+  };
+
   function updateEstimate() {
     const origin = originSelect?.value || 'CNSHG';
     const dest = destSelect?.value || 'NLRTM';
     const container = containerSelect?.value || '40FT_HC';
+    const commodity = commoditySelect?.value || 'GEN';
+
     const key = `${origin}-${dest}`;
     const reverseKey = `${dest}-${origin}`;
 
-    let data = routeData[key] || routeData[reverseKey] || {
-      transit: '18 - 24 Days',
-      baseRate: 2200,
-      nauticalMiles: 7200
-    };
-
     if (origin === dest) {
-      if (resultTransit) resultTransit.textContent = '1 - 2 Days (Feeder/Barge)';
-      if (resultRate) resultRate.textContent = '$450 - $650';
+      if (resultTransit) resultTransit.textContent = '1 - 2 Days (Feeder / Barge)';
+      if (resultRate) resultRate.textContent = '$450 – $650';
       if (resultCo2) resultCo2.textContent = '0.12 MT CO2e';
       return;
     }
 
-    const multiplier = containerMultipliers[container] || 1.65;
-    const estimatedCost = Math.round(data.baseRate * multiplier);
+    let data;
+    if (routeData[key]) {
+      data = routeData[key];
+    } else if (routeData[reverseKey]) {
+      data = routeData[reverseKey];
+    } else {
+      // Dynamic estimation for all 200+ global countries & ports
+      const p1 = getPortByCode(origin);
+      const p2 = getPortByCode(dest);
+      const nm = calculateNauticalDistance(p1, p2);
+
+      // Average liner speed ~17 knots (400 NM/day) + canal/port handling
+      const sailingDays = Math.round(nm / 390);
+      const canalDelay = (p1.region !== p2.region) ? 2 : 0;
+      const totalDays = Math.max(3, sailingDays + canalDelay);
+
+      // Base 20FT ocean rate scaled realistically
+      const calculatedBase = Math.round(580 + (nm * 0.215));
+
+      data = {
+        transit: `${totalDays} Days`,
+        baseRate: calculatedBase,
+        nauticalMiles: nm
+      };
+    }
+
+    const contMult = containerMultipliers[container] || 1.65;
+    const commMult = commodityMultipliers[commodity] || 1.0;
+    const estimatedCost = Math.round(data.baseRate * contMult * commMult);
+
     const lowRange = Math.round(estimatedCost * 0.95);
     const highRange = Math.round(estimatedCost * 1.08);
-
     const co2Tonnes = ((data.nauticalMiles * 12.8) / 1000).toFixed(2);
 
     if (resultTransit) resultTransit.textContent = data.transit;
@@ -440,22 +602,91 @@ function initRateEstimator() {
     if (resultCo2) resultCo2.textContent = `${co2Tonnes} MT CO2e`;
   }
 
+  // Setup Live Search Filters on Origin and Destination Selects
+  setupLiveSelectFilter('calc-origin', 'calc-origin-search', 'calc-origin-clear', 'CNSHG');
+  setupLiveSelectFilter('calc-dest', 'calc-dest-search', 'calc-dest-clear', 'NLRTM');
+
   [originSelect, destSelect, containerSelect, commoditySelect].forEach(sel => {
     if (sel) sel.addEventListener('change', updateEstimate);
   });
 
+  // Direct WhatsApp Autochat Bot Dispatch on Blue Button Click
   if (bookBtn) {
     bookBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      const qOrigin = document.getElementById('quote-origin');
-      const qDest = document.getElementById('quote-dest');
-      const qContainer = document.getElementById('quote-container');
-      
-      if (qOrigin && originSelect) qOrigin.value = originSelect.value;
-      if (qDest && destSelect) qDest.value = destSelect.value;
-      if (qContainer && containerSelect) qContainer.value = containerSelect.value;
 
-      openModal('quote-modal');
+      const originVal = originSelect?.value || 'CNSHG';
+      const destVal = destSelect?.value || 'NLRTM';
+      const containerVal = containerSelect?.value || '40FT_HC';
+      const commodityVal = commoditySelect?.value || 'GEN';
+
+      const originPort = getPortByCode(originVal);
+      const destPort = getPortByCode(destVal);
+
+      const containerText = containerSelect?.options[containerSelect.selectedIndex]?.text || '40ft High Cube (76.4 CBM)';
+      const commodityText = commoditySelect?.options[commoditySelect.selectedIndex]?.text || 'General Manufactured Cargo';
+
+      const transitText = resultTransit ? resultTransit.textContent.trim() : '26 Days';
+      const rateText = resultRate ? resultRate.textContent.trim() : '$4,468 – $5,079';
+      const co2Text = resultCo2 ? resultCo2.textContent.trim() : '134.40 MT CO2e';
+
+      const refCode = 'HSL-' + Math.floor(100000 + Math.random() * 900000);
+      const now = new Date();
+      const dateFormatted = now.toLocaleDateString('id-ID', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+      }) + ', ' + now.toLocaleTimeString('id-ID', {
+        hour: '2-digit',
+        minute: '2-digit'
+      }) + ' WIB';
+
+      // Clean structured format tailored for Autochat Bot (0818 0588 6644)
+      const waMessage = 
+`*HANSAI SHIPPING LINE — OCEAN FREIGHT BOOKING*
+*AUTO-BOT RATE LOCK & INSTANT BOOKING REQUEST*
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*Kode Booking:* #${refCode}
+*Waktu:* ${dateFormatted}
+*Status:* LOCKED RATE CONFIRMATION
+
+🚢 *SPESIFIKASI PENGIRIMAN CARGO:*
+• *Pelabuhan Asal (Origin):* ${originPort.port} (${originPort.code}), ${originPort.country} ${originPort.flag}
+• *Pelabuhan Tujuan (Dest):* ${destPort.port} (${destPort.code}), ${destPort.country} ${destPort.flag}
+• *Tipe Kontainer:* ${containerText}
+• *Klasifikasi Komoditas:* ${commodityText}
+• *Estimasi Waktu Tempuh:* ${transitText}
+• *Estimasi Tarif Freight:* ${rateText}
+• *Jejak Karbon (CO2e):* ${co2Text}
+
+🤖 *COMMAND AUTO-BOT:*
+\`!BOOKING ${refCode} ${originPort.code} ${destPort.code} ${containerVal} ${commodityVal}\`
+
+Halo Admin & Sistem Autochat Bot Hansai Shipping Line, saya ingin mengunci estimasi tarif dan memesan jadwal kapal untuk rute di atas. Mohon konfirmasi ketersediaan kontainer (space allocation) dan instruksi kelengkapan dokumen pengapalan. Terima kasih!`;
+
+      const waPhone = '6281805886644';
+      const waUrl = `https://wa.me/${waPhone}?text=${encodeURIComponent(waMessage)}`;
+
+      // Show instant feedback toast
+      showToast(`Membuka WhatsApp... Mengirim permohonan booking #${refCode} ke WhatsApp Autochat Bot (+62 818 0588 6644).`);
+
+      // Launch WhatsApp directly
+      const waTab = window.open(waUrl, '_blank');
+
+      // Update WhatsApp Confirmation Modal elements
+      const previewEl = document.getElementById('wa-modal-preview');
+      const directBtn = document.getElementById('wa-modal-direct-btn');
+      if (previewEl) previewEl.textContent = waMessage;
+      if (directBtn) directBtn.href = waUrl;
+
+      // If browser blocked popup, open modal immediately; otherwise open after subtle delay for confirmation
+      if (!waTab || waTab.closed || typeof waTab.closed === 'undefined') {
+        openModal('whatsapp-booking-modal');
+      } else {
+        setTimeout(() => {
+          openModal('whatsapp-booking-modal');
+        }, 350);
+      }
     });
   }
 
@@ -501,12 +732,74 @@ function initModals() {
     }
   });
 
+  // Populate official quote modal with all countries
+  const quoteOrigin = document.getElementById('quote-origin');
+  const quoteDest = document.getElementById('quote-dest');
+  const allPorts = (window.HANSAI_WORLD_PORTS && window.HANSAI_WORLD_PORTS.length)
+    ? window.HANSAI_WORLD_PORTS
+    : [];
+
+  if (quoteOrigin && allPorts.length) {
+    quoteOrigin.innerHTML = allPorts.map(p =>
+      `<option value="${p.code}">${p.flag} ${p.country} — ${p.port} (${p.code})</option>`
+    ).join('');
+    quoteOrigin.value = 'CNSHG';
+  }
+  if (quoteDest && allPorts.length) {
+    quoteDest.innerHTML = allPorts.map(p =>
+      `<option value="${p.code}">${p.flag} ${p.country} — ${p.port} (${p.code})</option>`
+    ).join('');
+    quoteDest.value = 'NLRTM';
+  }
+
   const quoteForm = document.getElementById('official-quote-form');
   if (quoteForm) {
     quoteForm.addEventListener('submit', (e) => {
       e.preventDefault();
       closeModal('quote-modal');
-      showToast('Quote Request Dispatched! Reference #HSL-' + Math.floor(100000 + Math.random() * 900000) + '. An ocean trade specialist will contact you within 15 minutes.');
+
+      const qOriginVal = quoteOrigin ? quoteOrigin.value : 'CNSHG';
+      const qDestVal = quoteDest ? quoteDest.value : 'NLRTM';
+      const originObj = getPortByCode(qOriginVal);
+      const destObj = getPortByCode(qDestVal);
+
+      const qContainer = document.getElementById('quote-container');
+      const qContainerVal = qContainer ? qContainer.options[qContainer.selectedIndex]?.text : '40ft High Cube';
+      const inputs = quoteForm.querySelectorAll('input');
+      const countVal = inputs[0] ? inputs[0].value : '1';
+      const weightVal = inputs[1] ? inputs[1].value : '-';
+      const dateVal = inputs[2] ? inputs[2].value : '-';
+      const nameVal = inputs[3] ? inputs[3].value : 'Client';
+      const emailVal = inputs[4] ? inputs[4].value : '-';
+
+      const refCode = 'HSL-QUO-' + Math.floor(100000 + Math.random() * 900000);
+
+      const waMsg = 
+`*HANSAI SHIPPING LINE — OFFICIAL FREIGHT QUOTE*
+*AUTO-BOT QUOTE & INQUIRY REQUEST*
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*Ref ID:* #${refCode}
+*Customer:* ${nameVal}
+*Email:* ${emailVal}
+
+📦 *SPESIFIKASI CARGO & BOOKING:*
+• *Port of Origin:* ${originObj.port} (${originObj.code}), ${originObj.country} ${originObj.flag}
+• *Port of Discharge:* ${destObj.port} (${destObj.code}), ${destObj.country} ${destObj.flag}
+• *Tipe Kontainer:* ${qContainerVal}
+• *Jumlah Kontainer:* ${countVal} Unit
+• *Estimasi Berat:* ${weightVal ? weightVal + ' Tonnes' : '-'}
+• *Target Loading:* ${dateVal || '-'}
+
+🤖 *COMMAND BOT:*
+\`!OFFICIAL_QUOTE ${refCode} ${originObj.code} ${destObj.code} ${countVal}BOX\`
+
+Halo Tim Hansai Shipping Line, mohon quotation resmi dan konfirmasi jadwal kapal untuk permohonan pengiriman di atas. Terima kasih!`;
+
+      const waPhone = '6281805886644';
+      const waUrl = `https://wa.me/${waPhone}?text=${encodeURIComponent(waMsg)}`;
+
+      showToast(`Quote Request Dispatched! Reference #${refCode}. Mengalihkan ke WhatsApp Autochat Bot (+62 818 0588 6644)...`);
+      window.open(waUrl, '_blank');
       quoteForm.reset();
     });
   }

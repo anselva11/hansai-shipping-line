@@ -196,3 +196,44 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   animation-play-state: paused;
 }
 
+/* No Scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Search Term Highlighting */
+.highlight-text {
+  background-color: #FEF08A;
+  color: #854D0E;
+  font-weight: 700;
+  border-radius: 2px;
+  padding: 0 2px;
+}
+
+/* Port Selector Combobox Dropdown */
+.hansai-port-selector .searchable-popover {
+  animation: popover-fade-down 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes popover-fade-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Active option in list */
+.port-option.selected {
+  background-color: #EBF5FF;
+  border-left: 3px solid #06345B;
+}
+
+
